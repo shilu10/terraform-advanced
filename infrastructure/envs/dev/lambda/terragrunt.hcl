@@ -13,6 +13,14 @@ dependency "vpc" {
   }
 }
 
+dependency "sqs" {
+  config_path = "../sqs"
+
+  mock_outputs = {
+    queue_arn = ["arn:aws:sqs:us-east-1:000000000000:demo-queue"]
+  }
+}
+
 terraform {
   source = "../../../modules/lambda"
 }
@@ -30,4 +38,14 @@ inputs = {
 
     subnet_ids             = dependency.vpc.outputs.private_subnet_ids
     security_group_ids = [dependency.vpc.outputs.security_group_ids["lambda"]]
+
+    # function url 
+    enable_function_url = true 
+
+    # event souurce (pull based lambda)
+    enabled_event_source_mapping = true 
+    event_source_arn = dependency.sqs.outputs.queue_arn
+
+    create_role = false 
+    role_arn = "arn:aws:iam::000000000000:role/from-sqs-to-lambda"
 }

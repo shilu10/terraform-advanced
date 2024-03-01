@@ -140,7 +140,7 @@ variable "enabled_event_source_mapping" {
   default = false
 }
 
-variable "event_sourc_arn" {
+variable "event_source_arn" {
   description = "event source arn like sqs arn"
   default = ""
   type = string
