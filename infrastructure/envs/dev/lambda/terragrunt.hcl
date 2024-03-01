@@ -21,6 +21,16 @@ dependency "sqs" {
   }
 }
 
+
+dependency "iam_role" {
+  config_path = "../iam_role"
+
+  mock_outputs = {
+    queue_arn = ["arn:aws:iam::000000000000:role/from-sqs-to-lambda"]
+  }
+}
+
+
 terraform {
   source = "../../../modules/lambda"
 }
@@ -47,5 +57,5 @@ inputs = {
     event_source_arn = dependency.sqs.outputs.queue_arn
 
     create_role = false 
-    role_arn = "arn:aws:iam::000000000000:role/from-sqs-to-lambda"
+    role_arn = dependency.iam_role.outputs.role_arn
 }

@@ -1,30 +1,15 @@
-provider "aws" {
-
-  access_key                  = "test"
-  secret_key                  = "test"
-  region                      = "us-east-1"
-
-
-  # only required for non virtual hosted-style endpoint use case.
-  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs#s3_use_path_style
-  s3_use_path_style           = true
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
-
-   endpoints  {
-    ec2 = "http://localhost:4566"
-    s3  = "http://localhost:4566"
-    iam = "http://localhost:4566"
-    sts = "http://localhost:4566"
-  }
+include {
+  path = find_in_parent_folders("root.hcl")
 }
 
 
-module "lambda_iam_role" {
-  source = "../../../modules/iam_role"  # path to your module
+terraform {
+  source = "../../../modules/iam_role"
+}
 
-  name = "lambda-sqs-role"
+
+input = {
+    name = "lambda-sqs-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
