@@ -16,8 +16,6 @@ dependency "vpc" {
     }
   }
 
-  # ✅ REMOVE THIS LINE: it causes the error
-  # mock_outputs_merge_strategy = "prefer_state"
 }
 
 inputs = {
