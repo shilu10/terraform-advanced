@@ -132,3 +132,16 @@ variable "role_arn" {
   type        = string
   default     = null
 }
+
+## event source mapper
+variable "enabled_event_source_mapping" {
+  description = "Optional bool for enabling event source mapper, making lambda to read from event source like sqs"
+  type = bool 
+  default = false
+}
+
+variable "event_sourc_arn" {
+  description = "event source arn like sqs arn"
+  default = ""
+  type = string
+}

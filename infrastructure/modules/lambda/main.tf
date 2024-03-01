@@ -81,3 +81,12 @@ resource "aws_lambda_permission" "allow_public_url" {
   function_name = aws_lambda_function.this.function_name
   principal     = "*"
 }
+
+# lambda event-source mapper
+resource "aws_lambda_event_source_mapping" "sqs_trigger" {
+  count = var.enabled_event_source_mapping ? 1 : 0
+  event_source_arn  = var.event_sourc_arn
+  function_name     = aws_lambda_function.this.function_name
+  batch_size        = 10
+  enabled           = true
+}
