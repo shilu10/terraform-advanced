@@ -51,11 +51,6 @@ variable "tags" {
 }
 
 
-variable "vpc_id" {
-  type        = string
-  description = "VPC ID for all security groups"
-}
-
 variable "security_groups" {
   description = "Map of security group configs"
   type = map(object({

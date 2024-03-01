@@ -6,6 +6,20 @@ terraform {
   source = "../../../modules/rds"
 }
 
+dependency "vpc" {
+  config_path = "../vpc"
+
+  mock_outputs = {
+    private_subnet_ids = ["subnet-111111", "subnet-222222"]
+    security_group_ids = {
+      rds = "sg-12345678"
+    }
+  }
+
+  # ✅ REMOVE THIS LINE: it causes the error
+  # mock_outputs_merge_strategy = "prefer_state"
+}
+
 inputs = {
   name                   = "mysql-db-dev"
   engine                 = "mysql"
@@ -17,8 +31,10 @@ inputs = {
   username               = "admin"
   password               = "S3cur3Pa$$w0rd"
   port                   = 3306
-  subnet_ids             = ["subnet-abc123", "subnet-def456"]
-  vpc_security_group_ids = ["sg-0123456789abcdef0"]
+
+  subnet_ids             = dependency.vpc.outputs.private_subnet_ids
+  vpc_security_group_ids = [dependency.vpc.outputs.security_group_ids["rds"]]
+
   multi_az               = false
   storage_type           = "gp3"
   backup_retention_period = 7

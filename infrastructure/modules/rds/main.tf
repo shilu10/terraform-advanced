@@ -23,12 +23,7 @@ resource "aws_db_instance" "this" {
   skip_final_snapshot     = var.skip_final_snapshot
   publicly_accessible     = var.publicly_accessible
 
-  dynamic "tags" {
-    for_each = var.tags != null ? [1] : []
-    content {
-      Name = var.tags["Name"]
-    }
-  }
+  tags = var.tags
 
   lifecycle {
     ignore_changes = [password]

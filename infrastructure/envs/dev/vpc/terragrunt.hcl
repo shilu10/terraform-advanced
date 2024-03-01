@@ -18,6 +18,30 @@ inputs = {
   enable_dns_support   = true
   enable_dns_hostnames = true
 
+
+  security_groups = {
+    "rds" = {
+      name        = "rds-sg"
+      description = "Allow MySQL"
+      ingress = [{
+        from_port   = 3306
+        to_port     = 3306
+        protocol    = "tcp"
+        cidr_blocks = ["10.0.0.0/16"]
+      }]
+      egress = [{
+        from_port   = 0
+        to_port     = 0
+        protocol    = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+      }]
+      tags = {
+        Environment = "dev"
+      }
+    }
+
+  }
+
   tags = {
     Environment = "dev"
     Owner       = "shilash"

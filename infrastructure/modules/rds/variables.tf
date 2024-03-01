@@ -48,7 +48,7 @@ variable "password" {
 variable "port" {
   description = "DB port"
   type        = number
-  default     = 5432
+  default     = 3306
 }
 
 variable "subnet_ids" {
