@@ -1,10 +1,13 @@
 resource "aws_iam_role" "lambda_exec" {
+  count = var.create_role ? 1 : 0
+
   name = "${var.name}-exec-role"
+
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Action = "sts:AssumeRole"
       Effect = "Allow"
+      Action = "sts:AssumeRole"
       Principal = {
         Service = "lambda.amazonaws.com"
       }
@@ -14,29 +17,31 @@ resource "aws_iam_role" "lambda_exec" {
   tags = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "default" {
-  count      = var.attach_basic_execution_role ? 1 : 0
-  role       = aws_iam_role.lambda_exec.name
+resource "aws_iam_role_policy_attachment" "basic" {
+  count = var.create_role && var.attach_basic_execution_role ? 1 : 0
+
+  role       = aws_iam_role.lambda_exec[0].name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-
 resource "aws_lambda_function" "this" {
   function_name = var.name
-  role          = aws_iam_role.lambda_exec.arn
+
+  role = var.create_role ? aws_iam_role.lambda_exec[0].arn : var.role_arn
+
+  package_type = var.use_image ? "Image" : "Zip"
 
   # ZIP-based
-  filename         = var.image_uri == null ? var.filename : null
-  s3_bucket        = var.image_uri == null ? var.s3_bucket : null
-  s3_key           = var.image_uri == null ? var.s3_key : null
-  source_code_hash = var.image_uri == null ? var.source_code_hash : null
+  filename         = var.use_image == false ? var.filename : null
+  s3_bucket        = var.use_image == false ? var.s3_bucket : null
+  s3_key           = var.use_image == false ? var.s3_key : null
+  source_code_hash = var.use_image == false ? var.source_code_hash : null
+  runtime          = var.use_image == false ? var.runtime : null
+  handler          = var.use_image == false ? var.handler : null
+  layers           = var.use_image == false ? var.layers : null
 
   # Image-based
-  image_uri = var.image_uri
-
-  # Only required for ZIP-based functions
-  runtime = var.image_uri == null ? var.runtime : null
-  handler = var.image_uri == null ? var.handler : null
+  image_uri = var.use_image == true ? var.image_uri : null
 
   timeout     = var.timeout
   memory_size = var.memory_size
@@ -45,11 +50,34 @@ resource "aws_lambda_function" "this" {
     variables = var.environment_variables
   }
 
-  vpc_config {
-    subnet_ids         = var.subnet_ids
-    security_group_ids = var.security_group_ids
+  dynamic "vpc_config" {
+    for_each = var.custom_vpc_enabled ? [1] : []
+    content {
+      subnet_ids         = var.subnet_ids
+      security_group_ids = var.security_group_ids
+    }
   }
 
-  layers = var.layers
-  tags   = var.tags
+  tags = var.tags
+}
+
+resource "aws_lambda_function_url" "this" {
+  count              = var.enable_function_url ? 1 : 0
+  function_name      = aws_lambda_function.this.function_name
+  authorization_type = var.function_url_auth_type
+
+  cors {
+    allow_origins = ["*"]
+    allow_methods = ["*"]
+    allow_headers = ["*"]
+  }
+}
+
+resource "aws_lambda_permission" "allow_public_url" {
+  count         = var.enable_function_url && var.function_url_auth_type == "NONE" ? 1 : 0
+
+  statement_id  = "AllowPublicFunctionUrl"
+  action        = "lambda:InvokeFunctionUrl"
+  function_name = aws_lambda_function.this.function_name
+  principal     = "*"
 }
