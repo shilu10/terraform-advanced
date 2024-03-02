@@ -2,7 +2,6 @@ include {
   path = find_in_parent_folders("root.hcl")
 }
 
-
 terraform {
   source = "../../../modules/iam_role"
 }
@@ -24,7 +23,7 @@ dependency "rds" {
 }
 
 inputs = {
-    name = "image-processor-iam-role"
+  name = "image-processor-iam-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -49,7 +48,7 @@ inputs = {
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   ]
 
-  # Inline policy
+  # Inline policies
   create_inline_policies = true
   inline_policies = [
     {
@@ -61,7 +60,30 @@ inputs = {
           Resource = dependency.sqs.outputs.queue_arn
         }
       ]
+    },
+    {
+      name = "inline-rds-access"
+      statements = [
+        {
+          Effect = "Allow"
+          Action = ["rds:DescribeDBInstances"]
+          Resource = dependency.rds.outputs.rds_arn
+        }
+      ]
+    },
+    {
+      name = "inline-cloudwatch-logs"
+      statements = [
+        {
+          Effect = "Allow"
+          Action = [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ]
+          Resource = "arn:aws:logs:*:*:*"
+        }
+      ]
     }
   ]
-
 }

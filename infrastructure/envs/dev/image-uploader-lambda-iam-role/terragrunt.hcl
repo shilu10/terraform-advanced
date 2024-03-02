@@ -18,7 +18,7 @@ dependency "s3" {
   config_path = "../s3"
 
   mock_outputs = {
-    bucket_arn = "arn:aws:s3:::my-upload-bucket/*"
+    bucket_arn = "arn:aws:s3:::my-upload-bucket"
   }
 }
 
@@ -61,6 +61,20 @@ inputs = {
           Effect = "Allow"
           Action = ["s3:PutObject"]
           Resource = "${dependency.s3.outputs.bucket_arn}/*"
+        }
+      ]
+    },
+    {
+      name = "inline-cloudwatch-logs"
+      statements = [
+        {
+          Effect = "Allow"
+          Action = [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ]
+          Resource = "arn:aws:logs:*:*:*"
         }
       ]
     }
