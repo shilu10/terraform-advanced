@@ -1,0 +1,31 @@
+metadata:
+  name: "Ensure S3 bucket blocks all public access"
+  id: "CUSTOM_S3_BLOCK_PUBLIC"
+  category: "networking"
+  severity: "HIGH"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_s3_bucket_public_access_block"
+      attribute: "block_public_acls"
+      operator: "equals"
+      value: true
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_s3_bucket_public_access_block"
+      attribute: "block_public_policy"
+      operator: "equals"
+      value: true
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_s3_bucket_public_access_block"
+      attribute: "ignore_public_acls"
+      operator: "equals"
+      value: true
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_s3_bucket_public_access_block"
+      attribute: "restrict_public_buckets"
+      operator: "equals"
+      value: true

@@ -1,0 +1,11 @@
+metadata:
+  name: "Ensure S3 bucket has encryption enabled"
+  id: "CUSTOM_S3_ENCRYPTION"
+  category: "encryption"
+  severity: "HIGH"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_s3_bucket"
+  attribute: "server_side_encryption_configuration"
+  operator: "exists"

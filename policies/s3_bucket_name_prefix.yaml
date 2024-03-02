@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure S3 bucket name starts with 'image-processing'"
+  id: "CUSTOM_S3_BUCKET_NAME_PREFIX"
+  category: "naming"
+  severity: "MEDIUM"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_s3_bucket"
+  attribute: "bucket"
+  operator: "starts_with"
+  value: "image-processing"
