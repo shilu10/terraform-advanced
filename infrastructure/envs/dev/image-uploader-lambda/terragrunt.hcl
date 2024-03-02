@@ -2,19 +2,13 @@ include {
     path = find_in_parent_folders("root.hcl")
 }
 
-dependency "sqs" {
-  config_path = "../sqs"
 
-  mock_outputs = {
-    queue_arn = ["arn:aws:sqs:us-east-1:000000000000:demo-queue"]
-  }
-}
 
 dependency "iam_role" {
   config_path = "../image-uploader-lambda-iam-role"
 
   mock_outputs = {
-    role_arn = ["arn:aws:iam::000000000000:role/from-sqs-to-lambda"]
+    role_arn = "arn:aws:iam::000000000000:role/from-sqs-to-lambda"
   }
 }
 
