@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure Lambda function uses only container image packaging"
+  id: "CUSTOM_LAMBDA_IMAGE_ONLY"
+  category: "deployment"
+  severity: "HIGH"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_lambda_function"
+  attribute: "package_type"
+  operator: "equals"
+  value: "Image"
