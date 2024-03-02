@@ -2,14 +2,28 @@ include {
   path = find_in_parent_folders("root.hcl")
 }
 
-
 terraform {
   source = "../../../modules/iam_role"
 }
 
+dependency "sqs" {
+  config_path = "../sqs"
+
+  mock_outputs = {
+    queue_arn = "arn:aws:sqs:us-east-1:000000000000:demo-queue"
+  }
+}
+
+dependency "s3" {
+  config_path = "../s3"
+
+  mock_outputs = {
+    bucket_arn = "arn:aws:s3:::my-upload-bucket/*"
+  }
+}
 
 inputs = {
-    name = "lambda-sqs-role"
+  name = "image-upload-iam-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -25,41 +39,28 @@ inputs = {
   tags = {
     Environment = "dev"
     Team        = "platform"
+    Name        = "image-upload-iam-role"
   }
 
-  # AWS managed policies
   attach_managed_policies = true
   managed_policy_arns = [
     "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
   ]
 
-  # Inline policy
   create_inline_policies = true
   inline_policies = [
     {
-      name = "inline-sqs-access"
+      name = "inline-sqs-s3-access"
       statements = [
         {
           Effect = "Allow"
-          Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"]
-          Resource = "arn:aws:sqs:us-east-1:123456789012:my-queue"
-        }
-      ]
-    }
-  ]
-
-  # Custom managed policy
-  create_custom_policies = true
-  custom_managed_policies = [
-    {
-      name        = "custom-sqs-policy"
-      path        = "/"
-      description = "Custom policy to access SQS queue"
-      statements = [
+          Action = ["sqs:SendMessage"]
+          Resource = dependency.sqs.outputs.queue_arn
+        },
         {
           Effect = "Allow"
-          Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage"]
-          Resource = "arn:aws:sqs:us-east-1:123456789012:my-queue"
+          Action = ["s3:PutObject"]
+          Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]
     }

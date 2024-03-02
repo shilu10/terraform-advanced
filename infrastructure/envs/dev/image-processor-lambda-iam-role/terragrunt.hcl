@@ -7,9 +7,24 @@ terraform {
   source = "../../../modules/iam_role"
 }
 
+dependency "sqs" {
+  config_path = "../sqs"
+
+  mock_outputs = {
+    queue_arn = "arn:aws:sqs:us-east-1:000000000000:demo-queue"
+  }
+}
+
+dependency "rds" {
+  config_path = "../rds"
+
+  mock_outputs = {
+    queue_arn = "arn:aws:rds:us-east-1:000000000000:rds-name"
+  }
+}
 
 inputs = {
-    name = "lambda-sqs-role"
+    name = "image-processor-iam-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -25,6 +40,7 @@ inputs = {
   tags = {
     Environment = "dev"
     Team        = "platform"
+    Name        = "image-processor-iam-role"
   }
 
   # AWS managed policies
@@ -42,26 +58,10 @@ inputs = {
         {
           Effect = "Allow"
           Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"]
-          Resource = "arn:aws:sqs:us-east-1:123456789012:my-queue"
+          Resource = dependency.sqs.outputs.queue_arn
         }
       ]
     }
   ]
 
-  # Custom managed policy
-  create_custom_policies = true
-  custom_managed_policies = [
-    {
-      name        = "custom-sqs-policy"
-      path        = "/"
-      description = "Custom policy to access SQS queue"
-      statements = [
-        {
-          Effect = "Allow"
-          Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage"]
-          Resource = "arn:aws:sqs:us-east-1:123456789012:my-queue"
-        }
-      ]
-    }
-  ]
 }
