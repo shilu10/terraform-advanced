@@ -1,0 +1,17 @@
+metadata:
+  name: "Ensure SQS queue has required tags"
+  id: "CUSTOM_SQS_REQUIRED_TAGS"
+  category: "tagging"
+  severity: "MEDIUM"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_sqs_queue"
+      attribute: "tags.Environment"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_sqs_queue"
+      attribute: "tags.Owner"
+      operator: "exists"

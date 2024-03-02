@@ -13,7 +13,7 @@ inputs = {
 
   visibility_timeout_seconds = 45
   message_retention_seconds  = 86400
-  delay_seconds              = 5
+  delay_seconds              = 0
   max_message_size           = 131072
   receive_wait_time_seconds  = 10
 

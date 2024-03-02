@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure SQS message retention is no more than 7 days"
+  id: "CUSTOM_SQS_RETENTION"
+  category: "performance"
+  severity: "LOW"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_sqs_queue"
+  attribute: "message_retention_seconds"
+  operator: "less_than_or_equal"
+  value: 604800  # 7 days in seconds
