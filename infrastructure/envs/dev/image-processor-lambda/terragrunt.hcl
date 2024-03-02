@@ -14,7 +14,7 @@ dependency "iam_role" {
   config_path = "../image-processor-lambda-iam-role"
 
   mock_outputs = {
-    queue_arn = ["arn:aws:iam::000000000000:role/from-sqs-to-lambda"]
+    role_arn = ["arn:aws:iam::000000000000:role/from-sqs-to-lambda"]
   }
 }
 

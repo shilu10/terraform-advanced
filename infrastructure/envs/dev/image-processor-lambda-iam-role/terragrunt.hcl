@@ -18,7 +18,7 @@ dependency "rds" {
   config_path = "../rds"
 
   mock_outputs = {
-    queue_arn = "arn:aws:rds:us-east-1:000000000000:rds-name"
+    rds_arn = "arn:aws:rds:us-east-1:000000000000:rds-name"
   }
 }
 
