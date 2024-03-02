@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure VPC uses private CIDR range"
+  id: "CUSTOM_VPC_PRIVATE_CIDR"
+  category: "networking"
+  severity: "HIGH"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_vpc"
+  attribute: "cidr_block"
+  operator: "regex_match"
+  value: "^(10\\..*|172\\.(1[6-9]|2[0-9]|3[0-1])\\..*|192\\.168\\..*)$"

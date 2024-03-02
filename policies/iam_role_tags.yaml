@@ -1,0 +1,17 @@
+metadata:
+  name: "Ensure IAM role has required tags"
+  id: "CUSTOM_IAM_ROLE_TAGS"
+  category: "tagging"
+  severity: "MEDIUM"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_iam_role"
+      attribute: "tags.Environment"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_iam_role"
+      attribute: "tags.Owner"
+      operator: "exists"

@@ -1,0 +1,13 @@
+metadata:
+  name: "Ensure IAM policy does not use wildcards"
+  id: "CUSTOM_IAM_NO_WILDCARD"
+  category: "iam"
+  severity: "CRITICAL"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_iam_policy"
+    - "aws_iam_role_policy"
+  attribute: "policy"
+  operator: "not_contains"
+  value: '"Action":"*"'

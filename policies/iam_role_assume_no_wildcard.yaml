@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure IAM assume role trust policy does not allow all principals"
+  id: "CUSTOM_IAM_ASSUME_ROLE_NO_WILDCARD"
+  category: "iam"
+  severity: "CRITICAL"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_iam_role"
+  attribute: "assume_role_policy"
+  operator: "not_contains"
+  value: '"Principal":"*"'

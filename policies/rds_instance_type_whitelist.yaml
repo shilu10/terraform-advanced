@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure RDS instance type is from allowed families (e.g., db.t3, db.t4g)"
+  id: "CUSTOM_RDS_INSTANCE_TYPE_ALLOWED"
+  category: "compute"
+  severity: "HIGH"
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - "aws_db_instance"
+  attribute: "instance_class"
+  operator: "regex_match"
+  value: "^db\\.(t3|t4g)\\..*$"

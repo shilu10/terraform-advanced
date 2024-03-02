@@ -1,0 +1,17 @@
+metadata:
+  name: "Ensure security group has required tags"
+  id: "CUSTOM_SG_TAGS"
+  category: "tagging"
+  severity: "MEDIUM"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_security_group"
+      attribute: "tags.Environment"
+      operator: "exists"
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_security_group"
+      attribute: "tags.Owner"
+      operator: "exists"

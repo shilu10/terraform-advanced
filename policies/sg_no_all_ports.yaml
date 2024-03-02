@@ -1,0 +1,19 @@
+metadata:
+  name: "Ensure security group does not allow all ports (0–65535)"
+  id: "CUSTOM_SG_NO_ALL_PORTS"
+  category: "networking"
+  severity: "CRITICAL"
+definition:
+  and:
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_security_group_rule"
+      attribute: "from_port"
+      operator: "less_than_or_equal"
+      value: 0
+    - cond_type: "attribute"
+      resource_types:
+        - "aws_security_group_rule"
+      attribute: "to_port"
+      operator: "greater_than_or_equal"
+      value: 65535
