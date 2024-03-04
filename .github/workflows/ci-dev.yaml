@@ -9,6 +9,8 @@ on:
     paths:
       - '*'
 
+workflow_dispatch:
+
 jobs:
   dev-ci:
     runs-on: ubuntu-latest
