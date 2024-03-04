@@ -9,7 +9,7 @@ on:
     paths:
       - '*'
 
-workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   dev-ci:
