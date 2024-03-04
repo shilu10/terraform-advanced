@@ -29,9 +29,9 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Setup Terragrunt
-        uses: gruntwork-io/terragrunt-action@v1
+        uses: autero1/setup-terragrunt@v2
         with:
-          terragrunt_version: 0.56.3
+          terragrunt-version: 0.56.3
 
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
