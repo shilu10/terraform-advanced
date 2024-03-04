@@ -1,4 +1,4 @@
-name: CI for Dev Environment
+name: CI for stage Environment
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - 'infrastructure/envs/stage/**'
 
 jobs:
-  dev-ci:
+  stage-ci:
     runs-on: ubuntu-latest
 
     env:
@@ -28,55 +28,55 @@ jobs:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
       - name: Check Terraform formatting
-        run: terraform fmt -check -recursive infrastructure/envs/dev
+        run: terraform fmt -check -recursive infrastructure/envs/stage
 
       - name: Check Terragrunt HCL formatting
-        run: terragrunt hclfmt --check --recursive infrastructure/envs/dev
+        run: terragrunt hclfmt --check --recursive infrastructure/envs/stage
 
       - name: Initialize with Terragrunt
-        run: terragrunt init --working-dir infrastructure/envs/dev
+        run: terragrunt init --working-dir infrastructure/envs/stage
 
       - name: Validate Terragrunt configuration
-        run: terragrunt validate --working-dir infrastructure/envs/dev
+        run: terragrunt validate --working-dir infrastructure/envs/stage
 
       - name: Terragrunt Plan and Generate JSON
         run: |
           terragrunt plan \
             --all \
-            --working-dir infrastructure/envs/dev \
+            --working-dir infrastructure/envs/stage \
             -out=tf.plan
-          terraform show -json tf.plan > infrastructure/envs/dev/tf.json
+          terraform show -json tf.plan > infrastructure/envs/stage/tf.json
 
       - name: Run Checkov static analysis
-        run: checkov -f infrastructure/envs/dev/tf.json
+        run: checkov -f infrastructure/envs/stage/tf.json
 
       - name: Run custom policies (if present)
         run: |
           if [ -d custom_policies ]; then
-            checkov -f infrastructure/envs/dev/tf.json --external-checks-dir custom_policies
+            checkov -f infrastructure/envs/stage/tf.json --external-checks-dir custom_policies
           fi
 
       - name: Run Infracost breakdown
         run: |
           infracost breakdown \
-            --path=infrastructure/envs/dev/tf.json \
+            --path=infrastructure/envs/stage/tf.json \
             --usage-file=infracost/infracost-usage.yml \
             --format=github-comment \
             --show-skipped \
-            --out-file=infracost-dev.json
+            --out-file=infracost-stage.json
 
       - name: Generate Infracost HTML report
         run: |
           infracost output \
-            --path=infracost-dev.json \
+            --path=infracost-stage.json \
             --format=html \
-            --out-file=infracost-report-dev.html
+            --out-file=infracost-report-stage.html
 
       - name: Upload Infracost report artifact
         uses: actions/upload-artifact@v4
         with:
-          name: infracost-report-dev
-          path: infracost-report-dev.html
+          name: infracost-report-stage
+          path: infracost-report-stage.html
 
       # Optional: Uncomment if you're using LocalStack + Terratest
       # - name: Start LocalStack
