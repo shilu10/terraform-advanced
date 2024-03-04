@@ -1,0 +1,21 @@
+name: Block direct changes to stage/prod
+
+on:
+  pull_request:
+    paths:
+      - 'infrastructure/envs/**'
+
+jobs:
+  check-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if stage/prod is modified directly
+        run: |
+          git fetch origin main --depth=1
+          git diff --name-only origin/main...HEAD > changed_files.txt
+          if grep -qE '^infrastructure/envs/(stage|prod)/' changed_files.txt; then
+            echo "❌ Direct changes to stage/prod are not allowed. Promote from dev instead."
+            exit 1
+          else
+            echo "✅ Only dev is modified. Good to go."
+          fi

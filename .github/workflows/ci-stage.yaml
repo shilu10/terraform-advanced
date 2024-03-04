@@ -1,0 +1,86 @@
+name: CI for Dev Environment
+
+on:
+  pull_request:
+    paths:
+      - 'infrastructure/envs/stage/**'
+
+jobs:
+  dev-ci:
+    runs-on: ubuntu-latest
+
+    env:
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_REGION: us-east-1
+      LOCALSTACK_HOST: http://localhost:4566
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Setup Infracost
+        uses: infracost/actions/setup@v2
+        with:
+          api-key: ${{ secrets.INFRACOST_API_KEY }}
+
+      - name: Check Terraform formatting
+        run: terraform fmt -check -recursive infrastructure/envs/dev
+
+      - name: Check Terragrunt HCL formatting
+        run: terragrunt hclfmt --check --recursive infrastructure/envs/dev
+
+      - name: Initialize with Terragrunt
+        run: terragrunt init --working-dir infrastructure/envs/dev
+
+      - name: Validate Terragrunt configuration
+        run: terragrunt validate --working-dir infrastructure/envs/dev
+
+      - name: Terragrunt Plan and Generate JSON
+        run: |
+          terragrunt plan \
+            --all \
+            --working-dir infrastructure/envs/dev \
+            -out=tf.plan
+          terraform show -json tf.plan > infrastructure/envs/dev/tf.json
+
+      - name: Run Checkov static analysis
+        run: checkov -f infrastructure/envs/dev/tf.json
+
+      - name: Run custom policies (if present)
+        run: |
+          if [ -d custom_policies ]; then
+            checkov -f infrastructure/envs/dev/tf.json --external-checks-dir custom_policies
+          fi
+
+      - name: Run Infracost breakdown
+        run: |
+          infracost breakdown \
+            --path=infrastructure/envs/dev/tf.json \
+            --usage-file=infracost/infracost-usage.yml \
+            --format=github-comment \
+            --show-skipped \
+            --out-file=infracost-dev.json
+
+      - name: Generate Infracost HTML report
+        run: |
+          infracost output \
+            --path=infracost-dev.json \
+            --format=html \
+            --out-file=infracost-report-dev.html
+
+      - name: Upload Infracost report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: infracost-report-dev
+          path: infracost-report-dev.html
+
+      # Optional: Uncomment if you're using LocalStack + Terratest
+      # - name: Start LocalStack
+      #   run: docker run -d -p 4566:4566 localstack/localstack-light
+
+      # - name: Run Terratest (S3 test)
+      #   run: go test -v tests/s3_test.go
