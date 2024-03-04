@@ -5,7 +5,7 @@ on:
     paths:
       - 'infrastructure/envs/dev/**'
 
-  on_push:
+  push:
     paths:
       - '*'
 
