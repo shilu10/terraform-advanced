@@ -3,6 +3,13 @@ metadata:
   id: "CUSTOM_IAM_NO_WILDCARD"
   category: "iam"
   severity: "CRITICAL"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_iam_policy  
+    - aws_iam_role_policy
+
 definition:
   cond_type: "attribute"
   resource_types:

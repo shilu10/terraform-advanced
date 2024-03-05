@@ -1,17 +1,23 @@
-# for static resources 
+version: 0.1
 
-resource_type_default_usage:
-  aws_lambda_function:
-    monthly_requests: 100000       # Total number of invocations
-    request_duration_ms: 200       # Average duration of each invocation in milliseconds
+resource_usages:
+  aws_lambda_function.image-processor-lambda:
+    monthly_requests: 200000
+    request_duration_ms: 300
 
-  aws_s3_bucket:
-    storage_gb: 500                # Total monthly stored GB
-    monthly_class_a_requests: 10000  # PUT, POST, LIST
-    monthly_class_b_requests: 50000  # GET, SELECT, etc.
-    monthly_data_retrieval_gb: 50    # GB retrieved from S3
-    monthly_data_transfer_gb: 100    # GB transferred out of S3
+  aws_lambda_function.image-uploader-lambda:
+    monthly_requests: 300000
+    request_duration_ms: 200
 
-  aws_sqs_queue:
-    monthly_requests: 1000000       # Messages sent to the queue
-    request_size_kb: 1              # Avg size per request in KB (default 64 KB pricing unit)
+  aws_s3_bucket.s3:
+    storage_gb: 100
+    monthly_class_a_requests: 50000
+    monthly_class_b_requests: 100000
+    monthly_data_transfer_gb: 50
+
+  aws_sqs_queue.sqs:
+    monthly_requests: 1000000
+    request_size_kb: 1
+
+  aws_nat_gateway.nat[0]:
+    monthly_data_processed_gb: 100

@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_RDS_ALLOCATED_STORAGE_LIMIT"
   category: "performance"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_db_instance 
+    
 definition:
   cond_type: "attribute"
   resource_types:

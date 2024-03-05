@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_LAMBDA_MEMORY_LIMIT"
   category: "performance"
   severity: "HIGH"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_lambda_function  # restricts it to Lambda URLs only
+
 definition:
   cond_type: "attribute"
   resource_types:

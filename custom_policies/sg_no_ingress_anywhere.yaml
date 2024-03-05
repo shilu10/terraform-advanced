@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_SG_NO_OPEN_INGRESS"
   category: "networking"
   severity: "CRITICAL"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_security_group_rule 
+    
 definition:
   cond_type: "attribute"
   resource_types:

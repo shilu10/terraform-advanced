@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_VPC_PRIVATE_CIDR"
   category: "networking"
   severity: "HIGH"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_vpc
+    
 definition:
   cond_type: "attribute"
   resource_types:

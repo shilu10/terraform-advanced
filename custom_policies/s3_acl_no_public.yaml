@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_S3_NO_PUBLIC_ACL"
   category: "networking"
   severity: "CRITICAL"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_s3_bucket 
+    
 definition:
   cond_type: "attribute"
   resource_types:

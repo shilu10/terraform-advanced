@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_IAM_ROLE_TAGS"
   category: "tagging"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_iam_role 
+    
 definition:
   and:
     - cond_type: "attribute"

@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_SQS_RETENTION"
   category: "performance"
   severity: "LOW"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_sqs_queue
+    
 definition:
   cond_type: "attribute"
   resource_types:

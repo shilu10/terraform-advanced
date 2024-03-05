@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_LAMBDA_REQUIRED_TAGS"
   category: "tagging"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_lambda_function  
+    
 definition:
   and:
     - cond_type: "attribute"

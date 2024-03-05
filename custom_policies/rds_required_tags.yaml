@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_RDS_TAGS"
   category: "tagging"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_db_instance 
+
 definition:
   and:
     - cond_type: "attribute"

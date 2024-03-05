@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_S3_ENCRYPTION"
   category: "encryption"
   severity: "HIGH"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_s3_bucket 
+    
 definition:
   cond_type: "attribute"
   resource_types:

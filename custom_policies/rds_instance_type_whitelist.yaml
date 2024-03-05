@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_RDS_INSTANCE_TYPE_ALLOWED"
   category: "compute"
   severity: "HIGH"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_db_instance 
+    
 definition:
   cond_type: "attribute"
   resource_types:

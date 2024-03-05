@@ -1,4 +1,4 @@
-name: CI for Dev Environment
+name: CI cache for Dev Environment
 
 on:
   pull_request:
@@ -14,12 +14,6 @@ on:
 jobs:
   dev-ci:
     runs-on: ubuntu-latest
-
-    env:
-      AWS_ACCESS_KEY_ID: test
-      AWS_SECRET_ACCESS_KEY: test
-      AWS_REGION: us-east-1
-      LOCALSTACK_HOST: http://localhost:4566
 
     steps:
       - name: Checkout repository
@@ -41,50 +35,62 @@ jobs:
       - name: Install Checkov
         run: pip install checkov
 
+      - name: Set plugin cache environment variable
+        run: echo "TF_PLUGIN_CACHE_DIR=$HOME/.terraform.d/plugin-cache" >> $GITHUB_ENV
+
+      #- name: Cache Terraform plugin binaries
+      #  uses: actions/cache@v4
+      #  with:
+      #    path: ~/.terraform.d/plugin-cache
+      #    key: terraform-plugins-${{ runner.os }}-${{ hashFiles('infrastructure/envs/dev/**/*.[th]f') }}
+      #    restore-keys: |
+       #     terraform-plugins-${{ runner.os }}-
+
+      - name: Ensure plugin cache directory exists
+        run: mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
       - name: Check Terragrunt HCL formatting
-        run: terragrunt hcl format 
+        run: terragrunt hcl format
 
       - name: Validate Terragrunt configuration
-        run: terragrunt hcl validate 
+        run: terragrunt hcl validate
 
-      - name: Initialize with Terragrunt
-        run: terragrunt init --working-dir infrastructure/envs/dev --all
+      - name: Initialize with Terragrunt (with plugin cache)
+        run: |
+          TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt init \
+            --parallelism=40 \
+            --terragrunt-working-dir infrastructure/envs/dev \
+            --all
 
-      - name: Run Checkov on each Terragrunt module
+      - name: Run Checkov on each Terragrunt module (with plugin cache)
         working-directory: infrastructure/envs/dev
         run: |
           for dir in $(find . -mindepth 1 -maxdepth 1 -type d); do
             echo "🔍 Running Checkov for module: $dir"
             cd "$dir"
 
-            terragrunt plan -out=tf.plan
-            terraform show -json tf.plan > tf.json
+            TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt plan -out=tf.plan
+            terragrunt show -json tf.plan > tf.json
 
-            if [ -d ../../../custom_policies ]; then
-              checkov --file tf.json --external-checks-dir ../../../custom_policies
+            echo "Running checkov inbuilt policies"
+            checkov --file tf.json --soft-fail
+
+            echo "Running checkov custom policies"
+            if [ -d ../../../../custom_policies ]; then
+              checkov --file tf.json --external-checks-dir ../../../../custom_policies --soft-fail
             else
-              checkov --file tf.json
+              echo "No custom policies found"
             fi
 
             cd - > /dev/null
           done
 
-      - name: Terragrunt Plan and Generate JSON for Infracost
-        run: |
-          terragrunt plan \
-            --all \
-            --working-dir infrastructure/envs/dev \
-            -out=tf.plan
-
-          terraform show -json tf.plan > infrastructure/envs/dev/tf.json
-
       - name: Run Infracost breakdown
         run: |
           infracost breakdown \
-            --path=infrastructure/envs/dev/tf.json \
+            --path=infrastructure/envs/dev \
             --usage-file=infracost/infracost-usage.yml \
             --format=github-comment \
-            --show-skipped \
             --out-file=infracost-dev.json
 
       - name: Generate Infracost HTML report

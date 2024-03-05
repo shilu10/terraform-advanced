@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_RDS_BACKUP_RETENTION"
   category: "recovery"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_lambda_function 
+    
 definition:
   cond_type: "attribute"
   resource_types:

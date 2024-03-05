@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_RDS_MAX_ALLOCATED_REQUIRED"
   category: "scalability"
   severity: "MEDIUM"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_db_instance 
+    
 definition:
   cond_type: "attribute"
   resource_types:

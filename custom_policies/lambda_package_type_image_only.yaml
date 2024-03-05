@@ -3,6 +3,12 @@ metadata:
   id: "CUSTOM_LAMBDA_IMAGE_ONLY"
   category: "deployment"
   severity: "HIGH"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_lambda_function  
+    
 definition:
   cond_type: "attribute"
   resource_types:
