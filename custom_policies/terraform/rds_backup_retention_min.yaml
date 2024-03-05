@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure RDS backup retention is at least 7 days"
+  id: "CUSTOM_RDS_BACKUP_RETENTION"
+  category: "recovery"
+  severity: "MEDIUM"
+
+    
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_db_instance
+  attribute: backup_retention_period
+  operator: "greater_than_or_equal"
+  value: 7

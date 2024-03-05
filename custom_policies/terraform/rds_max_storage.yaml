@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure RDS allocated storage is ≤ 100 GB"
+  id: "CUSTOM_RDS_ALLOCATED_STORAGE_LIMIT"
+  category: "performance"
+  severity: "MEDIUM"
+
+      
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_db_instance
+  attribute: allocated_storage
+  operator: "less_than_or_equal"
+  value: 100

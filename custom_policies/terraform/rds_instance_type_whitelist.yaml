@@ -4,10 +4,11 @@ metadata:
   category: "compute"
   severity: "HIGH"
 
+    
 definition:
-  cond_type: "attribute"
+  cond_type: attribute
   resource_types:
-    - "aws_db_instance"
-  attribute: "instance_class"
+    - aws_db_instance
+  attribute: instance_class
   operator: "regex_match"
   value: "^db\\.(t3|t4g)\\..*$"

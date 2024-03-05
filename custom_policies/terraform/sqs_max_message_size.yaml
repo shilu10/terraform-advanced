@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure SQS message size is no more than 128 KB"
+  id: "CUSTOM_SQS_MAX_MESSAGE_SIZE"
+  category: "performance"
+  severity: "MEDIUM"
+
+    
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_sqs_queue
+  attribute: maximum_message_size
+  operator: "less_than_or_equal"
+  value: 131072  # 128 KB in bytes

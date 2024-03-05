@@ -1,0 +1,26 @@
+metadata:
+  name: "Ensure S3 buckets have required tags"
+  id: "CUSTOM_S3_REQUIRED_TAGS"
+  category: "TAGGING"
+  severity: "MEDIUM"
+  version: 1.0.0
+
+definition:
+  and:
+    - cond_type: attribute
+      resource_types:
+        - aws_s3_bucket
+      attribute: tags.Environment
+      operator: exists
+
+    - cond_type: attribute
+      resource_types:
+        - aws_s3_bucket
+      attribute: tags.Owner
+      operator: exists
+
+    - cond_type: attribute
+      resource_types:
+        - aws_s3_bucket
+      attribute: tags.CostCenter
+      operator: exists

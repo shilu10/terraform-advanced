@@ -1,0 +1,20 @@
+metadata:
+  name: "Ensure Lambda function has required tags"
+  id: "CUSTOM_LAMBDA_REQUIRED_TAGS"
+  category: "TAGGING"
+  severity: "MEDIUM"
+
+
+definition:
+  and:
+    - cond_type: attribute
+      resource_types:
+        - aws_lambda_function
+      attribute: tags.Environment
+      operator: exists
+
+    - cond_type: attribute
+      resource_types:
+        - aws_lambda_function
+      attribute: tags.Owner
+      operator: exists

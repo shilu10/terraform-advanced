@@ -1,0 +1,12 @@
+metadata:
+  name: "Ensure SQS queue is encrypted using KMS"
+  id: "CUSTOM_SQS_ENCRYPTION"
+  category: "encryption"
+  severity: "HIGH"
+
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_sqs_queue
+  attribute: kms_master_key_id
+  operator: "exists"

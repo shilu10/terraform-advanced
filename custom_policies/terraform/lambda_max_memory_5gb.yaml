@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure Lambda function memory size does not exceed 5 GB"
+  id: "CUSTOM_LAMBDA_MEMORY_LIMIT"
+  category: "performance"
+  severity: "HIGH"
+
+
+definition:
+  cond_type: "attribute"
+  resource_types:
+    - aws_lambda_function
+  attribute: "memory_size"
+  operator: "less_than_or_equal"
+  value: 5120

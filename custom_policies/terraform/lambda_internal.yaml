@@ -4,22 +4,19 @@ metadata:
   category: "networking"
   severity: "HIGH"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_lambda_function_url 
     
 definition:
   and:
-    - cond_type: "resource_type"
-      resource_types:
-        - "aws_lambda_function_url"
 
     - cond_type: "attribute"
+      resource_types:
+        - aws_lambda_function_ur
       attribute: "tags.purpose"
       operator: "equals"
       value: "internal"
       
     - cond_type: "attribute"
+      resource_types:
+        - aws_lambda_function_ur
       attribute: "vpc_config"
       operator: "exists"

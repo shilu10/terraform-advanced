@@ -1,0 +1,18 @@
+metadata:
+  name: "Ensure IAM policy does not use wildcards"
+  id: "CUSTOM_IAM_NO_WILDCARD"
+  category: "iam"
+  severity: "CRITICAL"
+  framework: terraform_plan
+
+
+definition:
+  and:
+    - cond_type: attribute
+      resource_types:
+        - aws_iam_policy
+        - aws_iam_role_policy
+        - aws_iam_role
+      attribute: policy
+      operator: "jsonpath_not_match"
+      value: "$..Action[?(@ == '*')]"

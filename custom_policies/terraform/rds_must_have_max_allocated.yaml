@@ -1,0 +1,13 @@
+metadata:
+  name: "Ensure RDS has max_allocated_storage set for autoscaling"
+  id: "CUSTOM_RDS_MAX_ALLOCATED_REQUIRED"
+  category: "scalability"
+  severity: "MEDIUM"
+
+    
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_db_instance
+  attribute: max_allocated_storage
+  operator: "exists"

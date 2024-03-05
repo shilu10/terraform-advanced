@@ -1,0 +1,21 @@
+metadata:
+  name: "Ensure VPC has required tags"
+  id: "CUSTOM_VPC_TAGS"
+  category: "tagging"
+  severity: "MEDIUM"
+
+
+definition:
+  and:
+
+    - cond_type: attribute
+      resource_types:
+        - aws_vpc
+      attribute: tags.Environment
+      operator: "exists"
+      
+    - cond_type: attribute
+      resource_types:
+        - aws_vpc
+      attribute: tags.Owner
+      operator: "exists"

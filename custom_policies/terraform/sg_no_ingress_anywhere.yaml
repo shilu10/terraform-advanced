@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure security group does not allow ingress from 0.0.0.0/0"
+  id: "CUSTOM_SG_NO_OPEN_INGRESS"
+  category: "networking"
+  severity: "CRITICAL"
+
+    
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_security_group_rule 
+  attribute: cidr_blocks
+  operator: "not_contains"
+  value: "0.0.0.0/0"

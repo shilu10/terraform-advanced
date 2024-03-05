@@ -68,7 +68,7 @@ jobs:
 
             echo "Running custom Checkov policies"
             if [ -d "$GITHUB_WORKSPACE/custom_policies" ]; then
-              checkov --file tf.json --external-checks-dir "$GITHUB_WORKSPACE/custom_policies" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
+              checkov --file tf.json --framework=terraform --external-checks-dir "$GITHUB_WORKSPACE/custom_policies/terraform" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
               if [ -s custom-checkov-report.json ]; then
                 cp custom-checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov-custom.json"
               else

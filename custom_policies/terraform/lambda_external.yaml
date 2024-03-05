@@ -3,20 +3,19 @@ metadata:
   id: "CUSTOM_PUBLIC_LAMBDA_TAG_ENFORCEMENT"
   category: "security"
   severity: "HIGH"
-
     
 definition:
   and:
-    - cond_type: "resource_type"
-      resource_types:
-        - "aws_lambda_function_url"
-
     - cond_type: "attribute"
       attribute: "function_url.auth_type"
+      resource_types:
+        - aws_lambda_function_url
       operator: "equals"
       value: "NONE"
 
     - cond_type: "attribute"
       attribute: "tags.purpose"
+      resource_types:
+        - aws_lambda_function_url
       operator: "equals"
       value: "public"

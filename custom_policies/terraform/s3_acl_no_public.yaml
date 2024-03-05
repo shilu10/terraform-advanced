@@ -1,0 +1,14 @@
+metadata:
+  name: "Ensure S3 ACL is not public"
+  id: "CUSTOM_S3_NO_PUBLIC_ACL"
+  category: "networking"
+  severity: "CRITICAL"
+
+
+definition:
+  cond_type: attribute
+  resource_types:
+    - aws_s3_bucket 
+  attribute: acl
+  operator: "not_equals"
+  value: "public-read"

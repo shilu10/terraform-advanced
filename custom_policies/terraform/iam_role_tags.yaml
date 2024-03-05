@@ -1,24 +1,24 @@
 metadata:
-  name: "Ensure VPC has required tags"
-  id: "CUSTOM_VPC_TAGS"
+  name: "Ensure IAM role has required tags"
+  id: "CUSTOM_IAM_ROLE_TAGS"
   category: "tagging"
   severity: "MEDIUM"
 
 scope:
   provider: aws
   resource_types:
-    - aws_vpc
-
+    - aws_iam_role
+    
 definition:
   and:
     - cond_type: "resource_type"
       resource_types:
-        - "aws_vpc"
+        - "aws_iam_role"
         
     - cond_type: "attribute"
       attribute: "tags.Environment"
       operator: "exists"
-      
+
     - cond_type: "attribute"
       attribute: "tags.Owner"
       operator: "exists"
