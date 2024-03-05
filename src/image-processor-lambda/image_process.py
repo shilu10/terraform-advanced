@@ -34,11 +34,10 @@ def lambda_handler(event, context):
 
     for record in event['Records']:
         body = json.loads(record['body'])
-        image_key = body['image_key']
+        image_key = body['filename']
         metadata  = body['metadata']  # Example: dict of info
 
         bucket = os.environ["BUCKET_NAME"]
-
         # Download image (you could also process here if needed)
         local_path = f"/tmp/{os.path.basename(image_key)}"
         s3.download_file(bucket, image_key, local_path)

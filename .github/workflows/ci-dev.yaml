@@ -59,12 +59,12 @@ jobs:
           terragrunt show --all -json tf.plan > infrastructure/envs/dev/tf.json
 
       - name: Run Checkov static analysis
-        run: checkov -f infrastructure/envs/dev/tf.json
+        run: checkov --file infrastructure/envs/dev/tf.json
 
       - name: Run custom policies (if present)
         run: |
           if [ -d custom_policies ]; then
-            checkov -f infrastructure/envs/dev/tf.json --external-checks-dir custom_policies
+            checkov --file infrastructure/envs/dev/tf.json --external-checks-dir custom_policies
           fi
 
       - name: Run Infracost breakdown

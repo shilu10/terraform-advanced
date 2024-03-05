@@ -54,7 +54,7 @@ inputs = {
       statements = [
         {
           Effect   = "Allow"
-          Action   = ["sqs:SendMessage"]
+          Action   = ["sqs:SendMessage", "sqs:GetQueueUrl", "sqs:GetQueueAttributes"]
           Resource = dependency.sqs.outputs.queue_arn
         },
         {

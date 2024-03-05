@@ -17,10 +17,12 @@ terraform {
 inputs = {
   name      = "image-upload-function"
   use_image = true
-  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/demo-lambda:latest"
+  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest"
 
   environment_variables = {
-    ENV = "dev"
+    SQS_REGION = "us-east-1"
+    BUCKET_NAME = "demo-bucket"
+    QUEUE_NAME = "my-app-queue"
   }
 
   custom_vpc_enabled = false
