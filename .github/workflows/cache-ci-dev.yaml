@@ -46,10 +46,11 @@ jobs:
         run: terragrunt hcl validate
 
       - name: Run Checkov on each Terragrunt module and generate report
-        working-directory: infrastructure/envs/dev
         run: |
-          mkdir -p ../../checkov-reports
-          for dir in $(find . -mindepth 1 -maxdepth 1 -type d); do
+          CHECKOV_DIR="$GITHUB_WORKSPACE/checkov-reports"
+          mkdir -p "$CHECKOV_DIR"
+
+          for dir in infrastructure/envs/dev/*/; do
             echo "🔍 Running Checkov for module: $dir"
             cd "$dir"
 
@@ -59,19 +60,19 @@ jobs:
 
             echo "Running inbuilt Checkov policies"
             checkov --file tf.json --output json --soft-fail > checkov-report.json || echo "Checkov failed"
-            if [ -f checkov-report.json ]; then
-              cp checkov-report.json ../../../checkov-reports/$(basename "$dir")-checkov.json
+            if [ -s checkov-report.json ]; then
+              cp checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov.json"
             else
-              echo "⚠️ checkov-report.json not found for $dir"
+              echo "⚠️ checkov-report.json not found or empty for $dir"
             fi
 
             echo "Running custom Checkov policies"
-            if [ -d ../../../../custom_policies ]; then
-              checkov --file tf.json --external-checks-dir ../../../../custom_policies --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
-              if [ -f custom-checkov-report.json ]; then
-                cp custom-checkov-report.json ../../../checkov-reports/$(basename "$dir")-checkov-custom.json
+            if [ -d "$GITHUB_WORKSPACE/custom_policies" ]; then
+              checkov --file tf.json --external-checks-dir "$GITHUB_WORKSPACE/custom_policies" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
+              if [ -s custom-checkov-report.json ]; then
+                cp custom-checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov-custom.json"
               else
-                echo "⚠️ custom-checkov-report.json not found for $dir"
+                echo "⚠️ custom-checkov-report.json not found or empty for $dir"
               fi
             else
               echo "No custom policies found"
@@ -82,7 +83,7 @@ jobs:
 
       - name: Run Infracost breakdown
         env:
-          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}  # ensure it's set
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
         run: |
           infracost breakdown \
             --path=infrastructure/envs/dev \
@@ -113,8 +114,14 @@ jobs:
             infracost-comment.json
 
       - name: Upload Checkov reports
-        if: success() || failure()  # Run even if some step failed
+        if: always()  # Run even if prior step fails
         uses: actions/upload-artifact@v4
         with:
           name: checkov-reports
           path: checkov-reports/
+
+      - name: Debug Checkov Report Contents (Optional)
+        if: always()
+        run: |
+          echo "📄 Listing Checkov reports:"
+          ls -R checkov-reports || echo "❌ No reports found"
