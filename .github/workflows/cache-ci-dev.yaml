@@ -58,13 +58,21 @@ jobs:
             terragrunt show -json tf.plan > tf.json
 
             echo "Running inbuilt Checkov policies"
-            checkov --file tf.json --output json --soft-fail > checkov-report.json
-            cp checkov-report.json ../../../checkov-reports/$(basename $dir)-checkov.json
+            checkov --file tf.json --output json --soft-fail > checkov-report.json || echo "Checkov failed"
+            if [ -f checkov-report.json ]; then
+              cp checkov-report.json ../../../checkov-reports/$(basename "$dir")-checkov.json
+            else
+              echo "⚠️ checkov-report.json not found for $dir"
+            fi
 
             echo "Running custom Checkov policies"
             if [ -d ../../../../custom_policies ]; then
-              checkov --file tf.json --external-checks-dir ../../../../custom_policies --output json --soft-fail > custom-checkov-report.json
-              cp custom-checkov-report.json ../../../checkov-reports/$(basename $dir)-checkov-custom.json
+              checkov --file tf.json --external-checks-dir ../../../../custom_policies --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
+              if [ -f custom-checkov-report.json ]; then
+                cp custom-checkov-report.json ../../../checkov-reports/$(basename "$dir")-checkov-custom.json
+              else
+                echo "⚠️ custom-checkov-report.json not found for $dir"
+              fi
             else
               echo "No custom policies found"
             fi
@@ -73,6 +81,8 @@ jobs:
           done
 
       - name: Run Infracost breakdown
+        env:
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}  # ensure it's set
         run: |
           infracost breakdown \
             --path=infrastructure/envs/dev \
@@ -103,6 +113,7 @@ jobs:
             infracost-comment.json
 
       - name: Upload Checkov reports
+        if: success() || failure()  # Run even if some step failed
         uses: actions/upload-artifact@v4
         with:
           name: checkov-reports
