@@ -1,0 +1,14 @@
+metadata:
+  name: "Internal Lambda must run in VPC"
+  id: "CUSTOM_LAMBDA_INTERNAL_VPC"
+  category: "networking"
+  severity: "HIGH"
+definition:
+  and:
+    - cond_type: "attribute"
+      attribute: "tags.purpose"
+      operator: "equals"
+      value: "internal"
+    - cond_type: "attribute"
+      attribute: "vpc_config"
+      operator: "exists"

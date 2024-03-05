@@ -1,4 +1,4 @@
-include {
+include "parent" {
   path = find_in_parent_folders("root.hcl")
 }
 
@@ -55,8 +55,8 @@ inputs = {
       name = "inline-sqs-access"
       statements = [
         {
-          Effect = "Allow"
-          Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"]
+          Effect   = "Allow"
+          Action   = ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"]
           Resource = dependency.sqs.outputs.queue_arn
         }
       ]
@@ -65,8 +65,8 @@ inputs = {
       name = "inline-rds-access"
       statements = [
         {
-          Effect = "Allow"
-          Action = ["rds:DescribeDBInstances"]
+          Effect   = "Allow"
+          Action   = ["rds:DescribeDBInstances"]
           Resource = dependency.rds.outputs.rds_arn
         }
       ]

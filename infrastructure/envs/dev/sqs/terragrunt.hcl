@@ -1,4 +1,4 @@
-include {
+include "parent" {
   path = find_in_parent_folders("root.hcl")
 }
 
@@ -7,8 +7,8 @@ terraform {
 }
 
 inputs = {
-  name       = "my-app-queue"
-  fifo_queue = true
+  name                        = "my-app-queue"
+  fifo_queue                  = true
   content_based_deduplication = true
 
   visibility_timeout_seconds = 45

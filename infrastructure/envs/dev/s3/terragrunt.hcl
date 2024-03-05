@@ -1,4 +1,4 @@
-include {
+include "parent" {
   path = find_in_parent_folders("root.hcl")
 }
 
@@ -8,8 +8,8 @@ terraform {
 
 inputs = {
   bucket_name        = "demo-bucket"
-  versioning_enabled  = true
-  
+  versioning_enabled = true
+
   tags = {
     Environment = "dev"
   }

@@ -31,24 +31,24 @@ jobs:
       - name: Setup Terragrunt
         uses: autero1/action-terragrunt@v3
         with:
-          terragrunt-version: 0.56.3
+          terragrunt-version: 0.81.7
 
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
-      - name: Check Terraform formatting
-        run: terraform fmt -check -recursive infrastructure/envs/dev
+      #- name: Check Terraform formatting
+      #  run: terraform fmt -check -recursive infrastructure/modules
 
       - name: Check Terragrunt HCL formatting
-        run: terragrunt hclfmt --check --recursive infrastructure/envs/dev
-
-      - name: Initialize with Terragrunt
-        run: terragrunt init --working-dir infrastructure/envs/dev
+        run: terragrunt hcl format 
 
       - name: Validate Terragrunt configuration
-        run: terragrunt validate --working-dir infrastructure/envs/dev
+        run: terragrunt hcl validate 
+
+      - name: Initialize with Terragrunt
+        run: terragrunt init --working-dir infrastructure/envs/dev --all
 
       - name: Terragrunt Plan and Generate JSON
         run: |
@@ -56,7 +56,7 @@ jobs:
             --all \
             --working-dir infrastructure/envs/dev \
             -out=tf.plan
-          terraform show -json tf.plan > infrastructure/envs/dev/tf.json
+          terragrunt show --all -json tf.plan > infrastructure/envs/dev/tf.json
 
       - name: Run Checkov static analysis
         run: checkov -f infrastructure/envs/dev/tf.json

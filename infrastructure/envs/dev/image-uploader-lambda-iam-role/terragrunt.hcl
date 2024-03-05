@@ -1,4 +1,4 @@
-include {
+include "parent" {
   path = find_in_parent_folders("root.hcl")
 }
 
@@ -53,13 +53,13 @@ inputs = {
       name = "inline-sqs-s3-access"
       statements = [
         {
-          Effect = "Allow"
-          Action = ["sqs:SendMessage"]
+          Effect   = "Allow"
+          Action   = ["sqs:SendMessage"]
           Resource = dependency.sqs.outputs.queue_arn
         },
         {
-          Effect = "Allow"
-          Action = ["s3:PutObject"]
+          Effect   = "Allow"
+          Action   = ["s3:PutObject"]
           Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]

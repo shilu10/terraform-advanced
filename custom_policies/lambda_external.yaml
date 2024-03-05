@@ -1,0 +1,15 @@
+metadata:
+  name: "Public Lambda URL must be explicitly tagged"
+  id: "CUSTOM_PUBLIC_LAMBDA_TAG_ENFORCEMENT"
+  category: "security"
+  severity: "HIGH"
+definition:
+  and:
+    - cond_type: "attribute"
+      attribute: "function_url.auth_type"
+      operator: "equals"
+      value: "NONE"
+    - cond_type: "attribute"
+      attribute: "tags.purpose"
+      operator: "equals"
+      value: "public"
