@@ -55,7 +55,7 @@ jobs:
 
             TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt init --parallelism=40
             TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt plan -out=tf.plan
-            terraform show -json tf.plan > tf.json
+            terragrunt show -json tf.plan > tf.json
 
             echo "Running inbuilt Checkov policies"
             checkov --file tf.json --output json --soft-fail > checkov-report.json
