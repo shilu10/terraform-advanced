@@ -4,15 +4,13 @@ metadata:
   category: "performance"
   severity: "HIGH"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_lambda_function  # restricts it to Lambda URLs only
-
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_lambda_function"
-  attribute: "memory_size"
-  operator: "less_than_or_equal"
-  value: 5120
+  and: 
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_lambda_function"
+
+    - cond_type: "attribute"
+      attribute: "memory_size"
+      operator: "less_than_or_equal"
+      value: 5120

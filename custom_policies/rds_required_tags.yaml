@@ -11,13 +11,14 @@ scope:
 
 definition:
   and:
-    - cond_type: "attribute"
+    - cond_type: "resource_type"
       resource_types:
         - "aws_db_instance"
+
+    - cond_type: "attribute"
       attribute: "tags.Environment"
       operator: "exists"
+      
     - cond_type: "attribute"
-      resource_types:
-        - "aws_db_instance"
       attribute: "tags.Owner"
       operator: "exists"

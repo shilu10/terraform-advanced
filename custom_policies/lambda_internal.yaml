@@ -11,10 +11,15 @@ scope:
     
 definition:
   and:
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_lambda_function_url"
+
     - cond_type: "attribute"
       attribute: "tags.purpose"
       operator: "equals"
       value: "internal"
+      
     - cond_type: "attribute"
       attribute: "vpc_config"
       operator: "exists"

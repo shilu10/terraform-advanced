@@ -4,15 +4,14 @@ metadata:
   category: "iam"
   severity: "CRITICAL"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_iam_policy  
     
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_iam_role"
-  attribute: "assume_role_policy"
-  operator: "not_contains"
-  value: '"Principal":"*"'
+  and: 
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_iam_role"
+        
+    - cond_type: "attribute"
+      attribute: "assume_role_policy"
+      operator: "not_contains"
+      value: '"Principal":"*"'

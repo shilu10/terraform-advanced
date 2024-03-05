@@ -10,8 +10,11 @@ scope:
     - aws_sqs_queue
     
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_sqs_queue"
-  attribute: "kms_master_key_id"
-  operator: "exists"
+  and: 
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_sqs_queue"
+
+    - cond_type: "attribute"
+      attribute: "kms_master_key_id"
+      operator: "exists"

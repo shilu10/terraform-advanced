@@ -4,17 +4,18 @@ metadata:
   category: "security"
   severity: "HIGH"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_lambda_function_url 
     
 definition:
   and:
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_lambda_function_url"
+
     - cond_type: "attribute"
       attribute: "function_url.auth_type"
       operator: "equals"
       value: "NONE"
+
     - cond_type: "attribute"
       attribute: "tags.purpose"
       operator: "equals"

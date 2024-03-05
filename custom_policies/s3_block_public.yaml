@@ -11,27 +11,26 @@ scope:
 
 definition:
   and:
-    - cond_type: "attribute"
+    - cond_type: "resource_type"
       resource_types:
         - "aws_s3_bucket_public_access_block"
+
+    - cond_type: "attribute"
       attribute: "block_public_acls"
       operator: "equals"
       value: true
+
     - cond_type: "attribute"
-      resource_types:
-        - "aws_s3_bucket_public_access_block"
       attribute: "block_public_policy"
       operator: "equals"
       value: true
+
     - cond_type: "attribute"
-      resource_types:
-        - "aws_s3_bucket_public_access_block"
       attribute: "ignore_public_acls"
       operator: "equals"
       value: true
+      
     - cond_type: "attribute"
-      resource_types:
-        - "aws_s3_bucket_public_access_block"
       attribute: "restrict_public_buckets"
       operator: "equals"
       value: true

@@ -10,9 +10,11 @@ scope:
     - aws_sqs_queue
     
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_sqs_queue"
-  attribute: "message_retention_seconds"
-  operator: "less_than_or_equal"
-  value: 604800  # 7 days in seconds
+  add:
+    - cond_type: "resource_type"
+      resource_types: 
+        - "aws_sqs_queue"
+    - cond_type: "attribute"
+      attribute: "message_retention_seconds"
+      operator: "less_than_or_equal"
+      value: 604800  # 7 days in seconds

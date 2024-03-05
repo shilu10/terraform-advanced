@@ -10,8 +10,11 @@ scope:
     - aws_s3_bucket 
     
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_s3_bucket"
-  attribute: "server_side_encryption_configuration"
-  operator: "exists"
+  and: 
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_s3_bucket"
+
+    - cond_type: "attribute"
+      attribute: "server_side_encryption_configuration"
+      operator: "exists"

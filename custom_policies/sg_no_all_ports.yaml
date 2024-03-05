@@ -3,17 +3,24 @@ metadata:
   id: "CUSTOM_SG_NO_ALL_PORTS"
   category: "networking"
   severity: "CRITICAL"
+
+scope:
+  provider: aws
+  resource_types:
+    - aws_security_group_rule 
+    
 definition:
   and:
-    - cond_type: "attribute"
+    - cond_type: "resource_type"
       resource_types:
         - "aws_security_group_rule"
+
+    - cond_type: "attribute"
       attribute: "from_port"
       operator: "less_than_or_equal"
       value: 0
+      
     - cond_type: "attribute"
-      resource_types:
-        - "aws_security_group_rule"
       attribute: "to_port"
       operator: "greater_than_or_equal"
       value: 65535

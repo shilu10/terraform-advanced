@@ -10,9 +10,12 @@ scope:
     - aws_sqs_queue
     
 definition:
-  cond_type: "attribute"
-  resource_types:
-    - "aws_sqs_queue"
-  attribute: "maximum_message_size"
-  operator: "less_than_or_equal"
-  value: 131072  # 128 KB in bytes
+  and: 
+    - cond_type: "resource_type"
+      resource_types:
+        - "aws_sqs_queue"
+
+    - cond_type: "attribute"
+      attribute: "maximum_message_size"
+      operator: "less_than_or_equal"
+      value: 131072  # 128 KB in bytes
