@@ -4,14 +4,12 @@ on:
   pull_request:
     paths:
       - 'infrastructure/envs/prod/**'
-  push:
-    paths:
-      - 'infrastructure/envs/prod/**'
+
   workflow_dispatch:
 
 jobs:
   call-prod-ci:
-    uses: ./.github/workflows/ci-template.yml
+    uses: ./ci-template.yml
     with:
       env_name: prod
     secrets:

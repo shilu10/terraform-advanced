@@ -4,14 +4,12 @@ on:
   pull_request:
     paths:
       - 'infrastructure/envs/stage/**'
-  push:
-    paths:
-      - 'infrastructure/envs/stage/**'
+
   workflow_dispatch:
 
 jobs:
   call-stage-ci:
-    uses: ./.github/workflows/ci-template.yml
+    uses: ./ci-template.yml
     with:
       env_name: stage
     secrets:
