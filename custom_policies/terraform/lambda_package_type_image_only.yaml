@@ -6,9 +6,9 @@ metadata:
 
 definition:
 
-  cond_type: "attribute"
+  cond_type: attribute
   resource_types:
     - aws_lambda_function
-  attribute: "package_type"
+  attribute: package_type
   operator: "equals"
   value: "Image"

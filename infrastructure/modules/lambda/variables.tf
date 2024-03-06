@@ -1,6 +1,7 @@
 variable "name" {
   description = "Name of the Lambda function"
   type        = string
+  default     = "my-lambda-function"
 }
 
 variable "use_image" {
@@ -12,43 +13,43 @@ variable "use_image" {
 variable "image_uri" {
   description = "ECR image URI for container-based Lambda"
   type        = string
-  default     = null
+  default     = "123456789012.dkr.ecr.us-east-1.amazonaws.com/my-lambda-image:latest"
 }
 
 variable "filename" {
   description = "Local ZIP file path for deployment"
   type        = string
-  default     = null
+  default     = "lambda.zip"
 }
 
 variable "s3_bucket" {
   description = "S3 bucket for ZIP file"
   type        = string
-  default     = null
+  default     = "my-lambda-artifacts"
 }
 
 variable "s3_key" {
   description = "S3 key for ZIP file"
   type        = string
-  default     = null
+  default     = "lambda.zip"
 }
 
 variable "source_code_hash" {
   description = "Base64-encoded SHA256 hash of the deployment package"
   type        = string
-  default     = null
+  default     = ""
 }
 
 variable "runtime" {
   description = "Lambda runtime (e.g. python3.10)"
   type        = string
-  default     = null
+  default     = "python3.10"
 }
 
 variable "handler" {
   description = "Function entrypoint (e.g. index.handler)"
   type        = string
-  default     = null
+  default     = "main.handler"
 }
 
 variable "layers" {
@@ -69,11 +70,12 @@ variable "memory_size" {
   default     = 128
 }
 
-
 variable "environment_variables" {
   description = "Environment variables for the Lambda"
   type        = map(string)
-  default     = {}
+  default     = {
+    ENV = "dev"
+  }
 }
 
 variable "attach_basic_execution_role" {
@@ -85,21 +87,23 @@ variable "attach_basic_execution_role" {
 variable "tags" {
   description = "Tags to apply to all resources"
   type        = map(string)
-  default     = {}
+  default     = {
+    Project     = "lambda-demo"
+    Environment = "dev"
+  }
 }
 
 variable "subnet_ids" {
   type        = list(string)
   description = "Subnets to attach Lambda to (if custom VPC is enabled)"
-  default     = []
+  default     = ["subnet-abc123", "subnet-def456"]
 }
 
 variable "security_group_ids" {
   type        = list(string)
   description = "Security groups for the Lambda (if custom VPC is enabled)"
-  default     = []
+  default     = ["sg-0123456789abcdef0"]
 }
-
 
 variable "custom_vpc_enabled" {
   description = "Whether to deploy the Lambda into a custom VPC"
@@ -107,11 +111,10 @@ variable "custom_vpc_enabled" {
   default     = false
 }
 
-
 variable "enable_function_url" {
   description = "Whether to create a Function URL for the Lambda"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "function_url_auth_type" {
@@ -119,7 +122,6 @@ variable "function_url_auth_type" {
   type        = string
   default     = "NONE"
 }
-
 
 variable "create_role" {
   description = "Whether the module should create an IAM role for Lambda execution"
@@ -130,18 +132,17 @@ variable "create_role" {
 variable "role_arn" {
   description = "Optional ARN of an existing IAM role to use instead of creating one"
   type        = string
-  default     = null
+  default     = ""
 }
 
-## event source mapper
 variable "enabled_event_source_mapping" {
-  description = "Optional bool for enabling event source mapper, making lambda to read from event source like sqs"
-  type = bool 
-  default = false
+  description = "Optional bool for enabling event source mapper, making lambda read from event source like SQS"
+  type        = bool
+  default     = false
 }
 
 variable "event_source_arn" {
-  description = "event source arn like sqs arn"
-  default = ""
-  type = string
+  description = "Event source ARN like SQS ARN"
+  type        = string
+  default     = "arn:aws:sqs:us-east-1:123456789012:my-queue"
 }

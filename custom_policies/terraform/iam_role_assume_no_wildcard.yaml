@@ -9,6 +9,6 @@ definition:
   cond_type: attribute
   resource_types:
     - aws_iam_role
-  attribute: "assume_role_policy"
+  attribute: assume_role_policy
   operator: "not_contains"
   value: '"Principal":"*"'

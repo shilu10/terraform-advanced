@@ -1,6 +1,7 @@
 variable "name" {
   type        = string
   description = "Name of the SQS queue (without .fifo)"
+  default     = "my-default-queue"
 }
 
 variable "fifo_queue" {
@@ -22,7 +23,7 @@ variable "visibility_timeout_seconds" {
 
 variable "message_retention_seconds" {
   type        = number
-  default     = 345600
+  default     = 345600  # 4 days
 }
 
 variable "delay_seconds" {
@@ -32,7 +33,7 @@ variable "delay_seconds" {
 
 variable "max_message_size" {
   type        = number
-  default     = 262144
+  default     = 262144  # 256 KB
 }
 
 variable "receive_wait_time_seconds" {
@@ -42,12 +43,12 @@ variable "receive_wait_time_seconds" {
 
 variable "kms_master_key_id" {
   type        = string
-  default     = null
+  default     = null  # Optional KMS encryption
 }
 
 variable "kms_data_key_reuse_period_seconds" {
   type        = number
-  default     = null
+  default     = 300  # AWS default: 300 seconds (5 mins)
 }
 
 variable "redrive_policy" {
@@ -61,5 +62,8 @@ variable "redrive_policy" {
 
 variable "tags" {
   type        = map(string)
-  default     = {}
+  default     = {
+    Environment = "dev"
+    Project     = "sqs-module"
+  }
 }

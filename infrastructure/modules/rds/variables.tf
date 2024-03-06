@@ -1,26 +1,31 @@
 variable "name" {
   description = "RDS instance name"
   type        = string
+  default     = "my-db-instance"
 }
 
 variable "engine" {
   description = "Database engine (e.g. mysql, postgres)"
   type        = string
+  default     = "mysql"
 }
 
 variable "engine_version" {
   description = "Engine version"
   type        = string
+  default     = "8.0"
 }
 
 variable "instance_class" {
   description = "Instance class"
   type        = string
+  default     = "db.t3.micro"
 }
 
 variable "allocated_storage" {
   description = "Minimum allocated storage (GB)"
   type        = number
+  default     = 20
 }
 
 variable "max_allocated_storage" {
@@ -32,17 +37,20 @@ variable "max_allocated_storage" {
 variable "db_name" {
   description = "Database name"
   type        = string
+  default     = "mydb"
 }
 
 variable "username" {
   description = "Master username"
   type        = string
+  default     = "admin"
 }
 
 variable "password" {
   description = "Master password"
   type        = string
   sensitive   = true
+  default     = "changeMe123!"
 }
 
 variable "port" {
@@ -54,11 +62,13 @@ variable "port" {
 variable "subnet_ids" {
   description = "Subnet IDs for DB subnet group"
   type        = list(string)
+  default     = ["subnet-abc123", "subnet-def456"]
 }
 
 variable "vpc_security_group_ids" {
   description = "List of VPC security group IDs"
   type        = list(string)
+  default     = ["sg-0123456789abcdef0"]
 }
 
 variable "multi_az" {
@@ -94,5 +104,8 @@ variable "publicly_accessible" {
 variable "tags" {
   description = "Tags to apply to resources"
   type        = map(string)
-  default     = {}
+  default     = {
+    Environment = "dev"
+    Project     = "rds-module"
+  }
 }

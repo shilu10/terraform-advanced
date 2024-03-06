@@ -4,21 +4,17 @@ metadata:
   category: "tagging"
   severity: "MEDIUM"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_security_group 
 
 definition:
   and:
-    - cond_type: "resource_type"
+    - cond_type: attribute
       resource_types:
-        - "aws_security_group"
-
-    - cond_type: "attribute"
-      attribute: "tags.Environment"
+        - aws_security_group
+      attribute: tags.Environment
       operator: "exists"
       
-    - cond_type: "attribute"
-      attribute: "tags.Owner"
+    - cond_type: attribute
+      resource_types:
+        - aws_security_group
+      attribute: tags.Owner
       operator: "exists"

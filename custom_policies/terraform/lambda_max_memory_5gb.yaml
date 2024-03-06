@@ -6,9 +6,9 @@ metadata:
 
 
 definition:
-  cond_type: "attribute"
+  cond_type: attribute
   resource_types:
     - aws_lambda_function
-  attribute: "memory_size"
+  attribute: memory_size
   operator: "less_than_or_equal"
   value: 5120

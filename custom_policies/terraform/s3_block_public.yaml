@@ -6,7 +6,7 @@ metadata:
   
 
 definition:
-
+  and:
     - cond_type: attribute
       attribute: block_public_acls
       resource_types:

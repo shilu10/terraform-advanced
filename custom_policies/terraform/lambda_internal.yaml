@@ -10,13 +10,13 @@ definition:
 
     - cond_type: "attribute"
       resource_types:
-        - aws_lambda_function_ur
+        - aws_lambda_function_url
       attribute: "tags.purpose"
       operator: "equals"
       value: "internal"
       
     - cond_type: "attribute"
       resource_types:
-        - aws_lambda_function_ur
+        - aws_lambda_function_url
       attribute: "vpc_config"
       operator: "exists"

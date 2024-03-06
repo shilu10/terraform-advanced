@@ -4,21 +4,17 @@ metadata:
   category: "tagging"
   severity: "MEDIUM"
 
-scope:
-  provider: aws
-  resource_types:
-    - aws_iam_role
     
 definition:
   and:
-    - cond_type: "resource_type"
+    - cond_type: attribute
       resource_types:
-        - "aws_iam_role"
-        
-    - cond_type: "attribute"
-      attribute: "tags.Environment"
+        - aws_iam_role
+      attribute: tags.Environment
       operator: "exists"
 
-    - cond_type: "attribute"
-      attribute: "tags.Owner"
+    - cond_type: attribute
+      resource_types:
+        - aws_iam_role
+      attribute: tags.Owner
       operator: "exists"
