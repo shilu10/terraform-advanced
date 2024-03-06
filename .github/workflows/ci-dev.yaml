@@ -1,4 +1,4 @@
-name: CI cache for Dev Environment
+name: Dev Environment CI
 
 on:
   pull_request:
@@ -6,122 +6,13 @@ on:
       - 'infrastructure/envs/dev/**'
   push:
     paths:
-      - '*'
+      - 'infrastructure/envs/dev/**'
   workflow_dispatch:
 
 jobs:
-  dev-ci:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Setup Terragrunt
-        uses: autero1/action-terragrunt@v3
-        with:
-          terragrunt-version: 0.81.7
-
-      - name: Setup Infracost
-        uses: infracost/actions/setup@v2
-        with:
-          api-key: ${{ secrets.INFRACOST_API_KEY }}
-
-      - name: Install Checkov
-        run: pip install checkov
-
-      - name: Set plugin cache environment variable
-        run: echo "TF_PLUGIN_CACHE_DIR=$HOME/.terraform.d/plugin-cache" >> $GITHUB_ENV
-
-      - name: Ensure plugin cache directory exists
-        run: mkdir -p "$TF_PLUGIN_CACHE_DIR"
-
-      - name: Check Terragrunt HCL formatting
-        run: terragrunt hcl format
-
-      - name: Validate Terragrunt configuration
-        run: terragrunt hcl validate
-
-      - name: Run Checkov on each Terragrunt module and generate report
-        run: |
-          CHECKOV_DIR="$GITHUB_WORKSPACE/checkov-reports"
-          mkdir -p "$CHECKOV_DIR"
-
-          for dir in infrastructure/envs/dev/*/; do
-            echo "🔍 Running Checkov for module: $dir"
-            cd "$dir"
-
-            TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt init --parallelism=40
-            TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt plan -out=tf.plan
-            terragrunt show -json tf.plan > tf.json
-
-            echo "Running inbuilt Checkov policies"
-            checkov --file tf.json --output json --soft-fail > checkov-report.json || echo "Checkov failed"
-            if [ -s checkov-report.json ]; then
-              cp checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov.json"
-            else
-              echo "⚠️ checkov-report.json not found or empty for $dir"
-            fi
-
-            echo "Running custom Checkov policies"
-            if [ -d "$GITHUB_WORKSPACE/custom_policies" ]; then
-              checkov --skip-path tf.json --skip-check CKV* -d .terragrunt-cache  --external-checks-dir "$GITHUB_WORKSPACE/custom_policies/terraform" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
-              if [ -s custom-checkov-report.json ]; then
-                cp custom-checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov-custom.json"
-              else
-                echo "⚠️ custom-checkov-report.json not found or empty for $dir"
-              fi
-            else
-              echo "No custom policies found"
-            fi
-
-            cd - > /dev/null
-          done
-
-      - name: Run Infracost breakdown
-        env:
-          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
-        run: |
-          infracost breakdown \
-            --path=infrastructure/envs/dev \
-            --usage-file=infracost/infracost-usage.yml \
-            --format=json \
-            --out-file=infracost-dev.json
-
-      - name: Generate Infracost HTML report
-        run: |
-          infracost output \
-            --path=infracost-dev.json \
-            --format=html \
-            --out-file=infracost-report-dev.html
-
-      - name: Generate Infracost GitHub comment
-        run: |
-          infracost output \
-            --path=infracost-dev.json \
-            --format=github-comment \
-            --out-file=infracost-comment.json
-
-      - name: Upload Infracost reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: infracost-reports
-          path: |
-            infracost-report-dev.html
-            infracost-comment.json
-
-      - name: Upload Checkov reports
-        if: always()  # Run even if prior step fails
-        uses: actions/upload-artifact@v4
-        with:
-          name: checkov-reports
-          path: checkov-reports/
-
-      - name: Debug Checkov Report Contents (Optional)
-        if: always()
-        run: |
-          echo "📄 Listing Checkov reports:"
-          ls -R checkov-reports || echo "❌ No reports found"
+  call-dev-ci:
+    uses: ./.github/workflows/ci-template.yml
+    with:
+      env_name: dev
+    secrets:
+      INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
