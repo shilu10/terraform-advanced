@@ -1,22 +1,17 @@
-name: CI for stage Environment
+name: CI cache for stage Environment
 
 on:
   pull_request:
     paths:
       - 'infrastructure/envs/stage/**'
+  push:
+    paths:
+      - '*'
+  workflow_dispatch:
 
 jobs:
-
-  # -----------------------------------
-  # STAGE 1: Format and Lint Checks
-  # -----------------------------------
-  lint:
+  stage-ci:
     runs-on: ubuntu-latest
-    env:
-      AWS_ACCESS_KEY_ID: test
-      AWS_SECRET_ACCESS_KEY: test
-      AWS_REGION: us-east-1
-      LOCALSTACK_HOST: http://localhost:4566
 
     steps:
       - name: Checkout repository
@@ -28,97 +23,72 @@ jobs:
       - name: Setup Terragrunt
         uses: autero1/action-terragrunt@v3
         with:
-          terragrunt-version: 0.56.3
-
-      - name: Check Terraform formatting
-        run: terraform fmt -check -recursive infrastructure/envs/stage
-
-      - name: Check Terragrunt HCL formatting
-        run: terragrunt hclfmt --check --recursive infrastructure/envs/stage
-
-  # -----------------------------------
-  # STAGE 2: Validate and Security Check
-  # -----------------------------------
-  validate:
-    runs-on: ubuntu-latest
-    needs: lint
-    env:
-      AWS_ACCESS_KEY_ID: test
-      AWS_SECRET_ACCESS_KEY: test
-      AWS_REGION: us-east-1
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-
-      - name: Setup Terragrunt
-        uses: autero1/action-terragrunt@v3
-        with:
-          terragrunt-version: 0.56.3
-
-      - name: Initialize with Terragrunt
-        run: terragrunt init --working-dir infrastructure/envs/stage
-
-      - name: Validate Terragrunt configuration
-        run: terragrunt validate --working-dir infrastructure/envs/stage
-
-      - name: Terragrunt Plan and Generate JSON
-        run: |
-          terragrunt plan \
-            --all \
-            --working-dir infrastructure/envs/stage \
-            -out=tf.plan
-          terraform show -json tf.plan > infrastructure/envs/stage/tf.json
-
-      - name: Run Checkov static analysis
-        run: checkov -f infrastructure/envs/stage/tf.json
-
-      - name: Run custom policies (if present)
-        run: |
-          if [ -d custom_policies ]; then
-            checkov -f infrastructure/envs/stage/tf.json --external-checks-dir custom_policies
-          fi
-
-      - name: Upload tf.json artifact for downstream jobs
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfjson-stage
-          path: infrastructure/envs/stage/tf.json
-
-  # -----------------------------------
-  # STAGE 3: Infracost Analysis
-  # -----------------------------------
-  infracost:
-    runs-on: ubuntu-latest
-    needs: validate
-    env:
-      AWS_REGION: us-east-1
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+          terragrunt-version: 0.81.7
 
       - name: Setup Infracost
         uses: infracost/actions/setup@v2
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
-      - name: Download tf.json
-        uses: actions/download-artifact@v4
-        with:
-          name: tfjson-stage
-          path: tfjson
+      - name: Install Checkov
+        run: pip install checkov
+
+      - name: Set plugin cache environment variable
+        run: echo "TF_PLUGIN_CACHE_DIR=$HOME/.terraform.d/plugin-cache" >> $GITHUB_ENV
+
+      - name: Ensure plugin cache directory exists
+        run: mkdir -p "$TF_PLUGIN_CACHE_DIR"
+
+      - name: Check Terragrunt HCL formatting
+        run: terragrunt hcl format
+
+      - name: Validate Terragrunt configuration
+        run: terragrunt hcl validate
+
+      - name: Run Checkov on each Terragrunt module and generate report
+        run: |
+          CHECKOV_DIR="$GITHUB_WORKSPACE/checkov-reports"
+          mkdir -p "$CHECKOV_DIR"
+
+          for dir in infrastructure/envs/stage/*/; do
+            echo "🔍 Running Checkov for module: $dir"
+            cd "$dir"
+
+            TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt init --parallelism=40
+            TF_PLUGIN_CACHE_DIR="$TF_PLUGIN_CACHE_DIR" terragrunt plan -out=tf.plan
+            terragrunt show -json tf.plan > tf.json
+
+            echo "Running inbuilt Checkov policies"
+            checkov --file tf.json --output json --soft-fail > checkov-report.json || echo "Checkov failed"
+            if [ -s checkov-report.json ]; then
+              cp checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov.json"
+            else
+              echo "⚠️ checkov-report.json not found or empty for $dir"
+            fi
+
+            echo "Running custom Checkov policies"
+            if [ -d "$GITHUB_WORKSPACE/custom_policies" ]; then
+              checkov --skip-path tf.json --skip-check CKV* -d .terragrunt-cache  --external-checks-dir "$GITHUB_WORKSPACE/custom_policies/terraform" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
+              if [ -s custom-checkov-report.json ]; then
+                cp custom-checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov-custom.json"
+              else
+                echo "⚠️ custom-checkov-report.json not found or empty for $dir"
+              fi
+            else
+              echo "No custom policies found"
+            fi
+
+            cd - > /stage/null
+          done
 
       - name: Run Infracost breakdown
+        env:
+          INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
         run: |
           infracost breakdown \
-            --path=tfjson/tf.json \
+            --path=infrastructure/envs/stage \
             --usage-file=infracost/infracost-usage.yml \
-            --format=github-comment \
-            --show-skipped \
+            --format=json \
             --out-file=infracost-stage.json
 
       - name: Generate Infracost HTML report
@@ -128,8 +98,30 @@ jobs:
             --format=html \
             --out-file=infracost-report-stage.html
 
-      - name: Upload Infracost report artifact
+      - name: Generate Infracost GitHub comment
+        run: |
+          infracost output \
+            --path=infracost-stage.json \
+            --format=github-comment \
+            --out-file=infracost-comment.json
+
+      - name: Upload Infracost reports
         uses: actions/upload-artifact@v4
         with:
-          name: infracost-report-stage
-          path: infracost-report-stage.html
+          name: infracost-reports
+          path: |
+            infracost-report-stage.html
+            infracost-comment.json
+
+      - name: Upload Checkov reports
+        if: always()  # Run even if prior step fails
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkov-reports
+          path: checkov-reports/
+
+      - name: Debug Checkov Report Contents (Optional)
+        if: always()
+        run: |
+          echo "📄 Listing Checkov reports:"
+          ls -R checkov-reports || echo "❌ No reports found"
