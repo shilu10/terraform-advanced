@@ -4,12 +4,14 @@ on:
   pull_request:
     paths:
       - 'infrastructure/envs/dev/**'
-
+  push:
+    paths:
+      - 'infrastructure/envs/dev/**'
   workflow_dispatch:
 
 jobs:
   call-dev-ci:
-    uses: ./ci-template.yml
+    uses: ./.github/workflows/ci-template.yaml
     with:
       env_name: dev
     secrets:
