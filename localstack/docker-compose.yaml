@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"          # Edge port (all services)
+      - "4571:4571"          # For legacy services (optional)
+    environment:
+      - SERVICES=s3,sqs,lambda,rds  # list of AWS services you want to emulate
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "./localstack-data:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

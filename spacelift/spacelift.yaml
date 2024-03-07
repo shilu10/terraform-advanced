@@ -1,0 +1,17 @@
+stack:
+  terraform_version: "1.5.0"
+  terraform_wrapper: false
+  backend:
+    type: s3
+    bucket: "my-terraform-state"
+    key: "path/to/terraform.tfstate"
+    region: "us-east-1"
+  commands:
+    apply: "terragrunt apply -auto-approve"
+    plan: "terragrunt plan"
+  environment:
+    - "AWS_ACCESS_KEY_ID"
+    - "AWS_SECRET_ACCESS_KEY"
+  inputs:
+    environment: "dev"
+    region: "us-east-1"
