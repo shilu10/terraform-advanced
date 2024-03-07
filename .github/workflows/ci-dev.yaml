@@ -90,14 +90,14 @@ jobs:
           #  --out-file=infracost-dev.json
 
           infracost breakdown \
-            --config-file=infracost/infracost.yaml \
+            --config-file=infracost/infracost-config.yaml \
             --format=json \
             --out-file=infracost-dev.json
 
       - name: Save Infracost policy report
         run: |
           infracost policy \
-            --config-file=infracost/infracost.yaml \
+            --config-file=infracost/infracost-config.yaml \
             --format=json \
             --out-file=infracost-policy.json
 
