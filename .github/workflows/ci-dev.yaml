@@ -17,6 +17,8 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_wrapper: false
 
       - name: Setup Terragrunt
         uses: autero1/action-terragrunt@v3
@@ -28,8 +30,12 @@ jobs:
         with:
           api-key: ${{ secrets.INFRACOST_API_KEY }}
 
-      - name: Install Checkov
-        run: pip install checkov
+      - name: Install Checkov & OPA
+        run: |
+          pip install checkov
+          curl -L -o opa https://openpolicyagent.org/downloads/latest/opa_linux_amd64
+          chmod +x opa
+          sudo mv opa /usr/local/bin/
 
       - name: Set plugin cache environment variable
         run: echo "TF_PLUGIN_CACHE_DIR=$HOME/.terraform.d/plugin-cache" >> $GITHUB_ENV
@@ -66,7 +72,9 @@ jobs:
 
             echo "Running custom Checkov policies"
             if [ -d "$GITHUB_WORKSPACE/custom_policies" ]; then
-              checkov --skip-path tf.json --skip-check CKV* -d .terragrunt-cache  --external-checks-dir "$GITHUB_WORKSPACE/custom_policies/terraform" --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
+              checkov --skip-path tf.json --skip-check CKV* -d .terragrunt-cache \
+                --external-checks-dir "$GITHUB_WORKSPACE/custom_policies/terraform" \
+                --output json --soft-fail > custom-checkov-report.json || echo "Custom Checkov failed"
               if [ -s custom-checkov-report.json ]; then
                 cp custom-checkov-report.json "$CHECKOV_DIR/$(basename "$dir")-checkov-custom.json"
               else
@@ -83,29 +91,35 @@ jobs:
         env:
           INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
         run: |
-          #infracost breakdown \
-          #  --path=infrastructure/envs/dev \
-          #  --usage-file=infracost/infracost-usage.yaml \
-          #  --format=json \
-          #  --out-file=infracost-dev.json
-
           infracost breakdown \
             --config-file=infracost/infracost-config.yaml \
             --format=json \
             --out-file=infracost-dev.json
 
-      - name: Save Infracost policy report
+      - name: Evaluate Infracost Rego policies with OPA
         run: |
-          infracost policy \
-            --config-file=infracost/infracost-config.yaml \
-            --format=json \
-            --out-file=infracost-policy.json
+          echo "🔍 Evaluating Rego policies using OPA"
+          for f in infracost/policies/*.rego; do
+            echo "📜 Running policy: $f"
+            opa eval --format=pretty \
+              --data "$f" \
+              --input infracost-dev.json \
+              "data.infracost.deny"
+          done
 
-      - name: Upload Infracost policy report
-        uses: actions/upload-artifact@v4
-        with:
-          name: infracost-policy-report
-          path: infracost-policy.json
+      - name: Fail if any Infracost policy fails
+        run: |
+          echo "🔍 Checking for violations..."
+          FAILED=0
+          for f in infracost/policies/*.rego; do
+            echo "⏳ Evaluating $f..."
+            result=$(opa eval --format=json --data "$f" --input infracost-dev.json "data.infracost.deny" | jq '.[0].expressions[0].value | length > 0')
+            if [ "$result" == "true" ]; then
+              echo "❌ Policy violation detected in $f"
+              FAILED=1
+            fi
+          done
+          exit $FAILED
 
       - name: Generate Infracost HTML report
         run: |
@@ -114,7 +128,7 @@ jobs:
             --format=html \
             --out-file=infracost-report-dev.html
 
-      - name: Generate Infracost GitHub comment
+      - name: Generate Infracost GitHub comment JSON (Optional for future)
         run: |
           infracost output \
             --path=infracost-dev.json \
@@ -130,7 +144,7 @@ jobs:
             infracost-comment.json
 
       - name: Upload Checkov reports
-        if: always()  # Run even if prior step fails
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: checkov-reports

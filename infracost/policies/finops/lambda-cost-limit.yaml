@@ -1,8 +1,0 @@
-name: "Limit Lambda monthly cost"
-description: "Avoid expensive Lambda configurations"
-severity: HIGH
-
-conditions:
-  - resource_type: "aws_lambda_function"
-    price:
-      monthly_cost: ">50"
