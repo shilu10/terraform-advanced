@@ -11,6 +11,12 @@ inputs = {
   versioning_enabled = true
 
   tags = {
-    Environment = "dev"
+    Name               = "demo-bucket"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
   }
 }

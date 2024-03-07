@@ -57,4 +57,14 @@ inputs = {
   # event souurce (pull based lambda)
   enabled_event_source_mapping = true
   event_source_arn             = dependency.sqs.outputs.queue_arn
+
+  tags = {
+    Name               = "image-processer-lambda"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
+  }
 }

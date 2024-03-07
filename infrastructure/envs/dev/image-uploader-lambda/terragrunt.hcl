@@ -32,4 +32,14 @@ inputs = {
 
   create_role = false
   role_arn    = dependency.iam_role.outputs.role_arn
+
+  tags = {
+    Name               = "image-uploader-lambda"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
+  }
 }

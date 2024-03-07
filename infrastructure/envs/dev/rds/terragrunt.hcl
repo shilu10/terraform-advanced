@@ -40,8 +40,12 @@ inputs = {
   publicly_accessible     = false
 
   tags = {
-    Name        = "mysql-db-prod"
-    Environment = "production"
-    Owner       = "devops-team"
+    Name               = "mysql-db-dev"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
   }
 }

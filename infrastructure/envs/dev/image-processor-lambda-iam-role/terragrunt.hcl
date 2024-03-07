@@ -37,9 +37,13 @@ inputs = {
   })
 
   tags = {
-    Environment = "dev"
-    Team        = "platform"
-    Name        = "image-processor-iam-role"
+    Name               = "image-processer-lambda-iam"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
   }
 
   # AWS managed policies

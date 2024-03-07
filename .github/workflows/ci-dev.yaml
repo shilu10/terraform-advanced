@@ -85,19 +85,19 @@ jobs:
         run: |
           #infracost breakdown \
           #  --path=infrastructure/envs/dev \
-          #  --usage-file=infracost/infracost-usage.yml \
+          #  --usage-file=infracost/infracost-usage.yaml \
           #  --format=json \
           #  --out-file=infracost-dev.json
 
           infracost breakdown \
-            --config-file=infracost/infracost.yml \
+            --config-file=infracost/infracost.yaml \
             --format=json \
             --out-file=infracost-dev.json
 
       - name: Save Infracost policy report
         run: |
           infracost policy \
-            --config-file=infracost/infracost.yml \
+            --config-file=infracost/infracost.yaml \
             --format=json \
             --out-file=infracost-policy.json
 

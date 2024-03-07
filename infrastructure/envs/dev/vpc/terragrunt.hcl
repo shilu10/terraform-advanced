@@ -36,7 +36,13 @@ inputs = {
         cidr_blocks = ["0.0.0.0/0"]
       }]
       tags = {
-        Environment = "dev"
+        Name               = "rds-sg"
+        Project            = "iac-pipeline"
+        Environment        = "dev"
+        Owner              = "shilash"
+        Team               = "devops"
+        ManagedBy          = "terraform"
+        Compliance         = "internal"
       }
     }
 
@@ -57,15 +63,25 @@ inputs = {
       }]
 
       tags = {
-        Name = "lambda-function-sg"
+        Name               = "lambda-function-sg"
+        Project            = "iac-pipeline"
+        Environment        = "dev"
+        Owner              = "shilash"
+        Team               = "devops"
+        ManagedBy          = "terraform"
+        Compliance         = "internal"
       }
     }
 
   }
 
   tags = {
-    Environment = "dev"
-    Owner       = "shilash"
-    Project     = "custom-vpc"
-  }
+        Name               = "iac-pipeline-vpc"
+        Project            = "iac-pipeline"
+        Environment        = "dev"
+        Owner              = "shilash"
+        Team               = "devops"
+        ManagedBy          = "terraform"
+        Compliance         = "internal"
+      }
 }

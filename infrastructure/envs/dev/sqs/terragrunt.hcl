@@ -20,7 +20,12 @@ inputs = {
   kms_master_key_id = "alias/aws/sqs"
 
   tags = {
-    Environment = "dev"
-    Project     = "my-app"
+    Name               = "my-app-queue"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
   }
 }

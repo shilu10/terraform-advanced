@@ -37,9 +37,13 @@ inputs = {
   })
 
   tags = {
-    Environment = "dev"
-    Team        = "platform"
-    Name        = "image-upload-iam-role"
+    Name               = "image-uploader-lambda-iam"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
   }
 
   attach_managed_policies = true
