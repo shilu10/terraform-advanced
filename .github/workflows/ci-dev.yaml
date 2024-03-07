@@ -99,13 +99,14 @@ jobs:
       - name: Evaluate Infracost Rego policies with OPA
         run: |
           echo "🔍 Evaluating Rego policies using OPA"
-          for f in infracost/policies/*.rego; do
+          for f in policies/**/*.rego; do
             echo "📜 Running policy: $f"
             opa eval --format=pretty \
               --data "$f" \
               --input infracost-dev.json \
               "data.infracost.deny"
           done
+
 
       - name: Fail if any Infracost policy fails
         run: |
