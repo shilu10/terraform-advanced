@@ -4,9 +4,7 @@ on:
   pull_request:
     paths:
       - 'infrastructure/envs/stage/**'
-  push:
-    paths:
-      - '*'
+
   workflow_dispatch:
 
 jobs:
