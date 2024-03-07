@@ -1,0 +1,9 @@
+name: "Disallow high-cost RDS instance types"
+description: "Block provisioning of large RDS classes"
+severity: HIGH
+
+conditions:
+  - resource_type: "aws_db_instance"
+    attribute: "instance_type"
+    operator: "in"
+    value: ["db.r5.4xlarge", "db.m5.8xlarge"]

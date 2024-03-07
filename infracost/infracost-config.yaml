@@ -1,0 +1,14 @@
+version: 0.1
+
+projects:
+  - path: infrastructure/envs/dev
+    name: dev-environment
+    usage_file: infracost-usage.yml  # 👈 Include your usage estimates here
+
+policy:
+  paths:
+    - .infracost/policies/tagging
+    - .infracost/policies/finops
+    - .infracost/policies/guardrails
+  severity_threshold: LOW
+  format: table

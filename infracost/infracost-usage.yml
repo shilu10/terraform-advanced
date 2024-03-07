@@ -1,23 +1,35 @@
 version: 0.1
 
-resource_usages:
-  aws_lambda_function.image-processor-lambda:
+resource_type_default_usage:
+  aws_lambda_function:
+    monthly_requests: 100000 # Monthly requests to the Lambda function.
+    request_duration_ms: 500 # Average duration of each request in milliseconds.
+
+resource_usage:
+  aws_s3_bucket.this:
+    object_tags: 10000000 # Total object tags. Only for AWS provider V3.
+    standard: # Usages of S3 Standard:
+      storage_gb: 10000 # Total storage in GB.
+
+  # Lambdas
+  aws_lambda_function.this:
     monthly_requests: 200000
     request_duration_ms: 300
 
-  aws_lambda_function.image-uploader-lambda:
-    monthly_requests: 300000
-    request_duration_ms: 200
-
-  aws_s3_bucket.s3:
-    storage_gb: 100
-    monthly_class_a_requests: 50000
-    monthly_class_b_requests: 100000
-    monthly_data_transfer_gb: 50
-
-  aws_sqs_queue.sqs:
+  # SQS
+  aws_sqs_queue.this:
     monthly_requests: 1000000
     request_size_kb: 1
 
+  # NAT Gateway (inside your VPC module)
   aws_nat_gateway.nat[0]:
     monthly_data_processed_gb: 100
+
+  # RDS
+  aws_db_instance.this:
+    additional_backup_storage_gb: 1000  # Amount of backup storage used that is in excess of 100% of the storage size for all databases in GB.
+    monthly_standard_io_requests: 10000 # Monthly number of input/output requests for database.
+    monthly_additional_performance_insights_requests: 10000 # Monthly Performance Insights API requests above the 1000000 requests included in the free tier.
+    reserved_instance_term: 1_year                          # Term for Reserved Instances, can be: 1_year, 3_year.
+    reserved_instance_payment_option: partial_upfront   
+

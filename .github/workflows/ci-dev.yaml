@@ -85,11 +85,29 @@ jobs:
         env:
           INFRACOST_API_KEY: ${{ secrets.INFRACOST_API_KEY }}
         run: |
+          #infracost breakdown \
+          #  --path=infrastructure/envs/dev \
+          #  --usage-file=infracost/infracost-usage.yml \
+          #  --format=json \
+          #  --out-file=infracost-dev.json
+
           infracost breakdown \
-            --path=infrastructure/envs/dev \
-            --usage-file=infracost/infracost-usage.yml \
+            --config-file=infracost/infracost.yml \
             --format=json \
             --out-file=infracost-dev.json
+
+      - name: Save Infracost policy report
+        run: |
+          infracost policy \
+            --config-file=infracost/infracost.yml \
+            --format=json \
+            --out-file=infracost-policy.json
+
+      - name: Upload Infracost policy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: infracost-policy-report
+          path: infracost-policy.json
 
       - name: Generate Infracost HTML report
         run: |
