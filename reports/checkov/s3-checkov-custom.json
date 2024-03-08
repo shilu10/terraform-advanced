@@ -1,0 +1,444 @@
+{
+    "check_type": "terraform",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CUSTOM_S3_NO_PUBLIC_ACL",
+                "bc_check_id": null,
+                "check_name": "Ensure S3 ACL is not public",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_s3_bucket": {
+                            "this": {
+                                "__end_line__": 9,
+                                "__start_line__": 3,
+                                "bucket": [
+                                    "my-default-s3-bucket"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "s3-module",
+                                        "Name": "my-default-s3-bucket"
+                                    }
+                                ],
+                                "__address__": "aws_s3_bucket.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "acl"
+                    ]
+                },
+                "code_block": [
+                    [
+                        3,
+                        "resource \"aws_s3_bucket\" \"this\" {\n"
+                    ],
+                    [
+                        4,
+                        "  bucket = var.bucket_name\n"
+                    ],
+                    [
+                        5,
+                        "\n"
+                    ],
+                    [
+                        6,
+                        "  tags = merge(var.tags, {\n"
+                    ],
+                    [
+                        7,
+                        "    \"Name\" = var.bucket_name\n"
+                    ],
+                    [
+                        8,
+                        "  })\n"
+                    ],
+                    [
+                        9,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "repo_file_path": "/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_line_range": [
+                    3,
+                    9
+                ],
+                "resource": "aws_s3_bucket.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "s3-module",
+                    "Name": "my-default-s3-bucket"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "CRITICAL",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "breadcrumbs": {
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "bucket": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_S3_BLOCK_PUBLIC",
+                "bc_check_id": null,
+                "check_name": "Ensure S3 bucket blocks all public access",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_s3_bucket_public_access_block": {
+                            "this": {
+                                "__end_line__": 26,
+                                "__start_line__": 19,
+                                "block_public_acls": [
+                                    true
+                                ],
+                                "block_public_policy": [
+                                    true
+                                ],
+                                "bucket": [
+                                    "aws_s3_bucket.this.id"
+                                ],
+                                "ignore_public_acls": [
+                                    true
+                                ],
+                                "restrict_public_buckets": [
+                                    true
+                                ],
+                                "__address__": "aws_s3_bucket_public_access_block.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "ignore_public_acls",
+                        "restrict_public_buckets",
+                        "block_public_policy",
+                        "block_public_acls"
+                    ]
+                },
+                "code_block": [
+                    [
+                        19,
+                        "resource \"aws_s3_bucket_public_access_block\" \"this\" {\n"
+                    ],
+                    [
+                        20,
+                        "  bucket = aws_s3_bucket.this.id\n"
+                    ],
+                    [
+                        21,
+                        "\n"
+                    ],
+                    [
+                        22,
+                        "  block_public_acls       = true\n"
+                    ],
+                    [
+                        23,
+                        "  block_public_policy     = true\n"
+                    ],
+                    [
+                        24,
+                        "  ignore_public_acls      = true\n"
+                    ],
+                    [
+                        25,
+                        "  restrict_public_buckets = true\n"
+                    ],
+                    [
+                        26,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "repo_file_path": "/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_line_range": [
+                    19,
+                    26
+                ],
+                "resource": "aws_s3_bucket_public_access_block.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {},
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "HIGH",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf"
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CUSTOM_S3_REQUIRED_TAGS",
+                "bc_check_id": null,
+                "check_name": "Ensure S3 buckets have required tags",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_s3_bucket": {
+                            "this": {
+                                "__end_line__": 9,
+                                "__start_line__": 3,
+                                "bucket": [
+                                    "my-default-s3-bucket"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "s3-module",
+                                        "Name": "my-default-s3-bucket"
+                                    }
+                                ],
+                                "__address__": "aws_s3_bucket.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "tags/Owner",
+                        "tags/Environment",
+                        "tags/CostCenter"
+                    ]
+                },
+                "code_block": [
+                    [
+                        3,
+                        "resource \"aws_s3_bucket\" \"this\" {\n"
+                    ],
+                    [
+                        4,
+                        "  bucket = var.bucket_name\n"
+                    ],
+                    [
+                        5,
+                        "\n"
+                    ],
+                    [
+                        6,
+                        "  tags = merge(var.tags, {\n"
+                    ],
+                    [
+                        7,
+                        "    \"Name\" = var.bucket_name\n"
+                    ],
+                    [
+                        8,
+                        "  })\n"
+                    ],
+                    [
+                        9,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "repo_file_path": "/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_line_range": [
+                    3,
+                    9
+                ],
+                "resource": "aws_s3_bucket.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "s3-module",
+                    "Name": "my-default-s3-bucket"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "breadcrumbs": {
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "bucket": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_S3_ENCRYPTION",
+                "bc_check_id": null,
+                "check_name": "Ensure S3 bucket has encryption enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_s3_bucket": {
+                            "this": {
+                                "__end_line__": 9,
+                                "__start_line__": 3,
+                                "bucket": [
+                                    "my-default-s3-bucket"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "s3-module",
+                                        "Name": "my-default-s3-bucket"
+                                    }
+                                ],
+                                "__address__": "aws_s3_bucket.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "server_side_encryption_configuration"
+                    ]
+                },
+                "code_block": [
+                    [
+                        3,
+                        "resource \"aws_s3_bucket\" \"this\" {\n"
+                    ],
+                    [
+                        4,
+                        "  bucket = var.bucket_name\n"
+                    ],
+                    [
+                        5,
+                        "\n"
+                    ],
+                    [
+                        6,
+                        "  tags = merge(var.tags, {\n"
+                    ],
+                    [
+                        7,
+                        "    \"Name\" = var.bucket_name\n"
+                    ],
+                    [
+                        8,
+                        "  })\n"
+                    ],
+                    [
+                        9,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "repo_file_path": "/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "file_line_range": [
+                    3,
+                    9
+                ],
+                "resource": "aws_s3_bucket.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "s3-module",
+                    "Name": "my-default-s3-bucket"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "HIGH",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/main.tf",
+                "breadcrumbs": {
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "bucket": [
+                        {
+                            "type": "variable",
+                            "name": "bucket_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/s3/.terragrunt-cache/UnS5z1ic7b5-q5bUs3OsneQvQGE/tGJyhP0XlsPH_6z9lZTBeq2YH8Q/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 2,
+        "failed": 2,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 3,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

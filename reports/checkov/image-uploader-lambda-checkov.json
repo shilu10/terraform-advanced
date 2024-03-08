@@ -1,0 +1,703 @@
+{
+    "check_type": "terraform_plan",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CKV_AWS_41",
+                "bc_check_id": "BC_AWS_SECRETS_5",
+                "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [
+                    [
+                        1,
+                        "{\"format_version\":\"1.2\",\"terraform_version\":\"1.12.2\",\"variables\":{\"attach_basic_execution_role\":{\"value\":true},\"create_role\":{\"value\":\"false\"},\"custom_vpc_enabled\":{\"value\":\"false\"},\"enable_function_url\":{\"value\":\"true\"},\"enabled_event_source_mapping\":{\"value\":false},\"environment_variables\":{\"value\":{\"BUCKET_NAME\":\"demo-bucket\",\"QUEUE_NAME\":\"my-app-queue\",\"SQS_REGION\":\"us-east-1\"}},\"event_source_arn\":{\"value\":\"arn:aws:sqs:us-east-1:123456789012:my-queue\"},\"filename\":{\"value\":\"lambda.zip\"},\"function_url_auth_type\":{\"value\":\"NONE\"},\"handler\":{\"value\":\"main.handler\"},\"image_uri\":{\"value\":\"000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest\"},\"layers\":{\"value\":[]},\"memory_size\":{\"value\":128},\"name\":{\"value\":\"image-upload-function\"},\"role_arn\":{\"value\":\"arn:aws:iam::000000000000:role/from-sqs-to-lambda\"},\"runtime\":{\"value\":\"python3.10\"},\"s3_bucket\":{\"value\":\"my-lambda-artifacts\"},\"s3_key\":{\"value\":\"lambda.zip\"},\"security_group_ids\":{\"value\":[\"sg-0123456789abcdef0\"]},\"source_code_hash\":{\"value\":\"\"},\"subnet_ids\":{\"value\":[\"subnet-abc123\",\"subnet-def456\"]},\"tags\":{\"value\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"}},\"timeout\":{\"value\":10},\"use_image\":{\"value\":\"true\"}},\"planned_values\":{\"outputs\":{\"lambda_arn\":{\"sensitive\":false},\"lambda_function_name\":{\"sensitive\":false,\"type\":\"string\",\"value\":\"image-upload-function\"},\"lambda_function_url\":{\"sensitive\":false}},\"root_module\":{\"resources\":[{\"address\":\"aws_lambda_function.this\",\"mode\":\"managed\",\"type\":\"aws_lambda_function\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"code_signing_config_arn\":null,\"dead_letter_config\":[],\"description\":null,\"environment\":[{\"variables\":{\"BUCKET_NAME\":\"demo-bucket\",\"QUEUE_NAME\":\"my-app-queue\",\"SQS_REGION\":\"us-east-1\"}}],\"file_system_config\":[],\"filename\":null,\"function_name\":\"image-upload-function\",\"handler\":null,\"image_config\":[],\"image_uri\":\"000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest\",\"kms_key_arn\":null,\"layers\":null,\"memory_size\":128,\"package_type\":\"Image\",\"publish\":false,\"region\":\"us-east-1\",\"replace_security_groups_on_destroy\":null,\"replacement_security_group_ids\":null,\"reserved_concurrent_executions\":-1,\"role\":\"arn:aws:iam::000000000000:role/from-sqs-to-lambda\",\"runtime\":null,\"s3_bucket\":null,\"s3_key\":null,\"s3_object_version\":null,\"skip_destroy\":false,\"snap_start\":[],\"tags\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"},\"tags_all\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"},\"timeout\":10,\"timeouts\":null,\"vpc_config\":[]},\"sensitive_values\":{\"architectures\":[],\"dead_letter_config\":[],\"environment\":[{\"variables\":{}}],\"ephemeral_storage\":[],\"file_system_config\":[],\"image_config\":[],\"logging_config\":[],\"snap_start\":[],\"tags\":{},\"tags_all\":{},\"tracing_config\":[],\"vpc_config\":[]}},{\"address\":\"aws_lambda_function_url.this[0]\",\"mode\":\"managed\",\"type\":\"aws_lambda_function_url\",\"name\":\"this\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"authorization_type\":\"NONE\",\"cors\":[{\"allow_credentials\":null,\"allow_headers\":[\"*\"],\"allow_methods\":[\"*\"],\"allow_origins\":[\"*\"],\"expose_headers\":null,\"max_age\":null}],\"function_name\":\"image-upload-function\",\"invoke_mode\":\"BUFFERED\",\"qualifier\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"sensitive_values\":{\"cors\":[{\"allow_headers\":[false],\"allow_methods\":[false],\"allow_origins\":[false]}]}},{\"address\":\"aws_lambda_permission.allow_public_url[0]\",\"mode\":\"managed\",\"type\":\"aws_lambda_permission\",\"name\":\"allow_public_url\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"action\":\"lambda:InvokeFunctionUrl\",\"event_source_token\":null,\"function_name\":\"image-upload-function\",\"function_url_auth_type\":null,\"principal\":\"*\",\"principal_org_id\":null,\"qualifier\":null,\"region\":\"us-east-1\",\"source_account\":null,\"source_arn\":null,\"statement_id\":\"AllowPublicFunctionUrl\"},\"sensitive_values\":{}}]}},\"resource_changes\":[{\"address\":\"aws_lambda_function.this\",\"mode\":\"managed\",\"type\":\"aws_lambda_function\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"code_signing_config_arn\":null,\"dead_letter_config\":[],\"description\":null,\"environment\":[{\"variables\":{\"BUCKET_NAME\":\"demo-bucket\",\"QUEUE_NAME\":\"my-app-queue\",\"SQS_REGION\":\"us-east-1\"}}],\"file_system_config\":[],\"filename\":null,\"function_name\":\"image-upload-function\",\"handler\":null,\"image_config\":[],\"image_uri\":\"000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest\",\"kms_key_arn\":null,\"layers\":null,\"memory_size\":128,\"package_type\":\"Image\",\"publish\":false,\"region\":\"us-east-1\",\"replace_security_groups_on_destroy\":null,\"replacement_security_group_ids\":null,\"reserved_concurrent_executions\":-1,\"role\":\"arn:aws:iam::000000000000:role/from-sqs-to-lambda\",\"runtime\":null,\"s3_bucket\":null,\"s3_key\":null,\"s3_object_version\":null,\"skip_destroy\":false,\"snap_start\":[],\"tags\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"},\"tags_all\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"},\"timeout\":10,\"timeouts\":null,\"vpc_config\":[]},\"after_unknown\":{\"architectures\":true,\"arn\":true,\"code_sha256\":true,\"dead_letter_config\":[],\"environment\":[{\"variables\":{}}],\"ephemeral_storage\":true,\"file_system_config\":[],\"id\":true,\"image_config\":[],\"invoke_arn\":true,\"last_modified\":true,\"logging_config\":true,\"qualified_arn\":true,\"qualified_invoke_arn\":true,\"signing_job_arn\":true,\"signing_profile_version_arn\":true,\"snap_start\":[],\"source_code_hash\":true,\"source_code_size\":true,\"tags\":{},\"tags_all\":{},\"tracing_config\":true,\"version\":true,\"vpc_config\":[]},\"before_sensitive\":false,\"after_sensitive\":{\"architectures\":[],\"dead_letter_config\":[],\"environment\":[{\"variables\":{}}],\"ephemeral_storage\":[],\"file_system_config\":[],\"image_config\":[],\"logging_config\":[],\"snap_start\":[],\"tags\":{},\"tags_all\":{},\"tracing_config\":[],\"vpc_config\":[]}}},{\"address\":\"aws_lambda_function_url.this[0]\",\"mode\":\"managed\",\"type\":\"aws_lambda_function_url\",\"name\":\"this\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"authorization_type\":\"NONE\",\"cors\":[{\"allow_credentials\":null,\"allow_headers\":[\"*\"],\"allow_methods\":[\"*\"],\"allow_origins\":[\"*\"],\"expose_headers\":null,\"max_age\":null}],\"function_name\":\"image-upload-function\",\"invoke_mode\":\"BUFFERED\",\"qualifier\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"after_unknown\":{\"cors\":[{\"allow_headers\":[false],\"allow_methods\":[false],\"allow_origins\":[false]}],\"function_arn\":true,\"function_url\":true,\"id\":true,\"url_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"cors\":[{\"allow_headers\":[false],\"allow_methods\":[false],\"allow_origins\":[false]}]}}},{\"address\":\"aws_lambda_permission.allow_public_url[0]\",\"mode\":\"managed\",\"type\":\"aws_lambda_permission\",\"name\":\"allow_public_url\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"action\":\"lambda:InvokeFunctionUrl\",\"event_source_token\":null,\"function_name\":\"image-upload-function\",\"function_url_auth_type\":null,\"principal\":\"*\",\"principal_org_id\":null,\"qualifier\":null,\"region\":\"us-east-1\",\"source_account\":null,\"source_arn\":null,\"statement_id\":\"AllowPublicFunctionUrl\"},\"after_unknown\":{\"id\":true,\"statement_id_prefix\":true},\"before_sensitive\":false,\"after_sensitive\":{}}}],\"output_changes\":{\"lambda_arn\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false},\"lambda_function_name\":{\"actions\":[\"create\"],\"before\":null,\"after\":\"image-upload-function\",\"after_unknown\":false,\"before_sensitive\":false,\"after_sensitive\":false},\"lambda_function_url\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false}},\"prior_state\":{\"format_version\":\"1.0\",\"terraform_version\":\"1.12.2\",\"values\":{\"outputs\":{\"lambda_function_name\":{\"sensitive\":false,\"value\":\"image-upload-function\",\"type\":\"string\"}},\"root_module\":{}}},\"configuration\":{\"provider_config\":{\"aws\":{\"name\":\"aws\",\"full_name\":\"registry.terraform.io/hashicorp/aws\",\"expressions\":{\"access_key\":{\"constant_value\":\"mock\"},\"endpoints\":[{\"ec2\":{\"constant_value\":\"http://localhost:4566\"},\"iam\":{\"constant_value\":\"http://localhost:4566\"},\"lambda\":{\"constant_value\":\"http://localhost:4566\"},\"rds\":{\"constant_value\":\"http://localhost:4566\"},\"s3\":{\"constant_value\":\"http://localhost:4566\"},\"sqs\":{\"constant_value\":\"http://localhost:4566\"},\"sts\":{\"constant_value\":\"http://localhost:4566\"}}],\"region\":{\"constant_value\":\"us-east-1\"},\"s3_use_path_style\":{\"constant_value\":true},\"secret_key\":{\"constant_value\":\"mock\"},\"skip_credentials_validation\":{\"constant_value\":true},\"skip_metadata_api_check\":{\"constant_value\":true},\"skip_requesting_account_id\":{\"constant_value\":true}}}},\"root_module\":{\"outputs\":{\"lambda_arn\":{\"expression\":{\"references\":[\"aws_lambda_function.this.arn\",\"aws_lambda_function.this\"]}},\"lambda_function_name\":{\"expression\":{\"references\":[\"aws_lambda_function.this.function_name\",\"aws_lambda_function.this\"]}},\"lambda_function_url\":{\"expression\":{\"references\":[\"var.enable_function_url\",\"aws_lambda_function_url.this[0].function_url\",\"aws_lambda_function_url.this[0]\",\"aws_lambda_function_url.this\"]},\"description\":\"The URL to invoke the Lambda Function (if enabled)\"}},\"resources\":[{\"address\":\"aws_iam_role.lambda_exec\",\"mode\":\"managed\",\"type\":\"aws_iam_role\",\"name\":\"lambda_exec\",\"provider_config_key\":\"aws\",\"expressions\":{\"assume_role_policy\":{},\"name\":{\"references\":[\"var.name\"]},\"tags\":{\"references\":[\"var.tags\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"var.create_role\"]}},{\"address\":\"aws_iam_role_policy_attachment.basic\",\"mode\":\"managed\",\"type\":\"aws_iam_role_policy_attachment\",\"name\":\"basic\",\"provider_config_key\":\"aws\",\"expressions\":{\"policy_arn\":{\"constant_value\":\"arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole\"},\"role\":{\"references\":[\"aws_iam_role.lambda_exec[0].name\",\"aws_iam_role.lambda_exec[0]\",\"aws_iam_role.lambda_exec\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"var.create_role\",\"var.attach_basic_execution_role\"]}},{\"address\":\"aws_lambda_event_source_mapping.sqs_trigger\",\"mode\":\"managed\",\"type\":\"aws_lambda_event_source_mapping\",\"name\":\"sqs_trigger\",\"provider_config_key\":\"aws\",\"expressions\":{\"batch_size\":{\"constant_value\":10},\"enabled\":{\"constant_value\":true},\"event_source_arn\":{\"references\":[\"var.event_source_arn\"]},\"function_name\":{\"references\":[\"aws_lambda_function.this.function_name\",\"aws_lambda_function.this\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"var.enabled_event_source_mapping\"]}},{\"address\":\"aws_lambda_function.this\",\"mode\":\"managed\",\"type\":\"aws_lambda_function\",\"name\":\"this\",\"provider_config_key\":\"aws\",\"expressions\":{\"environment\":[{\"variables\":{\"references\":[\"var.environment_variables\"]}}],\"filename\":{\"references\":[\"var.use_image\",\"var.filename\"]},\"function_name\":{\"references\":[\"var.name\"]},\"handler\":{\"references\":[\"var.use_image\",\"var.handler\"]},\"image_uri\":{\"references\":[\"var.use_image\",\"var.image_uri\"]},\"layers\":{\"references\":[\"var.use_image\",\"var.layers\"]},\"memory_size\":{\"references\":[\"var.memory_size\"]},\"package_type\":{\"references\":[\"var.use_image\"]},\"role\":{\"references\":[\"var.create_role\",\"aws_iam_role.lambda_exec[0].arn\",\"aws_iam_role.lambda_exec[0]\",\"aws_iam_role.lambda_exec\",\"var.role_arn\"]},\"runtime\":{\"references\":[\"var.use_image\",\"var.runtime\"]},\"s3_bucket\":{\"references\":[\"var.use_image\",\"var.s3_bucket\"]},\"s3_key\":{\"references\":[\"var.use_image\",\"var.s3_key\"]},\"source_code_hash\":{\"references\":[\"var.use_image\",\"var.source_code_hash\"]},\"tags\":{\"references\":[\"var.tags\"]},\"timeout\":{\"references\":[\"var.timeout\"]}},\"schema_version\":0},{\"address\":\"aws_lambda_function_url.this\",\"mode\":\"managed\",\"type\":\"aws_lambda_function_url\",\"name\":\"this\",\"provider_config_key\":\"aws\",\"expressions\":{\"authorization_type\":{\"references\":[\"var.function_url_auth_type\"]},\"cors\":[{\"allow_headers\":{\"constant_value\":[\"*\"]},\"allow_methods\":{\"constant_value\":[\"*\"]},\"allow_origins\":{\"constant_value\":[\"*\"]}}],\"function_name\":{\"references\":[\"aws_lambda_function.this.function_name\",\"aws_lambda_function.this\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"var.enable_function_url\"]}},{\"address\":\"aws_lambda_permission.allow_public_url\",\"mode\":\"managed\",\"type\":\"aws_lambda_permission\",\"name\":\"allow_public_url\",\"provider_config_key\":\"aws\",\"expressions\":{\"action\":{\"constant_value\":\"lambda:InvokeFunctionUrl\"},\"function_name\":{\"references\":[\"aws_lambda_function.this.function_name\",\"aws_lambda_function.this\"]},\"principal\":{\"constant_value\":\"*\"},\"statement_id\":{\"constant_value\":\"AllowPublicFunctionUrl\"}},\"schema_version\":0,\"count_expression\":{\"references\":[\"var.enable_function_url\",\"var.function_url_auth_type\"]}}],\"variables\":{\"attach_basic_execution_role\":{\"default\":true,\"description\":\"Whether to attach AWSLambdaBasicExecutionRole\"},\"create_role\":{\"default\":true,\"description\":\"Whether the module should create an IAM role for Lambda execution\"},\"custom_vpc_enabled\":{\"default\":false,\"description\":\"Whether to deploy the Lambda into a custom VPC\"},\"enable_function_url\":{\"default\":true,\"description\":\"Whether to create a Function URL for the Lambda\"},\"enabled_event_source_mapping\":{\"default\":false,\"description\":\"Optional bool for enabling event source mapper, making lambda read from event source like SQS\"},\"environment_variables\":{\"default\":{\"ENV\":\"dev\"},\"description\":\"Environment variables for the Lambda\"},\"event_source_arn\":{\"default\":\"arn:aws:sqs:us-east-1:123456789012:my-queue\",\"description\":\"Event source ARN like SQS ARN\"},\"filename\":{\"default\":\"lambda.zip\",\"description\":\"Local ZIP file path for deployment\"},\"function_url_auth_type\":{\"default\":\"NONE\",\"description\":\"Auth type for the Lambda Function URL (e.g., NONE or AWS_IAM)\"},\"handler\":{\"default\":\"main.handler\",\"description\":\"Function entrypoint (e.g. index.handler)\"},\"image_uri\":{\"default\":\"123456789012.dkr.ecr.us-east-1.amazonaws.com/my-lambda-image:latest\",\"description\":\"ECR image URI for container-based Lambda\"},\"layers\":{\"default\":[],\"description\":\"Optional Lambda layers\"},\"memory_size\":{\"default\":128,\"description\":\"Memory allocated to Lambda in MB\"},\"name\":{\"default\":\"my-lambda-function\",\"description\":\"Name of the Lambda function\"},\"role_arn\":{\"default\":\"\",\"description\":\"Optional ARN of an existing IAM role to use instead of creating one\"},\"runtime\":{\"default\":\"python3.10\",\"description\":\"Lambda runtime (e.g. python3.10)\"},\"s3_bucket\":{\"default\":\"my-lambda-artifacts\",\"description\":\"S3 bucket for ZIP file\"},\"s3_key\":{\"default\":\"lambda.zip\",\"description\":\"S3 key for ZIP file\"},\"security_group_ids\":{\"default\":[\"sg-0123456789abcdef0\"],\"description\":\"Security groups for the Lambda (if custom VPC is enabled)\"},\"source_code_hash\":{\"default\":\"\",\"description\":\"Base64-encoded SHA256 hash of the deployment package\"},\"subnet_ids\":{\"default\":[\"subnet-abc123\",\"subnet-def456\"],\"description\":\"Subnets to attach Lambda to (if custom VPC is enabled)\"},\"tags\":{\"default\":{\"Environment\":\"dev\",\"Project\":\"lambda-demo\"},\"description\":\"Tags to apply to all resources\"},\"timeout\":{\"default\":10,\"description\":\"Function timeout in seconds\"},\"use_image\":{\"default\":false,\"description\":\"Set to true if using container image-based deployment\"}}}},\"relevant_attributes\":[{\"resource\":\"aws_lambda_function.this\",\"attribute\":[\"arn\"]},{\"resource\":\"aws_lambda_function.this\",\"attribute\":[\"function_name\"]},{\"resource\":\"aws_iam_role.lambda_exec[0]\",\"attribute\":[\"arn\"]},{\"resource\":\"aws_lambda_function_url.this[0]\",\"attribute\":[\"function_url\"]}],\"timestamp\":\"2025-07-04T07:22:50Z\",\"applyable\":true,\"complete\":true,\"errored\":false}\n"
+                    ]
+                ],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    1
+                ],
+                "resource": "aws.default",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.provider.aws.credentials",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws.default",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_115",
+                "bc_check_id": "BC_AWS_GENERAL_63",
+                "check_name": "Ensure that AWS Lambda function is configured for function-level concurrent execution limit",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "reserved_concurrent_executions/[0]"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaFunctionLevelConcurrentExecutionLimit",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-for-function-level-concurrent-execution-limit",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_45",
+                "bc_check_id": "BC_AWS_SECRETS_3",
+                "check_name": "Ensure no hard-coded secrets exist in lambda environment",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "environment/[0]/variables"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaEnvironmentCredentials",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-3",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_363",
+                "bc_check_id": "BC_AWS_GENERAL_259",
+                "check_name": "Ensure Lambda Runtime is not deprecated",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "runtime"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.DeprecatedLambdaRuntime",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-363",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_173",
+                "bc_check_id": "BC_AWS_SERVERLESS_5",
+                "check_name": "Check encryption settings for Lambda environmental variable",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "kms_key_arn"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaEnvironmentEncryptionSettings",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-serverless-policies/bc-aws-serverless-5",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CKV_AWS_272",
+                "bc_check_id": "BC_AWS_General_201",
+                "check_name": "Ensure AWS Lambda function is configured to validate code-signing",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "code_signing_config_arn"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaCodeSigningConfigured",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-272",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_117",
+                "bc_check_id": "BC_AWS_GENERAL_65",
+                "check_name": "Ensure that AWS Lambda function is configured inside a VPC",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "vpc_config"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaInVPC",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-inside-a-vpc-1",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_116",
+                "bc_check_id": "BC_AWS_GENERAL_64",
+                "check_name": "Ensure that AWS Lambda function is configured for a Dead Letter Queue(DLQ)",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "dead_letter_config/[0]/target_arn"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaDLQConfigured",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-aws-lambda-function-is-configured-for-a-dead-letter-queue-dlq",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_50",
+                "bc_check_id": "BC_AWS_SERVERLESS_4",
+                "check_name": "X-Ray tracing is enabled for Lambda",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "tracing_config/[0]/mode"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaXrayEnabled",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-serverless-policies/bc-aws-serverless-4",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_258",
+                "bc_check_id": "BC_AWS_GENERAL_132",
+                "check_name": "Ensure that Lambda function URLs AuthType is not None",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "authorization_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function_url.this[0]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaFunctionURLAuth",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function_url.this[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-aws-authtype-for-your-lambda-function-urls-is-defined",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_301",
+                "bc_check_id": "BC_AWS_GENERAL_215",
+                "check_name": "Ensure that AWS Lambda function is not publicly accessible",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "principal"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_permission.allow_public_url[0]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.LambdaFunctionIsNotPublic",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_permission.allow_public_url[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-301",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV2_AWS_75",
+                "bc_check_id": "BC_AWS_NETWORKING_105",
+                "check_name": "Ensure no open CORS policy",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_lambda_function": {
+                            "this": {
+                                "code_signing_config_arn": [
+                                    null
+                                ],
+                                "dead_letter_config": [
+                                    []
+                                ],
+                                "description": [
+                                    null
+                                ],
+                                "environment": [
+                                    {
+                                        "variables": [
+                                            {
+                                                "BUCKET_NAME": [
+                                                    "demo-bucket"
+                                                ],
+                                                "QUEUE_NAME": [
+                                                    "my-app-queue"
+                                                ],
+                                                "SQS_REGION": [
+                                                    "us-east-1"
+                                                ],
+                                                "__file__": [
+                                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json"
+                                                ],
+                                                "__startline__": [
+                                                    1
+                                                ],
+                                                "__endline__": [
+                                                    1
+                                                ],
+                                                "start_line": [
+                                                    0
+                                                ],
+                                                "end_line": [
+                                                    0
+                                                ]
+                                            }
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "file_system_config": [
+                                    []
+                                ],
+                                "filename": [
+                                    null
+                                ],
+                                "function_name": [
+                                    "image-upload-function"
+                                ],
+                                "handler": [
+                                    null
+                                ],
+                                "image_config": [
+                                    []
+                                ],
+                                "image_uri": [
+                                    "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest"
+                                ],
+                                "kms_key_arn": [
+                                    null
+                                ],
+                                "layers": [
+                                    null
+                                ],
+                                "memory_size": [
+                                    128
+                                ],
+                                "package_type": [
+                                    "Image"
+                                ],
+                                "publish": [
+                                    false
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "replace_security_groups_on_destroy": [
+                                    null
+                                ],
+                                "replacement_security_group_ids": [
+                                    null
+                                ],
+                                "reserved_concurrent_executions": [
+                                    -1
+                                ],
+                                "role": [
+                                    "arn:aws:iam::000000000000:role/from-sqs-to-lambda"
+                                ],
+                                "runtime": [
+                                    null
+                                ],
+                                "s3_bucket": [
+                                    null
+                                ],
+                                "s3_key": [
+                                    null
+                                ],
+                                "s3_object_version": [
+                                    null
+                                ],
+                                "skip_destroy": [
+                                    false
+                                ],
+                                "snap_start": [
+                                    []
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "lambda-demo",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Project": [
+                                            "lambda-demo"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeout": [
+                                    10
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "vpc_config": [
+                                    []
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "var.create_role",
+                                        "aws_iam_role.lambda_exec[0].arn",
+                                        "aws_iam_role.lambda_exec[0]",
+                                        "aws_iam_role.lambda_exec",
+                                        "var.role_arn"
+                                    ]
+                                ],
+                                "__address__": "aws_lambda_function.this",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "resource_type",
+                        "cors/allow_origins",
+                        "cors/allow_methods"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_lambda_function.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "lambda-demo",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_lambda_function.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": {
+                    "code_block": [],
+                    "file_path": "/tf.json",
+                    "file_line_range": [
+                        0,
+                        0
+                    ],
+                    "resource": "aws_lambda_function_url.this",
+                    "entity_tags": {},
+                    "evaluations": null,
+                    "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json",
+                    "resource_address": "aws_lambda_function_url.this[0]"
+                },
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-2-75",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda/tf.json"
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 5,
+        "failed": 7,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 3,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

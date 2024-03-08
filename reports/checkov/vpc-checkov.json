@@ -1,0 +1,2364 @@
+{
+    "check_type": "terraform_plan",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CKV_AWS_41",
+                "bc_check_id": "BC_AWS_SECRETS_5",
+                "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [
+                    [
+                        1,
+                        "{\"format_version\":\"1.2\",\"terraform_version\":\"1.12.2\",\"variables\":{\"azs\":{\"value\":[\"us-east-1a\",\"us-east-1b\"]},\"enable_dns_hostnames\":{\"value\":\"true\"},\"enable_dns_support\":{\"value\":\"true\"},\"enable_nat_gateway\":{\"value\":\"true\"},\"name\":{\"value\":\"dev-vpc\"},\"private_subnet_cidrs\":{\"value\":[\"10.0.101.0/24\",\"10.0.102.0/24\"]},\"public_subnet_cidrs\":{\"value\":[\"10.0.1.0/24\",\"10.0.2.0/24\"]},\"security_groups\":{\"value\":{\"lambda\":{\"description\":\"Allow All\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"from_port\":0,\"protocol\":\"-1\",\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"from_port\":0,\"protocol\":\"-1\",\"to_port\":0}],\"name\":\"lambda-sg\",\"tags\":{\"Name\":\"lambda-function-sg\"}},\"rds\":{\"description\":\"Allow MySQL\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"from_port\":0,\"protocol\":\"-1\",\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"10.0.0.0/16\"],\"from_port\":3306,\"protocol\":\"tcp\",\"to_port\":3306}],\"name\":\"rds-sg\",\"tags\":{\"Environment\":\"dev\"}}}},\"tags\":{\"value\":{\"Environment\":\"dev\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"}},\"vpc_cidr\":{\"value\":\"10.0.0.0/16\"}},\"planned_values\":{\"outputs\":{\"private_subnet_ids\":{\"sensitive\":false},\"public_subnet_ids\":{\"sensitive\":false},\"security_group_ids\":{\"sensitive\":false},\"vpc_id\":{\"sensitive\":false}},\"root_module\":{\"resources\":[{\"address\":\"aws_eip.nat[0]\",\"mode\":\"managed\",\"type\":\"aws_eip\",\"name\":\"nat\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"address\":null,\"associate_with_private_ip\":null,\"customer_owned_ipv4_pool\":null,\"domain\":\"vpc\",\"region\":\"us-east-1\",\"tags\":null,\"timeouts\":null},\"sensitive_values\":{\"tags_all\":{}}},{\"address\":\"aws_internet_gateway.igw[0]\",\"mode\":\"managed\",\"type\":\"aws_internet_gateway\",\"name\":\"igw\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-igw\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-igw\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_nat_gateway.nat[0]\",\"mode\":\"managed\",\"type\":\"aws_nat_gateway\",\"name\":\"nat\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"connectivity_type\":\"public\",\"region\":\"us-east-1\",\"secondary_allocation_ids\":null,\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-nat\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-nat\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"secondary_private_ip_addresses\":[],\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_route_table.private[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"region\":\"us-east-1\",\"route\":[{\"carrier_gateway_id\":\"\",\"cidr_block\":\"0.0.0.0/0\",\"core_network_arn\":\"\",\"destination_prefix_list_id\":\"\",\"egress_only_gateway_id\":\"\",\"gateway_id\":\"\",\"ipv6_cidr_block\":\"\",\"local_gateway_id\":\"\",\"network_interface_id\":\"\",\"transit_gateway_id\":\"\",\"vpc_endpoint_id\":\"\",\"vpc_peering_connection_id\":\"\"}],\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"propagating_vgws\":[],\"route\":[{}],\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_route_table.public[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"region\":\"us-east-1\",\"route\":[{\"carrier_gateway_id\":\"\",\"cidr_block\":\"0.0.0.0/0\",\"core_network_arn\":\"\",\"destination_prefix_list_id\":\"\",\"egress_only_gateway_id\":\"\",\"ipv6_cidr_block\":\"\",\"local_gateway_id\":\"\",\"nat_gateway_id\":\"\",\"network_interface_id\":\"\",\"transit_gateway_id\":\"\",\"vpc_endpoint_id\":\"\",\"vpc_peering_connection_id\":\"\"}],\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"propagating_vgws\":[],\"route\":[{}],\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_route_table_association.private[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"sensitive_values\":{}},{\"address\":\"aws_route_table_association.private[1]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"private\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"sensitive_values\":{}},{\"address\":\"aws_route_table_association.public[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"sensitive_values\":{}},{\"address\":\"aws_route_table_association.public[1]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"public\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"sensitive_values\":{}},{\"address\":\"aws_security_group.custom[\\\"lambda\\\"]\",\"mode\":\"managed\",\"type\":\"aws_security_group\",\"name\":\"custom\",\"index\":\"lambda\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"description\":\"Allow All\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"name\":\"lambda-sg\",\"region\":\"us-east-1\",\"revoke_rules_on_delete\":false,\"tags\":{\"Name\":\"lambda-sg\"},\"tags_all\":{\"Name\":\"lambda-sg\"},\"timeouts\":null},\"sensitive_values\":{\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_security_group.custom[\\\"rds\\\"]\",\"mode\":\"managed\",\"type\":\"aws_security_group\",\"name\":\"custom\",\"index\":\"rds\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"description\":\"Allow MySQL\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"10.0.0.0/16\"],\"description\":\"\",\"from_port\":3306,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"tcp\",\"security_groups\":[],\"self\":false,\"to_port\":3306}],\"name\":\"rds-sg\",\"region\":\"us-east-1\",\"revoke_rules_on_delete\":false,\"tags\":{\"Environment\":\"dev\",\"Name\":\"rds-sg\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"rds-sg\"},\"timeouts\":null},\"sensitive_values\":{\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_subnet.private[0]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1a\",\"cidr_block\":\"10.0.101.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":false,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_subnet.private[1]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"private\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1b\",\"cidr_block\":\"10.0.102.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":false,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_subnet.public[0]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1a\",\"cidr_block\":\"10.0.1.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":true,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_subnet.public[1]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"public\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1b\",\"cidr_block\":\"10.0.2.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":true,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}},{\"address\":\"aws_vpc.this\",\"mode\":\"managed\",\"type\":\"aws_vpc\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":1,\"values\":{\"assign_generated_ipv6_cidr_block\":null,\"cidr_block\":\"10.0.0.0/16\",\"enable_dns_hostnames\":true,\"enable_dns_support\":true,\"instance_tenancy\":\"default\",\"ipv4_ipam_pool_id\":null,\"ipv4_netmask_length\":null,\"ipv6_ipam_pool_id\":null,\"ipv6_netmask_length\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"}},\"sensitive_values\":{\"tags\":{},\"tags_all\":{}}}]}},\"resource_changes\":[{\"address\":\"aws_eip.nat[0]\",\"mode\":\"managed\",\"type\":\"aws_eip\",\"name\":\"nat\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"address\":null,\"associate_with_private_ip\":null,\"customer_owned_ipv4_pool\":null,\"domain\":\"vpc\",\"region\":\"us-east-1\",\"tags\":null,\"timeouts\":null},\"after_unknown\":{\"allocation_id\":true,\"arn\":true,\"association_id\":true,\"carrier_ip\":true,\"customer_owned_ip\":true,\"id\":true,\"instance\":true,\"ipam_pool_id\":true,\"network_border_group\":true,\"network_interface\":true,\"private_dns\":true,\"private_ip\":true,\"ptr_record\":true,\"public_dns\":true,\"public_ip\":true,\"public_ipv4_pool\":true,\"tags_all\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags_all\":{}}}},{\"address\":\"aws_internet_gateway.igw[0]\",\"mode\":\"managed\",\"type\":\"aws_internet_gateway\",\"name\":\"igw\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-igw\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-igw\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"id\":true,\"owner_id\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_nat_gateway.nat[0]\",\"mode\":\"managed\",\"type\":\"aws_nat_gateway\",\"name\":\"nat\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"connectivity_type\":\"public\",\"region\":\"us-east-1\",\"secondary_allocation_ids\":null,\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-nat\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-nat\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"allocation_id\":true,\"association_id\":true,\"id\":true,\"network_interface_id\":true,\"private_ip\":true,\"public_ip\":true,\"secondary_private_ip_address_count\":true,\"secondary_private_ip_addresses\":true,\"subnet_id\":true,\"tags\":{},\"tags_all\":{}},\"before_sensitive\":false,\"after_sensitive\":{\"secondary_private_ip_addresses\":[],\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_route_table.private[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"region\":\"us-east-1\",\"route\":[{\"carrier_gateway_id\":\"\",\"cidr_block\":\"0.0.0.0/0\",\"core_network_arn\":\"\",\"destination_prefix_list_id\":\"\",\"egress_only_gateway_id\":\"\",\"gateway_id\":\"\",\"ipv6_cidr_block\":\"\",\"local_gateway_id\":\"\",\"network_interface_id\":\"\",\"transit_gateway_id\":\"\",\"vpc_endpoint_id\":\"\",\"vpc_peering_connection_id\":\"\"}],\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"id\":true,\"owner_id\":true,\"propagating_vgws\":true,\"route\":[{\"nat_gateway_id\":true}],\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"propagating_vgws\":[],\"route\":[{}],\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_route_table.public[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"region\":\"us-east-1\",\"route\":[{\"carrier_gateway_id\":\"\",\"cidr_block\":\"0.0.0.0/0\",\"core_network_arn\":\"\",\"destination_prefix_list_id\":\"\",\"egress_only_gateway_id\":\"\",\"ipv6_cidr_block\":\"\",\"local_gateway_id\":\"\",\"nat_gateway_id\":\"\",\"network_interface_id\":\"\",\"transit_gateway_id\":\"\",\"vpc_endpoint_id\":\"\",\"vpc_peering_connection_id\":\"\"}],\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-rt\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"id\":true,\"owner_id\":true,\"propagating_vgws\":true,\"route\":[{\"gateway_id\":true}],\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"propagating_vgws\":[],\"route\":[{}],\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_route_table_association.private[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"after_unknown\":{\"id\":true,\"route_table_id\":true,\"subnet_id\":true},\"before_sensitive\":false,\"after_sensitive\":{}}},{\"address\":\"aws_route_table_association.private[1]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"private\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"after_unknown\":{\"id\":true,\"route_table_id\":true,\"subnet_id\":true},\"before_sensitive\":false,\"after_sensitive\":{}}},{\"address\":\"aws_route_table_association.public[0]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"after_unknown\":{\"id\":true,\"route_table_id\":true,\"subnet_id\":true},\"before_sensitive\":false,\"after_sensitive\":{}}},{\"address\":\"aws_route_table_association.public[1]\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"public\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"gateway_id\":null,\"region\":\"us-east-1\",\"timeouts\":null},\"after_unknown\":{\"id\":true,\"route_table_id\":true,\"subnet_id\":true},\"before_sensitive\":false,\"after_sensitive\":{}}},{\"address\":\"aws_security_group.custom[\\\"lambda\\\"]\",\"mode\":\"managed\",\"type\":\"aws_security_group\",\"name\":\"custom\",\"index\":\"lambda\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"description\":\"Allow All\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"name\":\"lambda-sg\",\"region\":\"us-east-1\",\"revoke_rules_on_delete\":false,\"tags\":{\"Name\":\"lambda-sg\"},\"tags_all\":{\"Name\":\"lambda-sg\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"id\":true,\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"name_prefix\":true,\"owner_id\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_security_group.custom[\\\"rds\\\"]\",\"mode\":\"managed\",\"type\":\"aws_security_group\",\"name\":\"custom\",\"index\":\"rds\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"description\":\"Allow MySQL\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":\"\",\"from_port\":0,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"-1\",\"security_groups\":[],\"self\":false,\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"10.0.0.0/16\"],\"description\":\"\",\"from_port\":3306,\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"protocol\":\"tcp\",\"security_groups\":[],\"self\":false,\"to_port\":3306}],\"name\":\"rds-sg\",\"region\":\"us-east-1\",\"revoke_rules_on_delete\":false,\"tags\":{\"Environment\":\"dev\",\"Name\":\"rds-sg\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"rds-sg\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"id\":true,\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"name_prefix\":true,\"owner_id\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"egress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"ingress\":[{\"cidr_blocks\":[false],\"ipv6_cidr_blocks\":[],\"prefix_list_ids\":[],\"security_groups\":[]}],\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_subnet.private[0]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"private\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1a\",\"cidr_block\":\"10.0.101.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":false,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"availability_zone_id\":true,\"id\":true,\"ipv6_cidr_block_association_id\":true,\"owner_id\":true,\"private_dns_hostname_type_on_launch\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_subnet.private[1]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"private\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1b\",\"cidr_block\":\"10.0.102.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":false,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-private-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"availability_zone_id\":true,\"id\":true,\"ipv6_cidr_block_association_id\":true,\"owner_id\":true,\"private_dns_hostname_type_on_launch\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_subnet.public[0]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"public\",\"index\":0,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1a\",\"cidr_block\":\"10.0.1.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":true,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-0\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"availability_zone_id\":true,\"id\":true,\"ipv6_cidr_block_association_id\":true,\"owner_id\":true,\"private_dns_hostname_type_on_launch\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_subnet.public[1]\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"public\",\"index\":1,\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"assign_ipv6_address_on_creation\":false,\"availability_zone\":\"us-east-1b\",\"cidr_block\":\"10.0.2.0/24\",\"customer_owned_ipv4_pool\":null,\"enable_dns64\":false,\"enable_lni_at_device_index\":null,\"enable_resource_name_dns_a_record_on_launch\":false,\"enable_resource_name_dns_aaaa_record_on_launch\":false,\"ipv6_cidr_block\":null,\"ipv6_native\":false,\"map_customer_owned_ip_on_launch\":null,\"map_public_ip_on_launch\":true,\"outpost_arn\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc-public-1\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"timeouts\":null},\"after_unknown\":{\"arn\":true,\"availability_zone_id\":true,\"id\":true,\"ipv6_cidr_block_association_id\":true,\"owner_id\":true,\"private_dns_hostname_type_on_launch\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}},{\"address\":\"aws_vpc.this\",\"mode\":\"managed\",\"type\":\"aws_vpc\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"assign_generated_ipv6_cidr_block\":null,\"cidr_block\":\"10.0.0.0/16\",\"enable_dns_hostnames\":true,\"enable_dns_support\":true,\"instance_tenancy\":\"default\",\"ipv4_ipam_pool_id\":null,\"ipv4_netmask_length\":null,\"ipv6_ipam_pool_id\":null,\"ipv6_netmask_length\":null,\"region\":\"us-east-1\",\"tags\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"},\"tags_all\":{\"Environment\":\"dev\",\"Name\":\"dev-vpc\",\"Owner\":\"shilash\",\"Project\":\"custom-vpc\"}},\"after_unknown\":{\"arn\":true,\"default_network_acl_id\":true,\"default_route_table_id\":true,\"default_security_group_id\":true,\"dhcp_options_id\":true,\"enable_network_address_usage_metrics\":true,\"id\":true,\"ipv6_association_id\":true,\"ipv6_cidr_block\":true,\"ipv6_cidr_block_network_border_group\":true,\"main_route_table_id\":true,\"owner_id\":true,\"tags\":{},\"tags_all\":{}},\"before_sensitive\":false,\"after_sensitive\":{\"tags\":{},\"tags_all\":{}}}}],\"output_changes\":{\"private_subnet_ids\":{\"actions\":[\"create\"],\"before\":null,\"after\":[null,null],\"after_unknown\":[true,true],\"before_sensitive\":false,\"after_sensitive\":false},\"public_subnet_ids\":{\"actions\":[\"create\"],\"before\":null,\"after\":[null,null],\"after_unknown\":[true,true],\"before_sensitive\":false,\"after_sensitive\":false},\"security_group_ids\":{\"actions\":[\"create\"],\"before\":null,\"after\":{},\"after_unknown\":{\"lambda\":true,\"rds\":true},\"before_sensitive\":false,\"after_sensitive\":false},\"vpc_id\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false}},\"configuration\":{\"provider_config\":{\"aws\":{\"name\":\"aws\",\"full_name\":\"registry.terraform.io/hashicorp/aws\",\"expressions\":{\"access_key\":{\"constant_value\":\"mock\"},\"endpoints\":[{\"ec2\":{\"constant_value\":\"http://localhost:4566\"},\"iam\":{\"constant_value\":\"http://localhost:4566\"},\"lambda\":{\"constant_value\":\"http://localhost:4566\"},\"rds\":{\"constant_value\":\"http://localhost:4566\"},\"s3\":{\"constant_value\":\"http://localhost:4566\"},\"sqs\":{\"constant_value\":\"http://localhost:4566\"},\"sts\":{\"constant_value\":\"http://localhost:4566\"}}],\"region\":{\"constant_value\":\"us-east-1\"},\"s3_use_path_style\":{\"constant_value\":true},\"secret_key\":{\"constant_value\":\"mock\"},\"skip_credentials_validation\":{\"constant_value\":true},\"skip_metadata_api_check\":{\"constant_value\":true},\"skip_requesting_account_id\":{\"constant_value\":true}}}},\"root_module\":{\"outputs\":{\"private_subnet_ids\":{\"expression\":{\"references\":[\"aws_subnet.private\"]},\"description\":\"IDs of private subnets\"},\"public_subnet_ids\":{\"expression\":{\"references\":[\"aws_subnet.public\"]},\"description\":\"IDs of public subnets\"},\"security_group_ids\":{\"expression\":{\"references\":[\"aws_security_group.custom\"]},\"description\":\"Map of SG names to their IDs\"},\"vpc_id\":{\"expression\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}}},\"resources\":[{\"address\":\"aws_eip.nat\",\"mode\":\"managed\",\"type\":\"aws_eip\",\"name\":\"nat\",\"provider_config_key\":\"aws\",\"expressions\":{\"domain\":{\"constant_value\":\"vpc\"}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_nat\"]}},{\"address\":\"aws_internet_gateway.igw\",\"mode\":\"managed\",\"type\":\"aws_internet_gateway\",\"name\":\"igw\",\"provider_config_key\":\"aws\",\"expressions\":{\"tags\":{\"references\":[\"var.tags\",\"var.name\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_public_subnets\"]}},{\"address\":\"aws_nat_gateway.nat\",\"mode\":\"managed\",\"type\":\"aws_nat_gateway\",\"name\":\"nat\",\"provider_config_key\":\"aws\",\"expressions\":{\"allocation_id\":{\"references\":[\"aws_eip.nat[0].id\",\"aws_eip.nat[0]\",\"aws_eip.nat\"]},\"subnet_id\":{\"references\":[\"aws_subnet.public[0].id\",\"aws_subnet.public[0]\",\"aws_subnet.public\"]},\"tags\":{\"references\":[\"var.tags\",\"var.name\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_nat\"]},\"depends_on\":[\"aws_internet_gateway.igw\"]},{\"address\":\"aws_route_table.private\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"private\",\"provider_config_key\":\"aws\",\"expressions\":{\"route\":{\"references\":[\"aws_nat_gateway.nat[0].id\",\"aws_nat_gateway.nat[0]\",\"aws_nat_gateway.nat\"]},\"tags\":{\"references\":[\"var.tags\",\"var.name\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_nat\"]}},{\"address\":\"aws_route_table.public\",\"mode\":\"managed\",\"type\":\"aws_route_table\",\"name\":\"public\",\"provider_config_key\":\"aws\",\"expressions\":{\"route\":{\"references\":[\"aws_internet_gateway.igw[0].id\",\"aws_internet_gateway.igw[0]\",\"aws_internet_gateway.igw\"]},\"tags\":{\"references\":[\"var.tags\",\"var.name\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_public_subnets\"]}},{\"address\":\"aws_route_table_association.private\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"private\",\"provider_config_key\":\"aws\",\"expressions\":{\"route_table_id\":{\"references\":[\"aws_route_table.private[0].id\",\"aws_route_table.private[0]\",\"aws_route_table.private\"]},\"subnet_id\":{\"references\":[\"aws_subnet.private\",\"count.index\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_nat\",\"var.private_subnet_cidrs\"]}},{\"address\":\"aws_route_table_association.public\",\"mode\":\"managed\",\"type\":\"aws_route_table_association\",\"name\":\"public\",\"provider_config_key\":\"aws\",\"expressions\":{\"route_table_id\":{\"references\":[\"aws_route_table.public[0].id\",\"aws_route_table.public[0]\",\"aws_route_table.public\"]},\"subnet_id\":{\"references\":[\"aws_subnet.public\",\"count.index\"]}},\"schema_version\":0,\"count_expression\":{\"references\":[\"local.create_public_subnets\",\"var.public_subnet_cidrs\"]}},{\"address\":\"aws_security_group.custom\",\"mode\":\"managed\",\"type\":\"aws_security_group\",\"name\":\"custom\",\"provider_config_key\":\"aws\",\"expressions\":{\"description\":{\"references\":[\"each.value.description\",\"each.value\"]},\"name\":{\"references\":[\"each.value.name\",\"each.value\"]},\"tags\":{\"references\":[\"each.value.tags\",\"each.value\",\"each.value.name\",\"each.value\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":1,\"for_each_expression\":{\"references\":[\"var.security_groups\"]}},{\"address\":\"aws_subnet.private\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"private\",\"provider_config_key\":\"aws\",\"expressions\":{\"availability_zone\":{\"references\":[\"var.azs\",\"count.index\"]},\"cidr_block\":{\"references\":[\"var.private_subnet_cidrs\",\"count.index\"]},\"tags\":{\"references\":[\"var.tags\",\"var.name\",\"count.index\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":1,\"count_expression\":{\"references\":[\"local.create_private_subnets\",\"var.private_subnet_cidrs\"]}},{\"address\":\"aws_subnet.public\",\"mode\":\"managed\",\"type\":\"aws_subnet\",\"name\":\"public\",\"provider_config_key\":\"aws\",\"expressions\":{\"availability_zone\":{\"references\":[\"var.azs\",\"count.index\"]},\"cidr_block\":{\"references\":[\"var.public_subnet_cidrs\",\"count.index\"]},\"map_public_ip_on_launch\":{\"constant_value\":true},\"tags\":{\"references\":[\"var.tags\",\"var.name\",\"count.index\"]},\"vpc_id\":{\"references\":[\"aws_vpc.this.id\",\"aws_vpc.this\"]}},\"schema_version\":1,\"count_expression\":{\"references\":[\"local.create_public_subnets\",\"var.public_subnet_cidrs\"]}},{\"address\":\"aws_vpc.this\",\"mode\":\"managed\",\"type\":\"aws_vpc\",\"name\":\"this\",\"provider_config_key\":\"aws\",\"expressions\":{\"cidr_block\":{\"references\":[\"var.vpc_cidr\"]},\"enable_dns_hostnames\":{\"references\":[\"var.enable_dns_hostnames\"]},\"enable_dns_support\":{\"references\":[\"var.enable_dns_support\"]},\"tags\":{\"references\":[\"var.tags\",\"var.name\"]}},\"schema_version\":1}],\"variables\":{\"azs\":{\"default\":[\"us-east-1a\",\"us-east-1b\"],\"description\":\"List of Availability Zones\"},\"enable_dns_hostnames\":{\"default\":true,\"description\":\"Enable DNS hostnames in VPC\"},\"enable_dns_support\":{\"default\":true,\"description\":\"Enable DNS support in VPC\"},\"enable_nat_gateway\":{\"default\":true,\"description\":\"Create NAT Gateway (only if private subnets exist)\"},\"name\":{\"default\":\"my-vpc\",\"description\":\"Name prefix for resources\"},\"private_subnet_cidrs\":{\"default\":[\"10.0.101.0/24\",\"10.0.102.0/24\"],\"description\":\"List of private subnet CIDRs\"},\"public_subnet_cidrs\":{\"default\":[\"10.0.1.0/24\",\"10.0.2.0/24\"],\"description\":\"List of public subnet CIDRs\"},\"security_groups\":{\"default\":{\"default\":{\"description\":\"Default security group\",\"egress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":null,\"from_port\":0,\"protocol\":\"-1\",\"to_port\":0}],\"ingress\":[{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":null,\"from_port\":80,\"protocol\":\"tcp\",\"to_port\":80},{\"cidr_blocks\":[\"0.0.0.0/0\"],\"description\":null,\"from_port\":443,\"protocol\":\"tcp\",\"to_port\":443}],\"name\":\"default-sg\",\"tags\":{\"Name\":\"default-sg\"}}},\"description\":\"Map of security group configs\"},\"tags\":{\"default\":{\"Environment\":\"dev\",\"Project\":\"vpc-module\"},\"description\":\"Common tags for all resources\"},\"vpc_cidr\":{\"default\":\"10.0.0.0/16\",\"description\":\"CIDR block for the VPC\"}}}},\"relevant_attributes\":[{\"resource\":\"aws_internet_gateway.igw[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_nat_gateway.nat[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_route_table.public[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_route_table.private[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_security_group.custom\",\"attribute\":[]},{\"resource\":\"aws_subnet.private\",\"attribute\":[]},{\"resource\":\"aws_eip.nat[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_subnet.public[0]\",\"attribute\":[\"id\"]},{\"resource\":\"aws_subnet.public\",\"attribute\":[]},{\"resource\":\"aws_vpc.this\",\"attribute\":[\"id\"]}],\"timestamp\":\"2025-07-04T07:23:52Z\",\"applyable\":true,\"complete\":true,\"errored\":false}\n"
+                    ]
+                ],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    1
+                ],
+                "resource": "aws.default",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.provider.aws.credentials",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws.default",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_23",
+                "bc_check_id": "BC_AWS_NETWORKING_31",
+                "check_name": "Ensure every security group and rule has a description",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "description"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupRuleDescription",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-31",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_277",
+                "bc_check_id": "BC_AWS_NETWORKING_78",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngressAny",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-group-does-not-allow-all-traffic-on-all-ports",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_24",
+                "bc_check_id": "BC_AWS_NETWORKING_1",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress22",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-1-port-security",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_23",
+                "bc_check_id": "BC_AWS_NETWORKING_31",
+                "check_name": "Ensure every security group and rule has a description",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "description"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupRuleDescription",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-31",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_25",
+                "bc_check_id": "BC_AWS_NETWORKING_2",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress3389",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-2",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_260",
+                "bc_check_id": "BC_AWS_NETWORKING_67",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress80",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-groups-do-not-allow-ingress-from-00000-to-port-80",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_130",
+                "bc_check_id": "BC_AWS_NETWORKING_53",
+                "check_name": "Ensure VPC subnets do not assign public IP by default",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "map_public_ip_on_launch"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_subnet.private[0]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_subnet.private[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_130",
+                "bc_check_id": "BC_AWS_NETWORKING_53",
+                "check_name": "Ensure VPC subnets do not assign public IP by default",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "map_public_ip_on_launch"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_subnet.private[1]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_subnet.private[1]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV2_AWS_35",
+                "bc_check_id": "BC_AWS_NETWORKING_77",
+                "check_name": "AWS NAT Gateways should be utilized for the default route",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_route_table": {
+                            "private": {
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "route": [
+                                    {
+                                        "carrier_gateway_id": [
+                                            ""
+                                        ],
+                                        "cidr_block": [
+                                            "0.0.0.0/0"
+                                        ],
+                                        "core_network_arn": [
+                                            ""
+                                        ],
+                                        "destination_prefix_list_id": [
+                                            ""
+                                        ],
+                                        "egress_only_gateway_id": [
+                                            ""
+                                        ],
+                                        "gateway_id": [
+                                            ""
+                                        ],
+                                        "ipv6_cidr_block": [
+                                            ""
+                                        ],
+                                        "local_gateway_id": [
+                                            ""
+                                        ],
+                                        "network_interface_id": [
+                                            ""
+                                        ],
+                                        "transit_gateway_id": [
+                                            ""
+                                        ],
+                                        "vpc_endpoint_id": [
+                                            ""
+                                        ],
+                                        "vpc_peering_connection_id": [
+                                            ""
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc-private-rt",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc-private-rt"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_nat_gateway.nat[0].id",
+                                        "aws_nat_gateway.nat[0]",
+                                        "aws_nat_gateway.nat"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_route_table.private[0]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "route/*/cidr_block",
+                        "route/*/instance_id",
+                        "destination_cidr_block",
+                        "instance_id"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_route_table.private[0]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc-private-rt",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_route_table.private[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-nat-gateways-are-utilized-for-the-default-route",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_35",
+                "bc_check_id": "BC_AWS_NETWORKING_77",
+                "check_name": "AWS NAT Gateways should be utilized for the default route",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_route_table": {
+                            "public": {
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "route": [
+                                    {
+                                        "carrier_gateway_id": [
+                                            ""
+                                        ],
+                                        "cidr_block": [
+                                            "0.0.0.0/0"
+                                        ],
+                                        "core_network_arn": [
+                                            ""
+                                        ],
+                                        "destination_prefix_list_id": [
+                                            ""
+                                        ],
+                                        "egress_only_gateway_id": [
+                                            ""
+                                        ],
+                                        "ipv6_cidr_block": [
+                                            ""
+                                        ],
+                                        "local_gateway_id": [
+                                            ""
+                                        ],
+                                        "nat_gateway_id": [
+                                            ""
+                                        ],
+                                        "network_interface_id": [
+                                            ""
+                                        ],
+                                        "transit_gateway_id": [
+                                            ""
+                                        ],
+                                        "vpc_endpoint_id": [
+                                            ""
+                                        ],
+                                        "vpc_peering_connection_id": [
+                                            ""
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc-public-rt",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc-public-rt"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_internet_gateway.igw[0].id",
+                                        "aws_internet_gateway.igw[0]",
+                                        "aws_internet_gateway.igw"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_route_table.public[0]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "route/*/cidr_block",
+                        "route/*/instance_id",
+                        "destination_cidr_block",
+                        "instance_id"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_route_table.public[0]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc-public-rt",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_route_table.public[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-nat-gateways-are-utilized-for-the-default-route",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_44",
+                "bc_check_id": "BC_AWS_NETWORKING_80",
+                "check_name": "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_route_table": {
+                            "private": {
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "route": [
+                                    {
+                                        "carrier_gateway_id": [
+                                            ""
+                                        ],
+                                        "cidr_block": [
+                                            "0.0.0.0/0"
+                                        ],
+                                        "core_network_arn": [
+                                            ""
+                                        ],
+                                        "destination_prefix_list_id": [
+                                            ""
+                                        ],
+                                        "egress_only_gateway_id": [
+                                            ""
+                                        ],
+                                        "gateway_id": [
+                                            ""
+                                        ],
+                                        "ipv6_cidr_block": [
+                                            ""
+                                        ],
+                                        "local_gateway_id": [
+                                            ""
+                                        ],
+                                        "network_interface_id": [
+                                            ""
+                                        ],
+                                        "transit_gateway_id": [
+                                            ""
+                                        ],
+                                        "vpc_endpoint_id": [
+                                            ""
+                                        ],
+                                        "vpc_peering_connection_id": [
+                                            ""
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc-private-rt",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc-private-rt"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_nat_gateway.nat[0].id",
+                                        "aws_nat_gateway.nat[0]",
+                                        "aws_nat_gateway.nat"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_route_table.private[0]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "destination_ipv6_cidr_block",
+                        "route/*/vpc_peering_connection_id",
+                        "destination_cidr_block",
+                        "route/*/ipv6_cidr_block",
+                        "route/*/cidr_block",
+                        "vpc_peering_connection_id"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_route_table.private[0]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc-private-rt",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_route_table.private[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-route-table-with-vpc-peering-does-not-contain-routes-overly-permissive-to-all-traffic",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_44",
+                "bc_check_id": "BC_AWS_NETWORKING_80",
+                "check_name": "Ensure AWS route table with VPC peering does not contain routes overly permissive to all traffic",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_route_table": {
+                            "public": {
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "route": [
+                                    {
+                                        "carrier_gateway_id": [
+                                            ""
+                                        ],
+                                        "cidr_block": [
+                                            "0.0.0.0/0"
+                                        ],
+                                        "core_network_arn": [
+                                            ""
+                                        ],
+                                        "destination_prefix_list_id": [
+                                            ""
+                                        ],
+                                        "egress_only_gateway_id": [
+                                            ""
+                                        ],
+                                        "ipv6_cidr_block": [
+                                            ""
+                                        ],
+                                        "local_gateway_id": [
+                                            ""
+                                        ],
+                                        "nat_gateway_id": [
+                                            ""
+                                        ],
+                                        "network_interface_id": [
+                                            ""
+                                        ],
+                                        "transit_gateway_id": [
+                                            ""
+                                        ],
+                                        "vpc_endpoint_id": [
+                                            ""
+                                        ],
+                                        "vpc_peering_connection_id": [
+                                            ""
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc-public-rt",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc-public-rt"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_internet_gateway.igw[0].id",
+                                        "aws_internet_gateway.igw[0]",
+                                        "aws_internet_gateway.igw"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_route_table.public[0]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "destination_ipv6_cidr_block",
+                        "route/*/vpc_peering_connection_id",
+                        "destination_cidr_block",
+                        "route/*/ipv6_cidr_block",
+                        "route/*/cidr_block",
+                        "vpc_peering_connection_id"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_route_table.public[0]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc-public-rt",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_route_table.public[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-route-table-with-vpc-peering-does-not-contain-routes-overly-permissive-to-all-traffic",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_19",
+                "bc_check_id": "BC_AWS_NETWORKING_48",
+                "check_name": "Ensure that all EIP addresses allocated to a VPC are attached to EC2 instances",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_eip": {
+                            "nat": {
+                                "address": [
+                                    null
+                                ],
+                                "associate_with_private_ip": [
+                                    null
+                                ],
+                                "customer_owned_ipv4_pool": [
+                                    null
+                                ],
+                                "domain": [
+                                    "vpc"
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "tags": [
+                                    null
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "__address__": "aws_eip.nat[0]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "instance",
+                        "domain",
+                        "instance_id",
+                        "vpc",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_eip.nat[0]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_eip.nat[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": {
+                    "code_block": [],
+                    "file_path": "/tf.json",
+                    "file_line_range": [
+                        0,
+                        0
+                    ],
+                    "resource": "aws_nat_gateway.nat",
+                    "entity_tags": {
+                        "Environment": "dev",
+                        "Name": "dev-vpc-nat",
+                        "Owner": "shilash",
+                        "Project": "custom-vpc",
+                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                        "__startline__": 1,
+                        "__endline__": 1,
+                        "start_line": 0,
+                        "end_line": 0
+                    },
+                    "evaluations": null,
+                    "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "resource_address": "aws_nat_gateway.nat[0]"
+                },
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-all-eip-addresses-allocated-to-a-vpc-are-attached-to-ec2-instances",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CKV_AWS_277",
+                "bc_check_id": "BC_AWS_NETWORKING_78",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port -1",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "ingress/[0]/from_port",
+                        "ingress/[0]/to_port",
+                        "ingress/[0]/cidr_blocks",
+                        "ingress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngressAny",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-group-does-not-allow-all-traffic-on-all-ports",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_24",
+                "bc_check_id": "BC_AWS_NETWORKING_1",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 22",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "ingress/[0]/from_port",
+                        "ingress/[0]/to_port",
+                        "ingress/[0]/cidr_blocks",
+                        "ingress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress22",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-1-port-security",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_382",
+                "bc_check_id": "BC_AWS_IAM_93",
+                "check_name": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "egress/[0]/from_port",
+                        "egress/[0]/to_port",
+                        "egress/[0]/cidr_blocks",
+                        "egress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedEgressAny",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-382",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_25",
+                "bc_check_id": "BC_AWS_NETWORKING_2",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 3389",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "ingress/[0]/from_port",
+                        "ingress/[0]/to_port",
+                        "ingress/[0]/cidr_blocks",
+                        "ingress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress3389",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-2",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_260",
+                "bc_check_id": "BC_AWS_NETWORKING_67",
+                "check_name": "Ensure no security groups allow ingress from 0.0.0.0:0 to port 80",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "ingress/[0]/from_port",
+                        "ingress/[0]/to_port",
+                        "ingress/[0]/cidr_blocks",
+                        "ingress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedIngress80",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-aws-security-groups-do-not-allow-ingress-from-00000-to-port-80",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_382",
+                "bc_check_id": "BC_AWS_IAM_93",
+                "check_name": "Ensure no security groups allow egress from 0.0.0.0:0 to port -1",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "egress/[0]/from_port",
+                        "egress/[0]/to_port",
+                        "egress/[0]/cidr_blocks",
+                        "egress/[0]/ipv6_cidr_blocks"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SecurityGroupUnrestrictedEgressAny",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-382",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_130",
+                "bc_check_id": "BC_AWS_NETWORKING_53",
+                "check_name": "Ensure VPC subnets do not assign public IP by default",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "map_public_ip_on_launch"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_subnet.public[0]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_subnet.public[0]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_130",
+                "bc_check_id": "BC_AWS_NETWORKING_53",
+                "check_name": "Ensure VPC subnets do not assign public IP by default",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "map_public_ip_on_launch"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_subnet.public[1]",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.SubnetPublicIP",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_subnet.public[1]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-vpc-subnets-do-not-assign-public-ip-by-default",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV2_AWS_11",
+                "bc_check_id": "BC_AWS_LOGGING_9",
+                "check_name": "Ensure VPC flow logging is enabled in all VPCs",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_vpc": {
+                            "this": {
+                                "assign_generated_ipv6_cidr_block": [
+                                    null
+                                ],
+                                "cidr_block": [
+                                    "10.0.0.0/16"
+                                ],
+                                "enable_dns_hostnames": [
+                                    true
+                                ],
+                                "enable_dns_support": [
+                                    true
+                                ],
+                                "instance_tenancy": [
+                                    "default"
+                                ],
+                                "ipv4_ipam_pool_id": [
+                                    null
+                                ],
+                                "ipv4_netmask_length": [
+                                    null
+                                ],
+                                "ipv6_ipam_pool_id": [
+                                    null
+                                ],
+                                "ipv6_netmask_length": [
+                                    null
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "__address__": "aws_vpc.this",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "networking",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_vpc.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_vpc.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/logging-9-enable-vpc-flow-logging",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_5",
+                "bc_check_id": "BC_AWS_NETWORKING_51",
+                "check_name": "Ensure that Security Groups are attached to another resource",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_security_group": {
+                            "custom": {
+                                "description": [
+                                    "Allow All"
+                                ],
+                                "egress": [
+                                    {
+                                        "cidr_blocks": [
+                                            [
+                                                "0.0.0.0/0"
+                                            ]
+                                        ],
+                                        "description": [
+                                            ""
+                                        ],
+                                        "from_port": [
+                                            0
+                                        ],
+                                        "ipv6_cidr_blocks": [
+                                            []
+                                        ],
+                                        "prefix_list_ids": [
+                                            []
+                                        ],
+                                        "protocol": [
+                                            "-1"
+                                        ],
+                                        "security_groups": [
+                                            []
+                                        ],
+                                        "self": [
+                                            false
+                                        ],
+                                        "to_port": [
+                                            0
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "ingress": [
+                                    {
+                                        "cidr_blocks": [
+                                            [
+                                                "0.0.0.0/0"
+                                            ]
+                                        ],
+                                        "description": [
+                                            ""
+                                        ],
+                                        "from_port": [
+                                            0
+                                        ],
+                                        "ipv6_cidr_blocks": [
+                                            []
+                                        ],
+                                        "prefix_list_ids": [
+                                            []
+                                        ],
+                                        "protocol": [
+                                            "-1"
+                                        ],
+                                        "security_groups": [
+                                            []
+                                        ],
+                                        "self": [
+                                            false
+                                        ],
+                                        "to_port": [
+                                            0
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "name": [
+                                    "lambda-sg"
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "revoke_rules_on_delete": [
+                                    false
+                                ],
+                                "tags": [
+                                    {
+                                        "Name": "lambda-sg",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Name": [
+                                            "lambda-sg"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "each.value.description",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "each.value.name",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "each.value.tags",
+                                        "each.value",
+                                        "each.value.name",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_security_group.custom[\"lambda\"]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "networking",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"lambda\"]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Name": "lambda-sg",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"lambda\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_5",
+                "bc_check_id": "BC_AWS_NETWORKING_51",
+                "check_name": "Ensure that Security Groups are attached to another resource",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_security_group": {
+                            "custom": {
+                                "description": [
+                                    "Allow MySQL"
+                                ],
+                                "egress": [
+                                    {
+                                        "cidr_blocks": [
+                                            [
+                                                "0.0.0.0/0"
+                                            ]
+                                        ],
+                                        "description": [
+                                            ""
+                                        ],
+                                        "from_port": [
+                                            0
+                                        ],
+                                        "ipv6_cidr_blocks": [
+                                            []
+                                        ],
+                                        "prefix_list_ids": [
+                                            []
+                                        ],
+                                        "protocol": [
+                                            "-1"
+                                        ],
+                                        "security_groups": [
+                                            []
+                                        ],
+                                        "self": [
+                                            false
+                                        ],
+                                        "to_port": [
+                                            0
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "ingress": [
+                                    {
+                                        "cidr_blocks": [
+                                            [
+                                                "10.0.0.0/16"
+                                            ]
+                                        ],
+                                        "description": [
+                                            ""
+                                        ],
+                                        "from_port": [
+                                            3306
+                                        ],
+                                        "ipv6_cidr_blocks": [
+                                            []
+                                        ],
+                                        "prefix_list_ids": [
+                                            []
+                                        ],
+                                        "protocol": [
+                                            "tcp"
+                                        ],
+                                        "security_groups": [
+                                            []
+                                        ],
+                                        "self": [
+                                            false
+                                        ],
+                                        "to_port": [
+                                            3306
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "name": [
+                                    "rds-sg"
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "revoke_rules_on_delete": [
+                                    false
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "rds-sg",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "rds-sg"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "each.value.description",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "each.value.name",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "each.value.tags",
+                                        "each.value",
+                                        "each.value.name",
+                                        "each.value"
+                                    ],
+                                    [
+                                        "aws_vpc.this.id",
+                                        "aws_vpc.this"
+                                    ]
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_security_group.custom[\"rds\"]",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "networking",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_security_group.custom[\"rds\"]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "rds-sg",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_security_group.custom[\"rds\"]",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/ensure-that-security-groups-are-attached-to-ec2-instances-or-elastic-network-interfaces-enis",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            },
+            {
+                "check_id": "CKV2_AWS_12",
+                "bc_check_id": "BC_AWS_NETWORKING_4",
+                "check_name": "Ensure the default security group of every VPC restricts all traffic",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_vpc": {
+                            "this": {
+                                "assign_generated_ipv6_cidr_block": [
+                                    null
+                                ],
+                                "cidr_block": [
+                                    "10.0.0.0/16"
+                                ],
+                                "enable_dns_hostnames": [
+                                    true
+                                ],
+                                "enable_dns_support": [
+                                    true
+                                ],
+                                "instance_tenancy": [
+                                    "default"
+                                ],
+                                "ipv4_ipam_pool_id": [
+                                    null
+                                ],
+                                "ipv4_netmask_length": [
+                                    null
+                                ],
+                                "ipv6_ipam_pool_id": [
+                                    null
+                                ],
+                                "ipv6_netmask_length": [
+                                    null
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Name": "dev-vpc",
+                                        "Owner": "shilash",
+                                        "Project": "custom-vpc",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "dev"
+                                        ],
+                                        "Name": [
+                                            "dev-vpc"
+                                        ],
+                                        "Owner": [
+                                            "shilash"
+                                        ],
+                                        "Project": [
+                                            "custom-vpc"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "__address__": "aws_vpc.this",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "egress/from_port",
+                        "ingress/self",
+                        "egress/cidr_blocks",
+                        "ingress/protocol",
+                        "egress/protocol",
+                        "ingress/to_port",
+                        "egress/to_port",
+                        "ingress/from_port",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_vpc.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Name": "dev-vpc",
+                    "Owner": "shilash",
+                    "Project": "custom-vpc",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_vpc.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/networking-4",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/tf.json"
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 14,
+        "failed": 12,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 16,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

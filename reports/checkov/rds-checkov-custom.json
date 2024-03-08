@@ -1,0 +1,2247 @@
+{
+    "check_type": "terraform",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CUSTOM_RDS_MAX_ALLOCATED_REQUIRED",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS has max_allocated_storage set for autoscaling",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "max_allocated_storage"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_RDS_ALLOCATED_STORAGE_LIMIT",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS allocated storage is \u2264 100 GB",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "allocated_storage"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_RDS_NO_PUBLIC",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS is not publicly accessible",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "publicly_accessible"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "HIGH",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_RDS_INSTANCE_TYPE_ALLOWED",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS instance type is from allowed families (e.g., db.t3, db.t4g)",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "instance_class"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "HIGH",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_RDS_BACKUP_RETENTION",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS backup retention is at least 7 days",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "backup_retention_period"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CUSTOM_RDS_TAGS",
+                "bc_check_id": null,
+                "check_name": "Ensure RDS instance has required tags",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "__end_line__": 31,
+                                "__start_line__": 7,
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "db_name": [
+                                    "mydb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "my-db-instance"
+                                ],
+                                "engine": [
+                                    "${var.engine}"
+                                ],
+                                "engine_version": [
+                                    "8.0"
+                                ],
+                                "identifier": [
+                                    "my-db-instance"
+                                ],
+                                "instance_class": [
+                                    "db.t3.micro"
+                                ],
+                                "lifecycle": [
+                                    {
+                                        "ignore_changes": [
+                                            [
+                                                "password"
+                                            ]
+                                        ]
+                                    }
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "changeMe123!"
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "Project": "rds-module"
+                                    }
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-0123456789abcdef0"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "tags/Owner",
+                        "tags/Environment"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_db_instance\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  identifier              = var.name\n"
+                    ],
+                    [
+                        9,
+                        "  engine                  = var.engine\n"
+                    ],
+                    [
+                        10,
+                        "  engine_version          = var.engine_version\n"
+                    ],
+                    [
+                        11,
+                        "  instance_class          = var.instance_class\n"
+                    ],
+                    [
+                        12,
+                        "  allocated_storage       = var.allocated_storage\n"
+                    ],
+                    [
+                        13,
+                        "  max_allocated_storage   = var.max_allocated_storage\n"
+                    ],
+                    [
+                        14,
+                        "  db_name                 = var.db_name\n"
+                    ],
+                    [
+                        15,
+                        "  username                = var.username\n"
+                    ],
+                    [
+                        16,
+                        "  password                = var.password\n"
+                    ],
+                    [
+                        17,
+                        "  port                    = var.port\n"
+                    ],
+                    [
+                        18,
+                        "  db_subnet_group_name    = aws_db_subnet_group.this.name\n"
+                    ],
+                    [
+                        19,
+                        "  vpc_security_group_ids  = var.vpc_security_group_ids\n"
+                    ],
+                    [
+                        20,
+                        "  multi_az                = var.multi_az\n"
+                    ],
+                    [
+                        21,
+                        "  storage_type            = var.storage_type\n"
+                    ],
+                    [
+                        22,
+                        "  backup_retention_period = var.backup_retention_period\n"
+                    ],
+                    [
+                        23,
+                        "  skip_final_snapshot     = var.skip_final_snapshot\n"
+                    ],
+                    [
+                        24,
+                        "  publicly_accessible     = var.publicly_accessible\n"
+                    ],
+                    [
+                        25,
+                        "\n"
+                    ],
+                    [
+                        26,
+                        "  tags = var.tags\n"
+                    ],
+                    [
+                        27,
+                        "\n"
+                    ],
+                    [
+                        28,
+                        "  lifecycle {\n"
+                    ],
+                    [
+                        29,
+                        "    ignore_changes = [password]\n"
+                    ],
+                    [
+                        30,
+                        "  }\n"
+                    ],
+                    [
+                        31,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "repo_file_path": "/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "file_line_range": [
+                    7,
+                    31
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "Project": "rds-module"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                "breadcrumbs": {
+                    "identifier": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine": [
+                        {
+                            "type": "variable",
+                            "name": "engine",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "engine_version": [
+                        {
+                            "type": "variable",
+                            "name": "engine_version",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "instance_class": [
+                        {
+                            "type": "variable",
+                            "name": "instance_class",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "max_allocated_storage": [
+                        {
+                            "type": "variable",
+                            "name": "max_allocated_storage",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_name": [
+                        {
+                            "type": "variable",
+                            "name": "db_name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "username": [
+                        {
+                            "type": "variable",
+                            "name": "username",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "password": [
+                        {
+                            "type": "variable",
+                            "name": "password",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "port": [
+                        {
+                            "type": "variable",
+                            "name": "port",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "vpc_security_group_ids": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_security_group_ids",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "multi_az": [
+                        {
+                            "type": "variable",
+                            "name": "multi_az",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "storage_type": [
+                        {
+                            "type": "variable",
+                            "name": "storage_type",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "backup_retention_period": [
+                        {
+                            "type": "variable",
+                            "name": "backup_retention_period",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "skip_final_snapshot": [
+                        {
+                            "type": "variable",
+                            "name": "skip_final_snapshot",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "publicly_accessible": [
+                        {
+                            "type": "variable",
+                            "name": "publicly_accessible",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "db_subnet_group_name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_db_subnet_group.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/.terragrunt-cache/wZ69YURi8OpXKfthSr-AWSimvas/0bQMWK9lt-9Vga7Q8_e8aMn5RRE/main.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 5,
+        "failed": 1,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 2,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

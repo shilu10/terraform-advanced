@@ -1,0 +1,541 @@
+{
+    "check_type": "terraform",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CUSTOM_VPC_PRIVATE_CIDR",
+                "bc_check_id": null,
+                "check_name": "Ensure VPC uses private CIDR range",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_vpc": {
+                            "this": {
+                                "__end_line__": 15,
+                                "__start_line__": 7,
+                                "cidr_block": [
+                                    "10.0.0.0/16"
+                                ],
+                                "enable_dns_hostnames": [
+                                    true
+                                ],
+                                "enable_dns_support": [
+                                    true
+                                ],
+                                "tags": [
+                                    "merge({'Environment': 'dev', 'Project': 'vpc-module'},{'Name': my-vpc})"
+                                ],
+                                "__address__": "aws_vpc.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "cidr_block"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_vpc\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  cidr_block           = var.vpc_cidr\n"
+                    ],
+                    [
+                        9,
+                        "  enable_dns_support   = var.enable_dns_support\n"
+                    ],
+                    [
+                        10,
+                        "  enable_dns_hostnames = var.enable_dns_hostnames\n"
+                    ],
+                    [
+                        11,
+                        "\n"
+                    ],
+                    [
+                        12,
+                        "  tags = merge(var.tags, {\n"
+                    ],
+                    [
+                        13,
+                        "    Name = var.name\n"
+                    ],
+                    [
+                        14,
+                        "  })\n"
+                    ],
+                    [
+                        15,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "repo_file_path": "/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_line_range": [
+                    7,
+                    15
+                ],
+                "resource": "aws_vpc.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": "merge({'Environment': 'dev', 'Project': 'vpc-module'},{'Name': my-vpc})",
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "HIGH",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "breadcrumbs": {
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "cidr_block": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_cidr",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "enable_dns_support": [
+                        {
+                            "type": "variable",
+                            "name": "enable_dns_support",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "enable_dns_hostnames": [
+                        {
+                            "type": "variable",
+                            "name": "enable_dns_hostnames",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CUSTOM_VPC_TAGS",
+                "bc_check_id": null,
+                "check_name": "Ensure VPC has required tags",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_vpc": {
+                            "this": {
+                                "__end_line__": 15,
+                                "__start_line__": 7,
+                                "cidr_block": [
+                                    "10.0.0.0/16"
+                                ],
+                                "enable_dns_hostnames": [
+                                    true
+                                ],
+                                "enable_dns_support": [
+                                    true
+                                ],
+                                "tags": [
+                                    "merge({'Environment': 'dev', 'Project': 'vpc-module'},{'Name': my-vpc})"
+                                ],
+                                "__address__": "aws_vpc.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "tags/Environment",
+                        "tags/Owner"
+                    ]
+                },
+                "code_block": [
+                    [
+                        7,
+                        "resource \"aws_vpc\" \"this\" {\n"
+                    ],
+                    [
+                        8,
+                        "  cidr_block           = var.vpc_cidr\n"
+                    ],
+                    [
+                        9,
+                        "  enable_dns_support   = var.enable_dns_support\n"
+                    ],
+                    [
+                        10,
+                        "  enable_dns_hostnames = var.enable_dns_hostnames\n"
+                    ],
+                    [
+                        11,
+                        "\n"
+                    ],
+                    [
+                        12,
+                        "  tags = merge(var.tags, {\n"
+                    ],
+                    [
+                        13,
+                        "    Name = var.name\n"
+                    ],
+                    [
+                        14,
+                        "  })\n"
+                    ],
+                    [
+                        15,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "repo_file_path": "/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_line_range": [
+                    7,
+                    15
+                ],
+                "resource": "aws_vpc.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": "merge({'Environment': 'dev', 'Project': 'vpc-module'},{'Name': my-vpc})",
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "breadcrumbs": {
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "cidr_block": [
+                        {
+                            "type": "variable",
+                            "name": "vpc_cidr",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "enable_dns_support": [
+                        {
+                            "type": "variable",
+                            "name": "enable_dns_support",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "enable_dns_hostnames": [
+                        {
+                            "type": "variable",
+                            "name": "enable_dns_hostnames",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            },
+            {
+                "check_id": "CUSTOM_SG_TAGS",
+                "bc_check_id": null,
+                "check_name": "Ensure security group has required tags",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_security_group": {
+                            "custom[\"default\"]": {
+                                "__end_line__": 139,
+                                "__start_line__": 107,
+                                "description": [
+                                    "Default security group"
+                                ],
+                                "dynamic": [
+                                    {
+                                        "ingress": [
+                                            {
+                                                "cidr_blocks": [
+                                                    "0.0.0.0/0"
+                                                ],
+                                                "description": [
+                                                    "null"
+                                                ],
+                                                "from_port": [
+                                                    80
+                                                ],
+                                                "protocol": [
+                                                    "tcp"
+                                                ],
+                                                "to_port": [
+                                                    80
+                                                ]
+                                            },
+                                            {
+                                                "cidr_blocks": [
+                                                    "0.0.0.0/0"
+                                                ],
+                                                "description": [
+                                                    "null"
+                                                ],
+                                                "from_port": [
+                                                    443
+                                                ],
+                                                "protocol": [
+                                                    "tcp"
+                                                ],
+                                                "to_port": [
+                                                    443
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "egress": [
+                                            {
+                                                "cidr_blocks": [
+                                                    "egress.value.cidr_blocks"
+                                                ],
+                                                "description": [
+                                                    "lookup(egress.value,\"description\",None)"
+                                                ],
+                                                "from_port": [
+                                                    "egress.value.from_port"
+                                                ],
+                                                "protocol": [
+                                                    "egress.value.protocol"
+                                                ],
+                                                "to_port": [
+                                                    "egress.value.to_port"
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "name": [
+                                    "default-sg"
+                                ],
+                                "tags": [
+                                    {
+                                        "Name": [
+                                            "default-sg"
+                                        ]
+                                    }
+                                ],
+                                "vpc_id": [
+                                    "aws_vpc.this.id"
+                                ],
+                                "__address__": "aws_security_group.custom[\"default\"]"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "tags/Environment",
+                        "tags/Owner"
+                    ]
+                },
+                "code_block": [
+                    [
+                        107,
+                        "resource \"aws_security_group\" \"custom\" {\n"
+                    ],
+                    [
+                        108,
+                        "  for_each = var.security_groups\n"
+                    ],
+                    [
+                        109,
+                        "\n"
+                    ],
+                    [
+                        110,
+                        "  name        = each.value.name\n"
+                    ],
+                    [
+                        111,
+                        "  description = each.value.description\n"
+                    ],
+                    [
+                        112,
+                        "  vpc_id      = aws_vpc.this.id\n"
+                    ],
+                    [
+                        113,
+                        "\n"
+                    ],
+                    [
+                        114,
+                        "  dynamic \"ingress\" {\n"
+                    ],
+                    [
+                        115,
+                        "    for_each = lookup(each.value, \"ingress\", [])\n"
+                    ],
+                    [
+                        116,
+                        "    content {\n"
+                    ],
+                    [
+                        117,
+                        "      from_port   = ingress.value.from_port\n"
+                    ],
+                    [
+                        118,
+                        "      to_port     = ingress.value.to_port\n"
+                    ],
+                    [
+                        119,
+                        "      protocol    = ingress.value.protocol\n"
+                    ],
+                    [
+                        120,
+                        "      cidr_blocks = ingress.value.cidr_blocks\n"
+                    ],
+                    [
+                        121,
+                        "      description = lookup(ingress.value, \"description\", null)\n"
+                    ],
+                    [
+                        122,
+                        "    }\n"
+                    ],
+                    [
+                        123,
+                        "  }\n"
+                    ],
+                    [
+                        124,
+                        "\n"
+                    ],
+                    [
+                        125,
+                        "  dynamic \"egress\" {\n"
+                    ],
+                    [
+                        126,
+                        "    for_each = lookup(each.value, \"egress\", [])\n"
+                    ],
+                    [
+                        127,
+                        "    content {\n"
+                    ],
+                    [
+                        128,
+                        "      from_port   = egress.value.from_port\n"
+                    ],
+                    [
+                        129,
+                        "      to_port     = egress.value.to_port\n"
+                    ],
+                    [
+                        130,
+                        "      protocol    = egress.value.protocol\n"
+                    ],
+                    [
+                        131,
+                        "      cidr_blocks = egress.value.cidr_blocks\n"
+                    ],
+                    [
+                        132,
+                        "      description = lookup(egress.value, \"description\", null)\n"
+                    ],
+                    [
+                        133,
+                        "    }\n"
+                    ],
+                    [
+                        134,
+                        "  }\n"
+                    ],
+                    [
+                        135,
+                        "\n"
+                    ],
+                    [
+                        136,
+                        "  tags = merge(each.value.tags, {\n"
+                    ],
+                    [
+                        137,
+                        "    \"Name\" = each.value.name\n"
+                    ],
+                    [
+                        138,
+                        "  })\n"
+                    ],
+                    [
+                        139,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "repo_file_path": "/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf",
+                "file_line_range": [
+                    107,
+                    139
+                ],
+                "resource": "aws_security_group.custom[\"default\"]",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Name": "default-sg"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/vpc/.terragrunt-cache/PAwEbC_k5HUJcAzRHj0RWN-fx4o/XDVrcE121WfTFoiw1XqHqWSWxbc/main.tf"
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 1,
+        "failed": 2,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 15,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

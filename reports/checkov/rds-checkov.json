@@ -1,0 +1,1082 @@
+{
+    "check_type": "terraform_plan",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CKV_AWS_41",
+                "bc_check_id": "BC_AWS_SECRETS_5",
+                "check_name": "Ensure no hard coded AWS access key and secret key exists in provider",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [
+                    [
+                        1,
+                        "{\"format_version\":\"1.2\",\"terraform_version\":\"1.12.2\",\"variables\":{\"allocated_storage\":{\"value\":\"20\"},\"backup_retention_period\":{\"value\":\"7\"},\"db_name\":{\"value\":\"myappdb\"},\"engine\":{\"value\":\"mysql\"},\"engine_version\":{\"value\":\"8.0.35\"},\"instance_class\":{\"value\":\"db.t3.medium\"},\"max_allocated_storage\":{\"value\":\"100\"},\"multi_az\":{\"value\":\"false\"},\"name\":{\"value\":\"mysql-db-dev\"},\"password\":{\"value\":\"S3cur3Pa$$w0rd\"},\"port\":{\"value\":\"3306\"},\"publicly_accessible\":{\"value\":\"false\"},\"skip_final_snapshot\":{\"value\":\"true\"},\"storage_type\":{\"value\":\"gp3\"},\"subnet_ids\":{\"value\":[\"subnet-111111\",\"subnet-222222\"]},\"tags\":{\"value\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"}},\"username\":{\"value\":\"admin\"},\"vpc_security_group_ids\":{\"value\":[\"sg-12345678\"]}},\"planned_values\":{\"outputs\":{\"rds_arn\":{\"sensitive\":false},\"rds_endpoint\":{\"sensitive\":false},\"rds_instance_id\":{\"sensitive\":false}},\"root_module\":{\"resources\":[{\"address\":\"aws_db_instance.this\",\"mode\":\"managed\",\"type\":\"aws_db_instance\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":2,\"values\":{\"allocated_storage\":20,\"allow_major_version_upgrade\":null,\"apply_immediately\":false,\"auto_minor_version_upgrade\":true,\"backup_retention_period\":7,\"blue_green_update\":[],\"copy_tags_to_snapshot\":false,\"custom_iam_instance_profile\":null,\"customer_owned_ip_enabled\":null,\"db_name\":\"myappdb\",\"db_subnet_group_name\":\"mysql-db-dev\",\"dedicated_log_volume\":false,\"delete_automated_backups\":true,\"deletion_protection\":null,\"domain\":null,\"domain_auth_secret_arn\":null,\"domain_dns_ips\":null,\"domain_iam_role_name\":null,\"domain_ou\":null,\"enabled_cloudwatch_logs_exports\":null,\"engine\":\"mysql\",\"engine_version\":\"8.0.35\",\"final_snapshot_identifier\":null,\"iam_database_authentication_enabled\":null,\"identifier\":\"mysql-db-dev\",\"instance_class\":\"db.t3.medium\",\"manage_master_user_password\":null,\"max_allocated_storage\":100,\"monitoring_interval\":0,\"multi_az\":false,\"password\":\"S3cur3Pa$$w0rd\",\"password_wo\":null,\"password_wo_version\":null,\"performance_insights_enabled\":false,\"port\":3306,\"publicly_accessible\":false,\"region\":\"us-east-1\",\"replicate_source_db\":null,\"restore_to_point_in_time\":[],\"s3_import\":[],\"skip_final_snapshot\":true,\"storage_encrypted\":null,\"storage_type\":\"gp3\",\"tags\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"tags_all\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"timeouts\":null,\"upgrade_storage_config\":null,\"username\":\"admin\",\"vpc_security_group_ids\":[\"sg-12345678\"]},\"sensitive_values\":{\"blue_green_update\":[],\"listener_endpoint\":[],\"master_user_secret\":[],\"password\":true,\"password_wo\":true,\"replicas\":[],\"restore_to_point_in_time\":[],\"s3_import\":[],\"tags\":{},\"tags_all\":{},\"vpc_security_group_ids\":[false]}},{\"address\":\"aws_db_subnet_group.this\",\"mode\":\"managed\",\"type\":\"aws_db_subnet_group\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"schema_version\":0,\"values\":{\"description\":\"Managed by Terraform\",\"name\":\"mysql-db-dev\",\"region\":\"us-east-1\",\"subnet_ids\":[\"subnet-111111\",\"subnet-222222\"],\"tags\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"tags_all\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"}},\"sensitive_values\":{\"subnet_ids\":[false,false],\"supported_network_types\":[],\"tags\":{},\"tags_all\":{}}}]}},\"resource_changes\":[{\"address\":\"aws_db_instance.this\",\"mode\":\"managed\",\"type\":\"aws_db_instance\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"allocated_storage\":20,\"allow_major_version_upgrade\":null,\"apply_immediately\":false,\"auto_minor_version_upgrade\":true,\"backup_retention_period\":7,\"blue_green_update\":[],\"copy_tags_to_snapshot\":false,\"custom_iam_instance_profile\":null,\"customer_owned_ip_enabled\":null,\"db_name\":\"myappdb\",\"db_subnet_group_name\":\"mysql-db-dev\",\"dedicated_log_volume\":false,\"delete_automated_backups\":true,\"deletion_protection\":null,\"domain\":null,\"domain_auth_secret_arn\":null,\"domain_dns_ips\":null,\"domain_iam_role_name\":null,\"domain_ou\":null,\"enabled_cloudwatch_logs_exports\":null,\"engine\":\"mysql\",\"engine_version\":\"8.0.35\",\"final_snapshot_identifier\":null,\"iam_database_authentication_enabled\":null,\"identifier\":\"mysql-db-dev\",\"instance_class\":\"db.t3.medium\",\"manage_master_user_password\":null,\"max_allocated_storage\":100,\"monitoring_interval\":0,\"multi_az\":false,\"password\":\"S3cur3Pa$$w0rd\",\"password_wo\":null,\"password_wo_version\":null,\"performance_insights_enabled\":false,\"port\":3306,\"publicly_accessible\":false,\"region\":\"us-east-1\",\"replicate_source_db\":null,\"restore_to_point_in_time\":[],\"s3_import\":[],\"skip_final_snapshot\":true,\"storage_encrypted\":null,\"storage_type\":\"gp3\",\"tags\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"tags_all\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"timeouts\":null,\"upgrade_storage_config\":null,\"username\":\"admin\",\"vpc_security_group_ids\":[\"sg-12345678\"]},\"after_unknown\":{\"address\":true,\"arn\":true,\"availability_zone\":true,\"backup_target\":true,\"backup_window\":true,\"blue_green_update\":[],\"ca_cert_identifier\":true,\"character_set_name\":true,\"database_insights_mode\":true,\"domain_fqdn\":true,\"endpoint\":true,\"engine_lifecycle_support\":true,\"engine_version_actual\":true,\"hosted_zone_id\":true,\"id\":true,\"identifier_prefix\":true,\"iops\":true,\"kms_key_id\":true,\"latest_restorable_time\":true,\"license_model\":true,\"listener_endpoint\":true,\"maintenance_window\":true,\"master_user_secret\":true,\"master_user_secret_kms_key_id\":true,\"monitoring_role_arn\":true,\"nchar_character_set_name\":true,\"network_type\":true,\"option_group_name\":true,\"parameter_group_name\":true,\"performance_insights_kms_key_id\":true,\"performance_insights_retention_period\":true,\"replica_mode\":true,\"replicas\":true,\"resource_id\":true,\"restore_to_point_in_time\":[],\"s3_import\":[],\"snapshot_identifier\":true,\"status\":true,\"storage_throughput\":true,\"tags\":{},\"tags_all\":{},\"timezone\":true,\"vpc_security_group_ids\":[false]},\"before_sensitive\":false,\"after_sensitive\":{\"blue_green_update\":[],\"listener_endpoint\":[],\"master_user_secret\":[],\"password\":true,\"password_wo\":true,\"replicas\":[],\"restore_to_point_in_time\":[],\"s3_import\":[],\"tags\":{},\"tags_all\":{},\"vpc_security_group_ids\":[false]}}},{\"address\":\"aws_db_subnet_group.this\",\"mode\":\"managed\",\"type\":\"aws_db_subnet_group\",\"name\":\"this\",\"provider_name\":\"registry.terraform.io/hashicorp/aws\",\"change\":{\"actions\":[\"create\"],\"before\":null,\"after\":{\"description\":\"Managed by Terraform\",\"name\":\"mysql-db-dev\",\"region\":\"us-east-1\",\"subnet_ids\":[\"subnet-111111\",\"subnet-222222\"],\"tags\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"},\"tags_all\":{\"Environment\":\"production\",\"Name\":\"mysql-db-prod\",\"Owner\":\"devops-team\"}},\"after_unknown\":{\"arn\":true,\"id\":true,\"name_prefix\":true,\"subnet_ids\":[false,false],\"supported_network_types\":true,\"tags\":{},\"tags_all\":{},\"vpc_id\":true},\"before_sensitive\":false,\"after_sensitive\":{\"subnet_ids\":[false,false],\"supported_network_types\":[],\"tags\":{},\"tags_all\":{}}}}],\"output_changes\":{\"rds_arn\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false},\"rds_endpoint\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false},\"rds_instance_id\":{\"actions\":[\"create\"],\"before\":null,\"after_unknown\":true,\"before_sensitive\":false,\"after_sensitive\":false}},\"configuration\":{\"provider_config\":{\"aws\":{\"name\":\"aws\",\"full_name\":\"registry.terraform.io/hashicorp/aws\",\"expressions\":{\"access_key\":{\"constant_value\":\"mock\"},\"endpoints\":[{\"ec2\":{\"constant_value\":\"http://localhost:4566\"},\"iam\":{\"constant_value\":\"http://localhost:4566\"},\"lambda\":{\"constant_value\":\"http://localhost:4566\"},\"rds\":{\"constant_value\":\"http://localhost:4566\"},\"s3\":{\"constant_value\":\"http://localhost:4566\"},\"sqs\":{\"constant_value\":\"http://localhost:4566\"},\"sts\":{\"constant_value\":\"http://localhost:4566\"}}],\"region\":{\"constant_value\":\"us-east-1\"},\"s3_use_path_style\":{\"constant_value\":true},\"secret_key\":{\"constant_value\":\"mock\"},\"skip_credentials_validation\":{\"constant_value\":true},\"skip_metadata_api_check\":{\"constant_value\":true},\"skip_requesting_account_id\":{\"constant_value\":true}}}},\"root_module\":{\"outputs\":{\"rds_arn\":{\"expression\":{\"references\":[\"aws_db_instance.this.arn\",\"aws_db_instance.this\"]},\"description\":\"ARN of RDS instance\"},\"rds_endpoint\":{\"expression\":{\"references\":[\"aws_db_instance.this.endpoint\",\"aws_db_instance.this\"]},\"description\":\"RDS instance endpoint\"},\"rds_instance_id\":{\"expression\":{\"references\":[\"aws_db_instance.this.id\",\"aws_db_instance.this\"]},\"description\":\"RDS instance ID\"}},\"resources\":[{\"address\":\"aws_db_instance.this\",\"mode\":\"managed\",\"type\":\"aws_db_instance\",\"name\":\"this\",\"provider_config_key\":\"aws\",\"expressions\":{\"allocated_storage\":{\"references\":[\"var.allocated_storage\"]},\"backup_retention_period\":{\"references\":[\"var.backup_retention_period\"]},\"db_name\":{\"references\":[\"var.db_name\"]},\"db_subnet_group_name\":{\"references\":[\"aws_db_subnet_group.this.name\",\"aws_db_subnet_group.this\"]},\"engine\":{\"references\":[\"var.engine\"]},\"engine_version\":{\"references\":[\"var.engine_version\"]},\"identifier\":{\"references\":[\"var.name\"]},\"instance_class\":{\"references\":[\"var.instance_class\"]},\"max_allocated_storage\":{\"references\":[\"var.max_allocated_storage\"]},\"multi_az\":{\"references\":[\"var.multi_az\"]},\"password\":{\"references\":[\"var.password\"]},\"port\":{\"references\":[\"var.port\"]},\"publicly_accessible\":{\"references\":[\"var.publicly_accessible\"]},\"skip_final_snapshot\":{\"references\":[\"var.skip_final_snapshot\"]},\"storage_type\":{\"references\":[\"var.storage_type\"]},\"tags\":{\"references\":[\"var.tags\"]},\"username\":{\"references\":[\"var.username\"]},\"vpc_security_group_ids\":{\"references\":[\"var.vpc_security_group_ids\"]}},\"schema_version\":2},{\"address\":\"aws_db_subnet_group.this\",\"mode\":\"managed\",\"type\":\"aws_db_subnet_group\",\"name\":\"this\",\"provider_config_key\":\"aws\",\"expressions\":{\"name\":{\"references\":[\"var.name\"]},\"subnet_ids\":{\"references\":[\"var.subnet_ids\"]},\"tags\":{\"references\":[\"var.tags\"]}},\"schema_version\":0}],\"variables\":{\"allocated_storage\":{\"default\":20,\"description\":\"Minimum allocated storage (GB)\"},\"backup_retention_period\":{\"default\":7,\"description\":\"Days to retain backups\"},\"db_name\":{\"default\":\"mydb\",\"description\":\"Database name\"},\"engine\":{\"default\":\"mysql\",\"description\":\"Database engine (e.g. mysql, postgres)\"},\"engine_version\":{\"default\":\"8.0\",\"description\":\"Engine version\"},\"instance_class\":{\"default\":\"db.t3.micro\",\"description\":\"Instance class\"},\"max_allocated_storage\":{\"default\":100,\"description\":\"Maximum storage autoscaling (GB)\"},\"multi_az\":{\"default\":false,\"description\":\"Enable multi-AZ\"},\"name\":{\"default\":\"my-db-instance\",\"description\":\"RDS instance name\"},\"password\":{\"default\":\"changeMe123!\",\"description\":\"Master password\",\"sensitive\":true},\"port\":{\"default\":3306,\"description\":\"DB port\"},\"publicly_accessible\":{\"default\":false,\"description\":\"Whether instance is publicly accessible\"},\"skip_final_snapshot\":{\"default\":true,\"description\":\"Skip final snapshot on deletion\"},\"storage_type\":{\"default\":\"gp3\",\"description\":\"Type of storage (gp2, gp3, io1)\"},\"subnet_ids\":{\"default\":[\"subnet-abc123\",\"subnet-def456\"],\"description\":\"Subnet IDs for DB subnet group\"},\"tags\":{\"default\":{\"Environment\":\"dev\",\"Project\":\"rds-module\"},\"description\":\"Tags to apply to resources\"},\"username\":{\"default\":\"admin\",\"description\":\"Master username\"},\"vpc_security_group_ids\":{\"default\":[\"sg-0123456789abcdef0\"],\"description\":\"List of VPC security group IDs\"}}}},\"relevant_attributes\":[{\"resource\":\"aws_db_instance.this\",\"attribute\":[\"endpoint\"]},{\"resource\":\"aws_db_subnet_group.this\",\"attribute\":[\"name\"]},{\"resource\":\"aws_db_instance.this\",\"attribute\":[\"arn\"]},{\"resource\":\"aws_db_instance.this\",\"attribute\":[\"id\"]}],\"timestamp\":\"2025-07-04T07:23:07Z\",\"applyable\":true,\"complete\":true,\"errored\":false}\n"
+                    ]
+                ],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    1
+                ],
+                "resource": "aws.default",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.provider.aws.credentials",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws.default",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/secrets-policies/bc-aws-secrets-5",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_388",
+                "bc_check_id": null,
+                "check_name": "Ensure AWS Aurora PostgreSQL is not exposed to local file read vulnerability",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": []
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.UnpatchedAuroraPostgresDB",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_226",
+                "bc_check_id": "BC_AWS_GENERAL_121",
+                "check_name": "Ensure DB instance gets all minor upgrades automatically",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "auto_minor_version_upgrade"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.DBInstanceMinorUpgrade",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-aws-db-instance-gets-all-minor-upgrades-automatically",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_354",
+                "bc_check_id": "BC_AWS_GENERAL_254",
+                "check_name": "Ensure RDS Performance Insights are encrypted using KMS CMKs",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "performance_insights_kms_key_id"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSInstancePerfInsightsEncryptionWithCMK",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-354",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_17",
+                "bc_check_id": "BC_AWS_PUBLIC_2",
+                "check_name": "Ensure all data stored in RDS is not publicly accessible",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "publicly_accessible"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSPubliclyAccessible",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/public-policies/public-2",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_133",
+                "bc_check_id": "BC_AWS_GENERAL_46",
+                "check_name": "Ensure that RDS instances has backup policy",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "backup_retention_period"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.DBInstanceBackupRetentionPeriod",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-that-rds-instances-have-backup-policy",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_211",
+                "bc_check_id": "BC_AWS_GENERAL_118",
+                "check_name": "Ensure RDS uses a modern CaCert",
+                "check_result": {
+                    "result": "PASSED",
+                    "evaluated_keys": [
+                        "ca_cert_identifier"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSCACertIsRecent",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/ensure-aws-rds-uses-a-modern-cacert",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV2_AWS_69",
+                "bc_check_id": "BC_AWS_NETWORKING_93",
+                "check_name": "Ensure AWS RDS database instance configured with encryption in transit",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "allow_major_version_upgrade": [
+                                    null
+                                ],
+                                "apply_immediately": [
+                                    false
+                                ],
+                                "auto_minor_version_upgrade": [
+                                    true
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "blue_green_update": [
+                                    []
+                                ],
+                                "copy_tags_to_snapshot": [
+                                    false
+                                ],
+                                "custom_iam_instance_profile": [
+                                    null
+                                ],
+                                "customer_owned_ip_enabled": [
+                                    null
+                                ],
+                                "db_name": [
+                                    "myappdb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "mysql-db-dev"
+                                ],
+                                "dedicated_log_volume": [
+                                    false
+                                ],
+                                "delete_automated_backups": [
+                                    true
+                                ],
+                                "deletion_protection": [
+                                    null
+                                ],
+                                "domain": [
+                                    null
+                                ],
+                                "domain_auth_secret_arn": [
+                                    null
+                                ],
+                                "domain_dns_ips": [
+                                    null
+                                ],
+                                "domain_iam_role_name": [
+                                    null
+                                ],
+                                "domain_ou": [
+                                    null
+                                ],
+                                "enabled_cloudwatch_logs_exports": [
+                                    null
+                                ],
+                                "engine": [
+                                    "mysql"
+                                ],
+                                "engine_version": [
+                                    "8.0.35"
+                                ],
+                                "final_snapshot_identifier": [
+                                    null
+                                ],
+                                "iam_database_authentication_enabled": [
+                                    null
+                                ],
+                                "identifier": [
+                                    "mysql-db-dev"
+                                ],
+                                "instance_class": [
+                                    "db.t3.medium"
+                                ],
+                                "manage_master_user_password": [
+                                    null
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "monitoring_interval": [
+                                    0
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "S3cur3Pa$$w0rd"
+                                ],
+                                "password_wo": [
+                                    null
+                                ],
+                                "password_wo_version": [
+                                    null
+                                ],
+                                "performance_insights_enabled": [
+                                    false
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "replicate_source_db": [
+                                    null
+                                ],
+                                "restore_to_point_in_time": [
+                                    []
+                                ],
+                                "s3_import": [
+                                    []
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_encrypted": [
+                                    null
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "production",
+                                        "Name": "mysql-db-prod",
+                                        "Owner": "devops-team",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "production"
+                                        ],
+                                        "Name": [
+                                            "mysql-db-prod"
+                                        ],
+                                        "Owner": [
+                                            "devops-team"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "upgrade_storage_config": [
+                                    null
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-12345678"
+                                    ]
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_db_subnet_group.this.name",
+                                        "aws_db_subnet_group.this"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "parameter[?(@/name=='rds/force_ssl')]/value",
+                        "parameter[?(@/name=='db2comm')]/value",
+                        "parameter[?(@/name=='require_secure_transport')]/value",
+                        "family",
+                        "resource_type"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "production",
+                    "Name": "mysql-db-prod",
+                    "Owner": "devops-team",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-networking-policies/bc-aws-2-69",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CKV_AWS_157",
+                "bc_check_id": "BC_AWS_GENERAL_73",
+                "check_name": "Ensure that RDS instances have Multi-AZ enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "multi_az"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSMultiAZEnabled",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/general-73",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_118",
+                "bc_check_id": "BC_AWS_LOGGING_28",
+                "check_name": "Ensure that enhanced monitoring is enabled for Amazon RDS instances",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "monitoring_interval"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSEnhancedMonitorEnabled",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/ensure-that-enhanced-monitoring-is-enabled-for-amazon-rds-instances",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_161",
+                "bc_check_id": "BC_AWS_IAM_65",
+                "check_name": "Ensure RDS database has IAM authentication enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "iam_database_authentication_enabled"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSIAMAuthentication",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-rds-database-has-iam-authentication-enabled",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_353",
+                "bc_check_id": "BC_AWS_LOGGING_47",
+                "check_name": "Ensure that RDS instances have performance insights enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "performance_insights_enabled"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSInstancePerformanceInsights",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-logging-policies/bc-aws-353",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_129",
+                "bc_check_id": "BC_AWS_IAM_60",
+                "check_name": "Ensure that respective logs of Amazon Relational Database Service (Amazon RDS) are enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "enabled_cloudwatch_logs_exports/[0]"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.DBInstanceLogging",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-iam-policies/ensure-that-respective-logs-of-amazon-relational-database-service-amazon-rds-are-enabled",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_293",
+                "bc_check_id": "BC_AWS_GENERAL_208",
+                "check_name": "Ensure that AWS database instances have deletion protection enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "deletion_protection"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSInstanceDeletionProtection",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-293",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV_AWS_16",
+                "bc_check_id": "BC_AWS_GENERAL_4",
+                "check_name": "Ensure all data stored in the RDS is securely encrypted at rest",
+                "check_result": {
+                    "result": "FAILED",
+                    "evaluated_keys": [
+                        "storage_encrypted"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.terraform.checks.resource.aws.RDSEncryption",
+                "fixed_definition": null,
+                "entity_tags": null,
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/general-4",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": null
+            },
+            {
+                "check_id": "CKV2_AWS_60",
+                "bc_check_id": "BC_AWS_GENERAL_195",
+                "check_name": "Ensure RDS instance with copy tags to snapshots is enabled",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_db_instance": {
+                            "this": {
+                                "allocated_storage": [
+                                    20
+                                ],
+                                "allow_major_version_upgrade": [
+                                    null
+                                ],
+                                "apply_immediately": [
+                                    false
+                                ],
+                                "auto_minor_version_upgrade": [
+                                    true
+                                ],
+                                "backup_retention_period": [
+                                    7
+                                ],
+                                "blue_green_update": [
+                                    []
+                                ],
+                                "copy_tags_to_snapshot": [
+                                    false
+                                ],
+                                "custom_iam_instance_profile": [
+                                    null
+                                ],
+                                "customer_owned_ip_enabled": [
+                                    null
+                                ],
+                                "db_name": [
+                                    "myappdb"
+                                ],
+                                "db_subnet_group_name": [
+                                    "mysql-db-dev"
+                                ],
+                                "dedicated_log_volume": [
+                                    false
+                                ],
+                                "delete_automated_backups": [
+                                    true
+                                ],
+                                "deletion_protection": [
+                                    null
+                                ],
+                                "domain": [
+                                    null
+                                ],
+                                "domain_auth_secret_arn": [
+                                    null
+                                ],
+                                "domain_dns_ips": [
+                                    null
+                                ],
+                                "domain_iam_role_name": [
+                                    null
+                                ],
+                                "domain_ou": [
+                                    null
+                                ],
+                                "enabled_cloudwatch_logs_exports": [
+                                    null
+                                ],
+                                "engine": [
+                                    "mysql"
+                                ],
+                                "engine_version": [
+                                    "8.0.35"
+                                ],
+                                "final_snapshot_identifier": [
+                                    null
+                                ],
+                                "iam_database_authentication_enabled": [
+                                    null
+                                ],
+                                "identifier": [
+                                    "mysql-db-dev"
+                                ],
+                                "instance_class": [
+                                    "db.t3.medium"
+                                ],
+                                "manage_master_user_password": [
+                                    null
+                                ],
+                                "max_allocated_storage": [
+                                    100
+                                ],
+                                "monitoring_interval": [
+                                    0
+                                ],
+                                "multi_az": [
+                                    false
+                                ],
+                                "password": [
+                                    "S3cur3Pa$$w0rd"
+                                ],
+                                "password_wo": [
+                                    null
+                                ],
+                                "password_wo_version": [
+                                    null
+                                ],
+                                "performance_insights_enabled": [
+                                    false
+                                ],
+                                "port": [
+                                    3306
+                                ],
+                                "publicly_accessible": [
+                                    false
+                                ],
+                                "region": [
+                                    "us-east-1"
+                                ],
+                                "replicate_source_db": [
+                                    null
+                                ],
+                                "restore_to_point_in_time": [
+                                    []
+                                ],
+                                "s3_import": [
+                                    []
+                                ],
+                                "skip_final_snapshot": [
+                                    true
+                                ],
+                                "storage_encrypted": [
+                                    null
+                                ],
+                                "storage_type": [
+                                    "gp3"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "production",
+                                        "Name": "mysql-db-prod",
+                                        "Owner": "devops-team",
+                                        "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                                        "__startline__": 1,
+                                        "__endline__": 1,
+                                        "start_line": 0,
+                                        "end_line": 0
+                                    }
+                                ],
+                                "tags_all": [
+                                    {
+                                        "Environment": [
+                                            "production"
+                                        ],
+                                        "Name": [
+                                            "mysql-db-prod"
+                                        ],
+                                        "Owner": [
+                                            "devops-team"
+                                        ],
+                                        "__file__": [
+                                            "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+                                        ],
+                                        "__startline__": [
+                                            1
+                                        ],
+                                        "__endline__": [
+                                            1
+                                        ],
+                                        "start_line": [
+                                            0
+                                        ],
+                                        "end_line": [
+                                            0
+                                        ]
+                                    }
+                                ],
+                                "timeouts": [
+                                    null
+                                ],
+                                "upgrade_storage_config": [
+                                    null
+                                ],
+                                "username": [
+                                    "admin"
+                                ],
+                                "vpc_security_group_ids": [
+                                    [
+                                        "sg-12345678"
+                                    ]
+                                ],
+                                "__file__": [
+                                    "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+                                ],
+                                "__startline__": [
+                                    1
+                                ],
+                                "__endline__": [
+                                    1
+                                ],
+                                "start_line": [
+                                    0
+                                ],
+                                "end_line": [
+                                    0
+                                ],
+                                "references_": [
+                                    [
+                                        "aws_db_subnet_group.this.name",
+                                        "aws_db_subnet_group.this"
+                                    ]
+                                ],
+                                "__address__": "aws_db_instance.this",
+                                "__change_actions__": [
+                                    "create"
+                                ],
+                                "__change_keys__": []
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "engine",
+                        "copy_tags_to_snapshot"
+                    ]
+                },
+                "code_block": [],
+                "file_path": "/tf.json",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                "repo_file_path": "/tf.json",
+                "file_line_range": [
+                    0,
+                    0
+                ],
+                "resource": "aws_db_instance.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "production",
+                    "Name": "mysql-db-prod",
+                    "Owner": "devops-team",
+                    "__file__": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json",
+                    "__startline__": 1,
+                    "__endline__": 1,
+                    "start_line": 0,
+                    "end_line": 0
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": "aws_db_instance.this",
+                "severity": null,
+                "bc_category": null,
+                "benchmarks": null,
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": "https://docs.prismacloud.io/en/enterprise-edition/policy-reference/aws-policies/aws-general-policies/bc-aws-2-60",
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/rds/tf.json"
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 8,
+        "failed": 8,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 2,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}

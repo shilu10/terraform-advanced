@@ -1,0 +1,273 @@
+{
+    "check_type": "terraform",
+    "results": {
+        "passed_checks": [
+            {
+                "check_id": "CUSTOM_IAM_ASSUME_ROLE_NO_WILDCARD",
+                "bc_check_id": null,
+                "check_name": "Ensure IAM assume role trust policy does not allow all principals",
+                "check_result": {
+                    "result": "PASSED",
+                    "entity": {
+                        "aws_iam_role": {
+                            "this": {
+                                "__end_line__": 5,
+                                "__start_line__": 1,
+                                "assume_role_policy": [
+                                    {
+                                        "Version": "2012-10-17",
+                                        "Statement": [
+                                            {
+                                                "Effect": "Allow",
+                                                "Principal": {
+                                                    "Service": "ec2.amazonaws.com"
+                                                },
+                                                "Action": "sts:AssumeRole"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "name": [
+                                    "my-iam-role"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "ManagedBy": "terraform"
+                                    }
+                                ],
+                                "__address__": "aws_iam_role.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "assume_role_policy"
+                    ]
+                },
+                "code_block": [
+                    [
+                        1,
+                        "resource \"aws_iam_role\" \"this\" {\n"
+                    ],
+                    [
+                        2,
+                        "  name               = var.name\n"
+                    ],
+                    [
+                        3,
+                        "  assume_role_policy = var.assume_role_policy\n"
+                    ],
+                    [
+                        4,
+                        "  tags               = var.tags\n"
+                    ],
+                    [
+                        5,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "repo_file_path": "/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "file_line_range": [
+                    1,
+                    5
+                ],
+                "resource": "aws_iam_role.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "ManagedBy": "terraform"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "CRITICAL",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "breadcrumbs": {
+                    "name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_iam_role.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "assume_role_policy": [
+                        {
+                            "type": "variable",
+                            "name": "assume_role_policy",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "failed_checks": [
+            {
+                "check_id": "CUSTOM_IAM_ROLE_TAGS",
+                "bc_check_id": null,
+                "check_name": "Ensure IAM role has required tags",
+                "check_result": {
+                    "result": "FAILED",
+                    "entity": {
+                        "aws_iam_role": {
+                            "this": {
+                                "__end_line__": 5,
+                                "__start_line__": 1,
+                                "assume_role_policy": [
+                                    {
+                                        "Version": "2012-10-17",
+                                        "Statement": [
+                                            {
+                                                "Effect": "Allow",
+                                                "Principal": {
+                                                    "Service": "ec2.amazonaws.com"
+                                                },
+                                                "Action": "sts:AssumeRole"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "name": [
+                                    "my-iam-role"
+                                ],
+                                "tags": [
+                                    {
+                                        "Environment": "dev",
+                                        "ManagedBy": "terraform"
+                                    }
+                                ],
+                                "__address__": "aws_iam_role.this"
+                            }
+                        }
+                    },
+                    "evaluated_keys": [
+                        "tags/Owner",
+                        "tags/Environment"
+                    ]
+                },
+                "code_block": [
+                    [
+                        1,
+                        "resource \"aws_iam_role\" \"this\" {\n"
+                    ],
+                    [
+                        2,
+                        "  name               = var.name\n"
+                    ],
+                    [
+                        3,
+                        "  assume_role_policy = var.assume_role_policy\n"
+                    ],
+                    [
+                        4,
+                        "  tags               = var.tags\n"
+                    ],
+                    [
+                        5,
+                        "}\n"
+                    ]
+                ],
+                "file_path": "/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "file_abs_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "repo_file_path": "/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "file_line_range": [
+                    1,
+                    5
+                ],
+                "resource": "aws_iam_role.this",
+                "evaluations": null,
+                "check_class": "checkov.common.graph.checks_infra.base_check",
+                "fixed_definition": null,
+                "entity_tags": {
+                    "Environment": "dev",
+                    "ManagedBy": "terraform"
+                },
+                "caller_file_path": null,
+                "caller_file_line_range": null,
+                "resource_address": null,
+                "severity": "MEDIUM",
+                "bc_category": null,
+                "benchmarks": {},
+                "description": null,
+                "short_description": null,
+                "vulnerability_details": null,
+                "connected_node": null,
+                "guideline": null,
+                "details": [],
+                "check_len": null,
+                "definition_context_file_path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                "breadcrumbs": {
+                    "name": [
+                        {
+                            "type": "variable",
+                            "name": "name",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        },
+                        {
+                            "type": "resource",
+                            "name": "aws_iam_role.this",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/main.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "assume_role_policy": [
+                        {
+                            "type": "variable",
+                            "name": "assume_role_policy",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        }
+                    ],
+                    "tags": [
+                        {
+                            "type": "variable",
+                            "name": "tags",
+                            "path": "/home/runner/work/terraform-advanced/terraform-advanced/infrastructure/envs/dev/image-uploader-lambda-iam-role/.terragrunt-cache/fyAPDCTuQjujX4PpQZzb3xxIfmc/pg3YHb-d5dERNX2GW6IZ8ar_PQo/variables.tf",
+                            "module_connection": false
+                        }
+                    ]
+                }
+            }
+        ],
+        "skipped_checks": [],
+        "parsing_errors": []
+    },
+    "summary": {
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0,
+        "parsing_errors": 0,
+        "resource_count": 6,
+        "checkov_version": "3.2.447"
+    },
+    "url": "Add an api key '--bc-api-key <api-key>' to see more detailed insights via https://bridgecrew.cloud"
+}
