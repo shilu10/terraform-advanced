@@ -37,6 +37,17 @@ jobs:
           chmod +x opa
           sudo mv opa /usr/local/bin/
 
+      - name: Set AWS credentials for LocalStack
+        run: |
+          echo "AWS_ACCESS_KEY_ID=test" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=test" >> $GITHUB_ENV
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+          echo "AWS_ENDPOINT_URL=http://localhost:4566" >> $GITHUB_ENV
+
+      - name: Confirm LocalStack is running
+        run: |
+          curl -s http://localhost:4566/_localstack/health || echo "LocalStack not responding"
+
       - name: Set plugin cache environment variable
         run: echo "TF_PLUGIN_CACHE_DIR=$HOME/.terraform.d/plugin-cache" >> $GITHUB_ENV
 
@@ -107,7 +118,6 @@ jobs:
               "data.infracost.deny"
           done
 
-
       - name: Fail if any Infracost policy fails
         run: |
           echo "🔍 Checking for violations..."
@@ -156,3 +166,14 @@ jobs:
         run: |
           echo "📄 Listing Checkov reports:"
           ls -R checkov-reports || echo "❌ No reports found"
+
+  localstack-run:
+
+    runs-on: self-hosted
+    steps:
+      - name: Terragrunt apply
+        run: |
+          echo "Starting Terragrunt apply"
+          cd infrastructure/envs/dev 
+          terragrunt init --parallelism=40
+          terragrunt apply --auto-approve --all terragrunt-localstack.hcl 
