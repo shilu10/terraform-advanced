@@ -1,86 +1,127 @@
-# 🚀 Terraform Advanced Infrastructure CI Pipeline
+# 🚀 Advanced Terraform Infrastructure: CI with GitHub Actions & CD via Spacelift
 
-This project demonstrates an advanced Infrastructure-as-Code (IaC) setup using **Terraform**, **Terragrunt**, and a robust CI pipeline powered by **GitHub Actions**.
+This project sets up a robust Infrastructure-as-Code (IaC) pipeline using **Terraform**, **Terragrunt**, **GitHub Actions**, and **Spacelift**.
 
-It automates infrastructure validation, static security analysis, policy enforcement, and cost estimation for multiple environments such as `dev`, `stage`, and `prod`.
-
----
-
-## 📦 Features
-
-- ✅ **Terraform & Terragrunt Support**  
-  Modular and environment-specific infrastructure using Terragrunt over Terraform modules.
-
-- 🔍 **Formatting & Validation**  
-  Ensures HCL and Terraform code is clean, consistent, and syntactically valid using `terraform fmt`, `terragrunt hclfmt`, and `terragrunt validate`.
-
-- 🛡️ **Static Analysis with Checkov**  
-  Detects security and compliance misconfigurations from Terraform plans using [Checkov](https://www.checkov.io/).
-
-- 🔐 **Custom Policy Support**  
-  Supports custom-written Checkov policies for organization-specific security/compliance checks.
-
-- 💰 **Cost Estimation with Infracost**  
-  Generates cost breakdowns and HTML reports for proposed changes using [Infracost](https://www.infracost.io/).
-
-- 🧪 **Terratest (Optional)**  
-  Validates deployed infrastructure using Go-based integration tests locally or via LocalStack.
+It combines static analysis, policy enforcement, cost estimation, and optional infrastructure testing — all in CI — while delegating multi-environment deployments to Spacelift.
 
 ---
 
-## 🔁 CI/CD Overview
+## 🏗️ Application Architecture
 
-Each environment (`dev`, `stage`, `prod`) has its own GitHub Actions workflow triggered by pull requests.  
+This infrastructure powers a modular AWS-based serverless system:
 
-### CI Pipeline Tasks:
+ImageUploaderLambda
+↓
+[S3 + SQS]
+↓
+ImageProcessorLambda
+↓
+[RDS + S3 (processed)]
 
-1. **Checkout Code**
-2. **Format Terraform & HCL Code**
-3. **Terragrunt Init + Validate + Plan**
-4. **Convert Terraform Plan to JSON**
-5. **Run Checkov Analysis**
-6. **Run Custom Policies (if defined)**
-7. **Generate Infracost Breakdown**
-8. **Generate HTML Cost Report & Upload**
+
+
+- **ImageUploaderLambda**: Receives image + metadata via Function URL.
+- **S3 Bucket**: Stores raw images.
+- **SQS Queue**: Sends metadata for asynchronous processing.
+- **ImageProcessorLambda**: Consumes metadata from SQS, enriches and stores:
+  - Structured metadata → **Amazon RDS**
+  - Processed image → **S3**
+
+---
+
+## ⚙️ CI/CD Overview
+
+### 🔄 CI: GitHub Actions (Pull Request Based)
+
+GitHub Actions run validations **per environment** (`dev`, `stage`, `prod`) based on PR changes.
+
+**CI Pipeline Tasks:**
+
+| Step                | Description                                      |
+|---------------------|--------------------------------------------------|
+| ✅ Checkout         | Clone repository and prepare workspace           |
+| 🔧 Format Check     | `terraform fmt`, `terragrunt hclfmt`             |
+| 🔍 Validation       | `terragrunt validate` per module                 |
+| 🧱 Plan & JSON      | `terragrunt plan`, then convert to JSON          |
+| 🛡️ Checkov Scan    | Static security scans (built-in + custom rules) |
+| 📜 Rego Policies    | Optional OPA-based policy enforcement            |
+| 💰 Infracost        | Cost breakdown and HTML report generation       |
+| 🧪 Terratest (opt)  | Go-based infrastructure tests via LocalStack     |
+
+> CI runs on `pull_request` and `workflow_dispatch` triggers.  
+> Reports and artifacts are uploaded as part of the CI job.
+
+---
+
+### 🚀 CD: Spacelift (Multi-Environment Deployment)
+
+Actual infrastructure **deployment is handled by Spacelift** using GitOps principles.
+
+- Each environment (`dev`, `stage`, `prod`) is mapped to a **Spacelift stack**
+- Triggered when PRs are merged into the main branches
+- Handles `plan`, `apply`, drift detection, and approvals
+- Policies, previews, and RBAC are enforced through Spacelift
+
+Spacelift automatically detects changes via:
+- Pushes to tracked branches
+- Changes under specific Terragrunt paths
+
+---
+
+## 🧪 Terratest Integration (Optional)
+
+Terratest can be enabled to run against infrastructure provisioned in CI using **LocalStack**.
+
+It provides:
+- End-to-end validation of SQS, Lambda, S3, RDS interactions
+- Test orchestration in Go
+- Full lifecycle: `apply → test → destroy`
+
+Example:
+```go
+terragrunt.RunTerragrunt(t, options, "apply")
+// run validations...
+defer terragrunt.RunTerragrunt(t, options, "destroy")
+```
+
+
+## 🔐 Required GitHub Secrets
+
+| Secret Name         | Purpose                                  |
+|---------------------|------------------------------------------|
+| `INFRACOST_API_KEY` | Infracost API key for cost estimation    |
+| `LOCALSTACK_AUTH_TOKEN` | Localstack cloud key for pro edition    |
+
+
+---
+
+## 🚀 Getting Started
+
+1. **Fork & Clone** this repository.
+2. Update your `infrastructure/envs/{env}` configuration as needed.
+3. Set the `INFRACOST_API_KEY` in GitHub Secrets.
+4. Push a branch and open a Pull Request.
+   - GitHub Actions CI will validate and analyze the changes.
+5. Upon merging:
+   - **Spacelift** will deploy the infrastructure into the targeted environment.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Tool        | Purpose                                   |
-|-------------|-------------------------------------------|
-| Terraform   | Infrastructure provisioning               |
-| Terragrunt  | Manage Terraform modules & environments   |
-| GitHub Actions | CI workflows                           |
-| Checkov     | Static security & compliance analysis     |
-| Infracost   | Cloud cost estimation                     |
-| Terratest   | Infrastructure testing (optional)         |
-| LocalStack  | Local AWS testing (optional)              |
+| Tool         | Purpose                                   |
+|--------------|-------------------------------------------|
+| Terraform    | Infrastructure provisioning               |
+| Terragrunt   | Wrapper for managing modules & environments |
+| GitHub Actions | Continuous Integration for PR validation |
+| Spacelift    | GitOps-based Infrastructure Deployment    |
+| Checkov      | Static security and compliance analysis   |
+| Infracost    | Cloud cost estimation                     |
+| Terratest    | Infrastructure testing via Go (optional)  |
+| LocalStack   | Local AWS simulation (CI testing)         |
+
+
 
 ---
 
-## 🔐 Required Secrets
-
-| Secret Name         | Description                          |
-|---------------------|--------------------------------------|
-| `INFRACOST_API_KEY` | API key from Infracost for CI usage |
-
----
-
-## 📎 Usage
-
-1. Fork the repo and clone it.
-2. Update your `infrastructure/envs/{env}` with your configurations.
-3. Open a pull request — CI automatically validates and analyzes changes.
-4. Review the comments and cost breakdown posted by the CI.
-5. Merge once compliant and approved.
-
----
-
-## 📄 License
-
-MIT © 2025 [Your Name or Org]
-
----
-
-> 💡 Pro Tip: Extend this setup with [Spacelift](https://spacelift.io/) or [Atlantis](https://www.runatlantis.io/) for full GitOps control of Terraform plans and applies.
+> 💡 **Pro Tip:** This setup can be extended with [Atlantis](https://www.runatlantis.io/), [DriftCTL](https://github.com/snyk/driftctl), or [OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) for even stronger IaC governance.
