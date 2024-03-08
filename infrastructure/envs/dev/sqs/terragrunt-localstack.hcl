@@ -1,0 +1,31 @@
+include "parent" {
+  path = find_in_parent_folders("root-terragrunt.hcl")
+}
+
+terraform {
+  source = "../../../modules/sqs"
+}
+
+inputs = {
+  name                        = "my-app-queue"
+  fifo_queue                  = true
+  content_based_deduplication = true
+
+  visibility_timeout_seconds = 45
+  message_retention_seconds  = 86400
+  delay_seconds              = 0
+  max_message_size           = 131072
+  receive_wait_time_seconds  = 10
+
+  kms_master_key_id = "alias/aws/sqs"
+
+  tags = {
+    Name               = "my-app-queue"
+    Project            = "iac-pipeline"
+    Environment        = "dev"
+    Owner              = "shilash"
+    Team               = "devops"
+    ManagedBy          = "terraform"
+    Compliance         = "internal"
+  }
+}
