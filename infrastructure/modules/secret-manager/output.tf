@@ -11,7 +11,7 @@ output "secret_arn" {
 }
 
 output "secret_rotation_enabled"{
-    value = aws_secretsmanager_secret_rotation.this.rotation_enabled
+    value = var.enable_rotation ? aws_secretsmanager_secret_rotation.this[0].rotation_enabled: null
     description = "value indicating if secret rotation is enabled"
 }
 

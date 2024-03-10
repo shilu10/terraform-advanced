@@ -54,15 +54,3 @@ variable "secret_policy_json" {
   default     = ""
   description = "JSON IAM policy to attach to the secret (required if enable_policy = true)"
 }
-
-resource "aws_secretsmanager_secret" "this" {
-  name                    = var.secret_name
-  description             = var.secret_description
-  kms_key_id              = var.kms_key_id
-  recovery_window_in_days = var.recovery_window_in_days
-  tags                    = var.tags
-
-  lifecycle {
-    prevent_destroy = false
-  }
-}
