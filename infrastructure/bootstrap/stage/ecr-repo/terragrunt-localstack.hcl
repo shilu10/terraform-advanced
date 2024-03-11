@@ -1,5 +1,5 @@
 include {
-    path = find_in_parent_folders("root.localstack.hcl")
+    path = find_in_parent_folders("root-localstack.hcl")
 }
 
 terraform {

@@ -1,5 +1,5 @@
 include {
-    path = find_in_parent_folders("root.localstack.hcl")
+    path = find_in_parent_folders("root-localstack.hcl")
 }
 
 terraform{
@@ -10,10 +10,10 @@ inputs = {
     private_repository = true
     ecr_private_repositories_values = {
         image_processer_lambda_repo = {
-                name                 = "image-processer-lambda-prod-repo"
+                name                 = "image-processer-lambda-dev-repo"
                 image_tag_mutability = "MUTABLE"
                 tags                 = {
-                    Environment = "prod"
+                    Environment = "dev"
                     Project     = "terraform-advanced"
                 }
                 repository_policy    = null
@@ -24,10 +24,10 @@ inputs = {
                 force_delete         = false
             },
         image_uploader_lambda_repo = {
-                name                 = "image-uploader-lambda-prod-repo"
+                name                 = "image-uploader-lambda-dev-repo"
                 image_tag_mutability = "MUTABLE"
                 tags                 = {
-                    Environment = "prod"
+                    Environment = "dev"
                     Project     = "terraform-advanced"
                 }
                 repository_policy    = null
@@ -39,7 +39,7 @@ inputs = {
             }
     }
     tags = {
-        Environment = "prod"
+        Environment = "dev"
         Project     = "terraform-advanced"
         Owner       = "devops-team"
         ManagedBy   = "Terragrunt"

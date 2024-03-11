@@ -22,26 +22,28 @@ func TestSQSWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/sqs",
-		TerraformBinary: "terragrunt",
+	TerraformDir:    "../infrastructure/envs/dev/sqs",
+	TerraformBinary: "terragrunt",
 
-		RetryableTerraformErrors: map[string]string{
-			".*unable to verify checksum.*": "Checksum error – retrying",
-		},
-		MaxRetries:         3,
-		TimeBetweenRetries: 5 * time.Second,
+	RetryableTerraformErrors: map[string]string{
+		".*unable to verify checksum.*": "Checksum error – retrying",
+	},
+	MaxRetries:         3,
+	TimeBetweenRetries: 5 * time.Second,
 
-		EnvVars: map[string]string{
-			"AWS_ACCESS_KEY_ID":     "test",
-			"AWS_SECRET_ACCESS_KEY": "test",
-			"AWS_DEFAULT_REGION":    localstackRegion,
-			"AWS_ENDPOINT_URL":      localstackURL,
-		},
+	EnvVars: map[string]string{
+		"AWS_ACCESS_KEY_ID":     "test",
+		"AWS_SECRET_ACCESS_KEY": "test",
+		"AWS_DEFAULT_REGION":    localstackRegion,
+		"AWS_ENDPOINT_URL":      localstackURL,
+	},
 
-		NoColor: true,
-    	// pass CLI args
-    	TerraformCliArgs: []string{"--terragrunt-ignore-dependency-errors"},
-	}
+	ExtraArgs: terraform.ExtraArgs{
+        Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/sqs"},
+        Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/sqs", "-auto-approve"},
+        Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/sqs", "-auto-approve"},
+    },
+}
 
 	defer terraform.Destroy(t, terraformOptions)
 
@@ -52,6 +54,8 @@ func TestSQSWithTerragrunt_Localstack(t *testing.T) {
 
 	assert.NotEmpty(t, queueURL)
 	assert.NotEmpty(t, queueName)
+
+	assert.Contains(t, queueName, ".fifo", "Queue name should end with .fifo")
 
 	sess, err := session.NewSession(&aws.Config{
 		Region:      aws.String(localstackRegion),
@@ -93,7 +97,7 @@ func TestSQSWithTerragrunt_Localstack(t *testing.T) {
 	assert.Equal(t, "0", *attributes.Attributes["DelaySeconds"], "DelaySeconds should be 0")
 	assert.Equal(t, "10", *attributes.Attributes["ReceiveMessageWaitTimeSeconds"], "ReceiveMessageWaitTimeSeconds should be 10 seconds")
 	assert.Equal(t, "alias/aws/sqs", *attributes.Attributes["KmsMasterKeyId"], "KmsMasterKeyId should be 'alias/aws/sqs'")
-	assert.Equal(t, "1200", *attributes.Attributes["MessageRetentionPeriod"], "MessageRetentionPeriod should be 4 days")
+	assert.Equal(t, "86400", *attributes.Attributes["MessageRetentionPeriod"], "MessageRetentionPeriod should be 4 days")
 	assert.Equal(t, "true", *attributes.Attributes["FifoQueue"], "FifoQueue should be true")
 	assert.Equal(t, "true", *attributes.Attributes["ContentBasedDeduplication"], "ContentBasedDeduplication should be true")
 }

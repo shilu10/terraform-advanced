@@ -1,7 +1,7 @@
 
-include {
-  path = find_in_parent_folders("root.localstack.hcl")
-}
+#include {
+ # path = find_in_parent_folders("root.localstack.hcl")
+#}
 
 generate "provider" {
   path      = "provider.tf"
