@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/iam"
+
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -24,7 +25,7 @@ func TestImageUploaderLambdaIamRoleWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/localstack/dev/image-uploader-lambda-iam-role",
+		TerraformDir:    "../infrastructure/localstack/dev/image-processor-lambda-iam-role",
 		TerraformBinary: "terragrunt",
 
 		RetryableTerraformErrors: map[string]string{
@@ -124,6 +125,7 @@ func TestImageUploaderLambdaIamRoleWithTerragrunt_Localstack(t *testing.T) {
 		"inline-sqs-access",
 		"inline-cloudwatch-logs",
 		"inline-s3-access",
+		"inline-rds-access",
 	}
 
 	for _, expected := range expectedInline {

@@ -24,7 +24,7 @@ func TestRDSInstanceWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	vpcTerraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/vpc",
+		TerraformDir:    "../infrastructure/localstack/dev/vpc",
 		TerraformBinary: "terragrunt",
 		RetryableTerraformErrors: map[string]string{
 			".*unable to verify checksum.*": "Checksum error – retrying",
@@ -41,15 +41,15 @@ func TestRDSInstanceWithTerragrunt_Localstack(t *testing.T) {
 		},
 
 		ExtraArgs: terraform.ExtraArgs{
-			Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc"},
-			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc", "-auto-approve"},
-			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc", "-auto-approve"},
+			Init:    []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc"},
+			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc", "-auto-approve"},
+			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc", "-auto-approve"},
 		},
 
 	}
 
 	rdsTerraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/rds",
+		TerraformDir:    "../infrastructure/localstack/dev/rds",
 		TerraformBinary: "terragrunt",
 		RetryableTerraformErrors: map[string]string{
 			".*unable to verify checksum.*": "Checksum error – retrying",
@@ -64,9 +64,9 @@ func TestRDSInstanceWithTerragrunt_Localstack(t *testing.T) {
 		},
 		
 		ExtraArgs: terraform.ExtraArgs{
-			Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/rds"},
-			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/rds", "-auto-approve"},
-			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/rds", "-auto-approve"},
+			Init:    []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/rds"},
+			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/rds", "-auto-approve"},
+			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/rds", "-auto-approve"},
 		},
 	}
 

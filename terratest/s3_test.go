@@ -22,7 +22,7 @@ func TestS3BucketWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/s3", // Adjust to match your folder
+		TerraformDir:    "../infrastructure/localstack/dev/s3", // Adjust to match your folder
 		TerraformBinary: "terragrunt",
 		RetryableTerraformErrors: map[string]string{
 			".*unable to verify checksum.*": "Checksum error – retrying",
@@ -36,9 +36,9 @@ func TestS3BucketWithTerragrunt_Localstack(t *testing.T) {
 			"AWS_ENDPOINT_URL":      localhostURL,
 		},
 		ExtraArgs: terraform.ExtraArgs{
-			Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/s3"},
-			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/s3", "-auto-approve"},
-			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/s3", "-auto-approve"},
+			Init:    []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/s3"},
+			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/s3", "-auto-approve"},
+			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/s3", "-auto-approve"},
 		},
 	}
 

@@ -22,7 +22,7 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/image-uploader-lambda",
+		TerraformDir:    "../infrastructure/envs/localstack/image-uploader-lambda",
 		TerraformBinary: "terragrunt",
 
 		RetryableTerraformErrors: map[string]string{
@@ -39,9 +39,9 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 		},
 
 		ExtraArgs: terraform.ExtraArgs{
-			Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/image-uploader-lambda"},
-			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/image-uploader-lambda", "-auto-approve"},
-			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/image-uploader-lambda", "-auto-approve"},
+			Init:    []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/image-uploader-lambda"},
+			Apply:   []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/image-uploader-lambda", "-auto-approve"},
+			Destroy: []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/image-uploader-lambda", "-auto-approve"},
 		},
 	}
 

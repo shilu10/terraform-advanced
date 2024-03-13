@@ -14,11 +14,16 @@ import (
 )
 
 
+const (
+	localstackRegion = "us-east-1"
+	localstackURL    = "http://localhost:4566"
+)
+
 func TestVpcWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/dev/vpc",
+		TerraformDir:    "../infrastructure/localstack/dev/vpc",
 		TerraformBinary: "terragrunt",
 
 		RetryableTerraformErrors: map[string]string{
@@ -36,9 +41,9 @@ func TestVpcWithTerragrunt_Localstack(t *testing.T) {
 		},
 
 		ExtraArgs: terraform.ExtraArgs{
-        Init:    []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc"},
-        Apply:   []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc", "-auto-approve"},
-        Destroy: []string{"--terragrunt-include-dir", "../infrastructure/envs/dev/vpc", "-auto-approve"},
+        Init:    []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc"},
+        Apply:   []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc", "-auto-approve"},
+        Destroy: []string{"--terragrunt-include-dir", "../infrastructure/localstack/dev/vpc", "-auto-approve"},
     },
 	}
 

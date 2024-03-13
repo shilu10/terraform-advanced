@@ -54,17 +54,12 @@ inputs = {
   create_inline_policies = true
   inline_policies = [
     {
-      name = "inline-sqs-s3-access"
+      name = "inline-sqs-access"
       statements = [
         {
           Effect   = "Allow"
           Action   = ["sqs:SendMessage", "sqs:GetQueueUrl", "sqs:GetQueueAttributes"]
           Resource = dependency.sqs.outputs.queue_arn
-        },
-        {
-          Effect   = "Allow"
-          Action   = ["s3:PutObject"]
-          Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]
     },
@@ -79,6 +74,21 @@ inputs = {
             "logs:PutLogEvents"
           ]
           Resource = "arn:aws:logs:*:*:*"
+        }
+      ]
+    },
+
+    {
+      name = "inline-s3-access"
+      statements = [
+        {
+          Effect   = "Allow"
+          Action   = [
+            "s3:ListBucket",
+            "s3:GetObject",
+            "s3:PutObject"
+          ]
+          Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]
     }

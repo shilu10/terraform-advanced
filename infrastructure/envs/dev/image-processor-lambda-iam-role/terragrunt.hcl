@@ -22,6 +22,16 @@ dependency "rds" {
   }
 }
 
+dependency "s3" {
+  config_path = "../s3"
+
+  mock_outputs = {
+    bucket_arn = "arn:aws:s3:::my-example-bucket"
+
+  }
+}
+
+
 inputs = {
   name = "image-processor-iam-role"
 
@@ -86,6 +96,20 @@ inputs = {
             "logs:PutLogEvents"
           ]
           Resource = "arn:aws:logs:*:*:*"
+        }
+      ]
+    },
+    {
+      name = "inline-s3-access"
+      statements = [
+        {
+          Effect = "Allow"
+          Action = [
+            "s3:ListBucket",
+            "s3:GetObject",
+            "s3:PutObject"
+          ]
+          Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]
     }

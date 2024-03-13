@@ -1,8 +1,27 @@
+# root.hcl - Terragrunt config for LocalStack with dynamic provider and backend
 
 locals {
   region       = "us-east-1"
   profile      = "localhost"
   endpoint_url = "http://localhost:4566"
+}
+
+# version.tf 
+generate "version" {
+  path      = "version.tf"
+  if_exists = "overwrite"
+  contents  = <<EOF
+terraform {
+  required_version = ">= 1.0.0"
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+EOF
 }
 
 generate "provider" {
@@ -25,7 +44,7 @@ provider "aws" {
     sts = "http://localhost:4566"
     iam = "http://localhost:4566"
     lambda = "http://localhost:4566"
-    
+    ecr = "http://localhost:4566"
     sqs = "http://localhost:4566"
   }
 }

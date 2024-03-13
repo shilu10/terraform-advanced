@@ -1,5 +1,5 @@
 include "parent" {
-  path = find_in_parent_folders("root-localstack.hcl")
+  path = find_in_parent_folders("root.hcl")
 }
 
 dependency "iam_role" {
