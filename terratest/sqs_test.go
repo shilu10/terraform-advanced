@@ -55,6 +55,9 @@ func TestSQSWithTerragrunt_Localstack(t *testing.T) {
 	assert.NotEmpty(t, queueURL)
 	assert.NotEmpty(t, queueName)
 
+	t.Logf("Queue URL: %s", queueURL)
+	t.Logf("Queue Name: %s", queueName)
+
 	assert.Contains(t, queueName, ".fifo", "Queue name should end with .fifo")
 
 	sess, err := session.NewSession(&aws.Config{

@@ -1,5 +1,5 @@
 include "parent" {
-  path = find_in_parent_folders("root.hcl")
+  path = find_in_parent_folders("root-localstack.hcl")
 }
 
 dependency "sqs" {
@@ -36,7 +36,7 @@ terraform {
 inputs = {
   name      = "image-process-function"
   use_image = true
-  image_uri = "image-uri"
+  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-processor-lambda:latest"
 
   environment_variables = {
     ENV = "dev"

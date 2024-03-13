@@ -51,6 +51,11 @@ func TestVpcWithTerragrunt_Localstack(t *testing.T) {
 	privateSubnets := terraform.OutputList(t, terraformOptions, "private_subnet_ids")
 	sgIDs := terraform.OutputMap(t, terraformOptions, "security_group_ids")
 
+	t.Logf("VPC ID: %s", vpcID)
+	t.Logf("Public Subnets: %v", publicSubnets)
+	t.Logf("Private Subnets: %v", privateSubnets)
+	t.Logf("Security Group IDs: %v", sgIDs)
+
 	assert.NotEmpty(t, vpcID)
 	assert.Equal(t, 2, len(publicSubnets))
 	assert.Equal(t, 2, len(privateSubnets))

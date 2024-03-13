@@ -51,9 +51,11 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 
 	functionName := terraform.Output(t, terraformOptions, "lambda_function_name")
 	assert.NotEmpty(t, functionName, "Lambda function name should not be empty")
+	t.Logf("Lambda Function Name: %s", functionName)
 
 	functionURL := terraform.Output(t, terraformOptions, "lambda_function_url")
 	assert.NotEmpty(t, functionURL, "Lambda function URL should not be empty")
+	t.Logf("Lambda Function URL: %s", functionURL)
 
 	assert.Equal(t, "image-upload-function", functionName, "Function name should match the expected value")
 
@@ -83,7 +85,8 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 
 	envVars := config.Configuration.Environment.Variables
 	require.NotNil(t, envVars, "Environment variables should not be nil")
-
+	t.Logf("Environment Variables: %v", envVars)
+	
 	assert.Equal(t, "us-east-1", aws.StringValue(envVars["SQS_REGION"]), "Incorrect SQS_REGION")
 	assert.Equal(t, "demo-bucket", aws.StringValue(envVars["BUCKET_NAME"]), "Incorrect BUCKET_NAME")
 	assert.Equal(t, "my-app-queue", aws.StringValue(envVars["QUEUE_NAME"]), "Incorrect QUEUE_NAME")
