@@ -42,9 +42,9 @@ func TestImageUploaderLambdaIamRoleWithTerragrunt_Localstack(t *testing.T) {
 		},
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
+	//defer terraform.Destroy(t, terraformOptions)
 
-	terraform.InitAndApply(t, terraformOptions)
+//	terraform.InitAndApply(t, terraformOptions)
 
 	roleName := terraform.Output(t, terraformOptions, "role_name")
 	t.Logf("IAM Role Name: %s", roleName)

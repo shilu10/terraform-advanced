@@ -1,6 +1,6 @@
 
 include {
-    path = find_in_parent_folders("root-localstack.hcl")
+    path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
@@ -8,8 +8,8 @@ terraform {
 }
 
 inputs = {
-    bucket_name = "tf-state-dev-localstack"
-    dynamodb_table_name = "tf-state-lock-dev-localstack"
+    bucket_name = "tf-state-dev-terraform-advanced"
+    dynamodb_table_name = "tf-state-lock-dev"
     force_destroy = true
     tags = {
         Environment = "dev"

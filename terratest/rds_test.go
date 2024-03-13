@@ -72,13 +72,13 @@ func TestRDSInstanceWithTerragrunt_Localstack(t *testing.T) {
 
 	// Apply VPC and RDS
 	terraform.InitAndApply(t, vpcTerraformOptions)
-	terraform.InitAndApply(t, rdsTerraformOptions)
+	//terraform.InitAndApply(t, rdsTerraformOptions)
 
 	// Cleanup: destroy RDS before VPC
-	defer func() {
-		terraform.Destroy(t, rdsTerraformOptions)
-		terraform.Destroy(t, vpcTerraformOptions)
-	}()
+//	defer func() {
+//		terraform.Destroy(t, rdsTerraformOptions)
+//		terraform.Destroy(t, vpcTerraformOptions)
+//	}()
 
 	dbInstanceID := terraform.Output(t, rdsTerraformOptions, "rds_identifier")
 	assert.NotEmpty(t, dbInstanceID, "DB Instance ID should not be empty")

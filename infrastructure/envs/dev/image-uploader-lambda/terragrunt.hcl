@@ -17,7 +17,7 @@ terraform {
 inputs = {
   name      = "image-upload-function"
   use_image = true
-  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest"
+  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda-dev-repo:latest"
 
   environment_variables = {
     SQS_REGION = "us-east-1"

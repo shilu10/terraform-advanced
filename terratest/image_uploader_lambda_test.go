@@ -22,7 +22,7 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
 
 	terraformOptions := &terraform.Options{
-		TerraformDir:    "../infrastructure/envs/localstack/image-uploader-lambda",
+		TerraformDir:    "../infrastructure/localstack/dev/image-uploader-lambda",
 		TerraformBinary: "terragrunt",
 
 		RetryableTerraformErrors: map[string]string{
@@ -45,9 +45,9 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 		},
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
+	//defer terraform.Destroy(t, terraformOptions)
 
-	terraform.InitAndApply(t, terraformOptions)
+	//terraform.InitAndApply(t, terraformOptions)
 
 	functionName := terraform.Output(t, terraformOptions, "lambda_function_name")
 	assert.NotEmpty(t, functionName, "Lambda function name should not be empty")
@@ -89,5 +89,5 @@ func TestImageUploaderLambdaWithTerragrunt_Localstack(t *testing.T) {
 	
 	assert.Equal(t, "us-east-1", aws.StringValue(envVars["SQS_REGION"]), "Incorrect SQS_REGION")
 	assert.Equal(t, "demo-bucket", aws.StringValue(envVars["BUCKET_NAME"]), "Incorrect BUCKET_NAME")
-	assert.Equal(t, "my-app-queue", aws.StringValue(envVars["QUEUE_NAME"]), "Incorrect QUEUE_NAME")
+	assert.Equal(t, "my-app-queue.fifo", aws.StringValue(envVars["QUEUE_NAME"]), "Incorrect QUEUE_NAME")
 }

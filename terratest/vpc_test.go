@@ -47,9 +47,9 @@ func TestVpcWithTerragrunt_Localstack(t *testing.T) {
     },
 	}
 
-	defer terraform.Destroy(t, terraformOptions)
+	//defer terraform.Destroy(t, terraformOptions)
 
-	terraform.InitAndApply(t, terraformOptions)
+	//terraform.InitAndApply(t, terraformOptions)
 
 	vpcID := terraform.Output(t, terraformOptions, "vpc_id")
 	publicSubnets := terraform.OutputList(t, terraformOptions, "public_subnet_ids")

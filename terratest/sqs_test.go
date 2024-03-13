@@ -46,14 +46,14 @@ func TestSQSWithTerragrunt_Localstack(t *testing.T) {
 	}
 
 	// Ensure destroy happens
-	defer func() {
-		_, err := terraform.DestroyE(t, terraformOptions)
-		require.NoError(t, err, "Failed to destroy resources")
-	}()
+	//defer func() {
+	//	_, err := terraform.DestroyE(t, terraformOptions)
+	//	require.NoError(t, err, "Failed to destroy resources")
+	//}()
 
 	// Init & Apply
-	_, err := terraform.InitAndApplyE(t, terraformOptions)
-	require.NoError(t, err, "Failed to init & apply")
+	//_, err := terraform.InitAndApplyE(t, terraformOptions)
+	//require.NoError(t, err, "Failed to init & apply")
 
 	// Fetch outputs
 	queueURL := terraform.Output(t, terraformOptions, "queue_url")

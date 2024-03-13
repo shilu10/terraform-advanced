@@ -1,4 +1,4 @@
-package test 
+package test
 
 import (
 	"testing"
@@ -6,19 +6,20 @@ import (
 	"io/ioutil"
 	"net/http"
 	"fmt"
+	"encoding/json"
+	"bytes"
+	"database/sql"
+
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/iam"
-	"github.com/aws/aws-sdk-go/service/lambda"
 	"github.com/aws/aws-sdk-go/service/s3"
-	"github.com/aws/aws-sdk-go/service/ec2"
 	"github.com/gruntwork-io/terratest/modules/terraform"
-	"github.com/stretchr/testify/assert"	
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"github.com/aws/aws-sdk-go/service/rds"
 )
-
 
 const (
 	localstackRegion = "us-east-1"
@@ -27,90 +28,48 @@ const (
 
 func TestE2ETerragrunt_Localstack(t *testing.T) {
 	t.Parallel()
-	
-	// s3 Terraform options
+
 	s3TerraformOptions := getTerrafomrOptions("../infrastructure/localstack/dev/s3")
-	
-	// vpc terraform options
 	vpcTerraformOptions := getTerrafomrOptions("../infrastructure/localstack/dev/vpc")
-
-	// rds terraform options
 	rdsTerraformOptions := getTerrafomrOptions("../infrastructure/localstack/dev/rds")
-
-	// sqs terraform options
 	sqsTerraformOptions := getTerrafomrOptions("../infrastructure/localstack/dev/sqs")
-
-	// image-uploader-lambda terraform options
-	imageUploaderLambdaOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-uploader-lambda")	
-
-	// image-processer-lambda terraform options
+	imageUploaderLambdaOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-uploader-lambda")
 	imageProcesserLambdaOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-processor-lambda")
-
-	// image-uploader-lambda-iam-role terraform options
 	imageUploaderLambdaIAMRoleOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-uploader-lambda-iam-role")
-
-	// image-processer-lambda-iam-role terraform options
 	imageProcesserLambdaIAMRoleOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-processor-lambda-iam-role")
 
-	// appply all resources in the correct order
-	terraform.InitAndApply(t, vpcTerraformOptions)
-	terraform.InitAndApply(t, s3TerraformOptions)
-	terraform.InitAndApply(t, rdsTerraformOptions)
-	terraform.InitAndApply(t, sqsTerraformOptions)
-	terraform.InitAndApply(t, imageUploaderLambdaIAMRoleOptions)
-	terraform.InitAndApply(t, imageProcesserLambdaIAMRoleOptions)
-	terraform.InitAndApply(t, imageUploaderLambdaOptions)
-	terraform.InitAndApply(t, imageProcesserLambdaOptions)
+	fmt.Println(imageProcesserLambdaOptions, imageUploaderLambdaOptions, imageProcesserLambdaIAMRoleOptions)
+	fmt.Println(imageUploaderLambdaIAMRoleOptions, sqsTerraformOptions, rdsTerraformOptions, s3TerraformOptions)
+	fmt.Println(vpcTerraformOptions)
 
-	// Cleanup: destroy all resources in reverse order
-	defer func() {
-		terraform.Destroy(t, imageProcesserLambdaOptions)
-		terraform.Destroy(t, imageUploaderLambdaOptions)
-		terraform.Destroy(t, imageProcesserLambdaIAMRoleOptions)
-		terraform.Destroy(t, imageUploaderLambdaIAMRoleOptions)
-		terraform.Destroy(t, sqsTerraformOptions)	
-		terraform.Destroy(t, rdsTerraformOptions)
-		terraform.Destroy(t, s3TerraformOptions)
-		terraform.Destroy(t, vpcTerraformOptions)
-	}()
-	
-	// vpc outputs 
 	vpcID := terraform.Output(t, vpcTerraformOptions, "vpc_id")
 	publicSubnets := terraform.OutputList(t, vpcTerraformOptions, "public_subnet_ids")
 	privateSubnets := terraform.OutputList(t, vpcTerraformOptions, "private_subnet_ids")
 	sgIDs := terraform.OutputMap(t, vpcTerraformOptions, "security_group_ids")
 
-	// s3 output
 	bucketID := terraform.Output(t, s3TerraformOptions, "bucket_id")
 
-	// sqs output
 	queueURL := terraform.Output(t, sqsTerraformOptions, "queue_url")
 	queueName := terraform.Output(t, sqsTerraformOptions, "queue_name")
 
-	// rds output
 	dbInstanceID := terraform.Output(t, rdsTerraformOptions, "rds_identifier")
 
-	// lambdas output 
 	imageProcessFunctionName := terraform.Output(t, imageProcesserLambdaOptions, "lambda_function_name")
 	imageUploadFunctionName := terraform.Output(t, imageUploaderLambdaOptions, "lambda_function_name")
-	
-	// function url 
-	imageUploaderLambdaFunctionURL := terraform.Output(t, imageUploaderLambdaOptions, "lambda_function_url")
 
+	imageUploaderLambdaFunctionURL := terraform.Output(t, imageUploaderLambdaOptions, "lambda_function_url")
 
 	t.Logf("VPC ID: %s", vpcID)
 	t.Logf("Public Subnets: %v", publicSubnets)
 	t.Logf("Private Subnets: %v", privateSubnets)
-	t.Logf("S3 Bucket Name: %s", s3BucketName)
-	t.Logf("Lambda Function Name: %s", lambdaFunctionName)
-	t.Logf("RDS Instance ID: %s", rdsInstanceID)
+	t.Logf("S3 Bucket Name: %s", bucketID)
+	t.Logf("RDS Instance ID: %s", dbInstanceID)
 	t.Logf("SQS Queue URL: %s", queueURL)
 	t.Logf("SQS Queue Name: %s", queueName)
 	t.Logf("Image Process Lambda Function Name: %s", imageProcessFunctionName)
 	t.Logf("Image Upload Lambda Function Name: %s", imageUploadFunctionName)
 	t.Logf("Image Uploader Lambda Function URL: %s", imageUploaderLambdaFunctionURL)
 
-	// assertions 
 	assert.NotEmpty(t, bucketID)
 	assert.NotEmpty(t, dbInstanceID)
 	assert.NotEmpty(t, queueURL)
@@ -123,10 +82,8 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 	assert.NotEmpty(t, imageUploadFunctionName)
 	assert.NotEmpty(t, imageUploaderLambdaFunctionURL)
 
-	// upload image and metadata to lambda function url 
 	url := imageUploaderLambdaFunctionURL
 
-	// the payload
 	payload := map[string]interface{}{
 		"image_base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=",
 		"metadata": map[string]string{
@@ -134,22 +91,18 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 		},
 	}
 
-	// marshal payload to JSON
 	jsonData, err := json.Marshal(payload)
 	if err != nil {
 		panic(err)
 	}
 
-	// build request
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonData))
 	if err != nil {
 		panic(err)
 	}
 
-	// set header
 	req.Header.Set("Content-Type", "application/json")
 
-	// execute request
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
@@ -157,7 +110,6 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 	}
 	defer resp.Body.Close()
 
-	// read response
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		panic(err)
@@ -166,16 +118,17 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 	fmt.Println("Response Status:", resp.Status)
 	fmt.Println("Response Body:", string(body))
 
-	// check s3 bucket not empty 
 	s3Session, err := session.NewSession(&aws.Config{
-		Region:           aws.String(localstackRegion),
-		Endpoint:         aws.String(localstackURL),
-		Credentials:      credentials.NewStaticCredentials("test", "test", ""),
+		Region:      aws.String(localstackRegion),
+		Endpoint:    aws.String(localstackURL),
+		Credentials: credentials.NewStaticCredentials("test", "test", ""),
 	})
 	require.NoError(t, err, "Failed to create AWS session for S3")
-	s3Client := s3.New(s3Session)
 
-	// List objects in the bucket
+	s3Client := s3.New(s3Session, &aws.Config{
+		S3ForcePathStyle: aws.Bool(true),
+	})
+
 	listObjectsInput := &s3.ListObjectsV2Input{
 		Bucket: aws.String(bucketID),
 	}
@@ -188,14 +141,13 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 		t.Logf("S3 bucket %s contains %d objects", bucketID, len(listObjectsOutput.Contents))
 	}
 
-	// check rds instance is available
 	rdsSession, err := session.NewSession(&aws.Config{
 		Region:      aws.String(localstackRegion),
 		Endpoint:    aws.String(localstackURL),
 		Credentials: credentials.NewStaticCredentials("test", "test", ""),
 	})
 	require.NoError(t, err, "Failed to create AWS session for RDS")
-	
+
 	rdsClient := rds.New(rdsSession)
 	describeDBInstancesInput := &rds.DescribeDBInstancesInput{
 		DBInstanceIdentifier: aws.String(dbInstanceID),
@@ -210,8 +162,28 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 		t.Logf("RDS instance %s is available", dbInstanceID)
 	}
 
-}
+	// 🔍 Verify uploaded record exists in RDS `uploads` table based on meta.user = 'shilash'
+	dbUser := "admin"                 // adjust if needed
+	dbPassword := "S3cur3Pa$$w0rd"   // adjust if needed
+	dbName := "myappdb"              // adjust if needed
 
+	dbHost := *describeDBInstancesOutput.DBInstances[0].Endpoint.Address
+	dbPort := *describeDBInstancesOutput.DBInstances[0].Endpoint.Port
+
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s",
+		dbUser, dbPassword, dbHost, dbPort, dbName)
+
+	db, err := sql.Open("mysql", dsn)
+	require.NoError(t, err, "Failed to connect to RDS MySQL")
+	defer db.Close()
+
+	var count int
+	err = db.QueryRow(`SELECT COUNT(*) FROM uploads WHERE JSON_EXTRACT(meta, '$.user') = 'shilash'`).Scan(&count)
+	require.NoError(t, err, "Failed to query uploads table")
+
+	assert.Greater(t, count, 0, "No record found in uploads table for meta.user = 'shilash'")
+	t.Logf("Found %d record(s) in uploads table for meta.user = 'shilash'", count)
+}
 
 func getTerrafomrOptions(dir string) *terraform.Options {
 	return &terraform.Options{

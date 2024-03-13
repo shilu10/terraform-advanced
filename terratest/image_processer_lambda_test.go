@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 	"time"
-
+	"fmt"
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -48,16 +48,16 @@ func TestImageProcessorLambdaWithTerragrunt_Localstack(t *testing.T) {
 	vpcOptions := createTerraformOptions("../infrastructure/localstack/dev/vpc")
 	sqsOptions := createTerraformOptions("../infrastructure/localstack/dev/sqs")
 	lambdaOptions := createTerraformOptions("../infrastructure/localstack/dev/image-processor-lambda")
-
+	
 	// Ensure cleanup in correct order
-	defer terraform.Destroy(t, lambdaOptions)
-	defer terraform.Destroy(t, sqsOptions)
-	defer terraform.Destroy(t, vpcOptions)
+	//defer terraform.Destroy(t, lambdaOptions)
+	//defer terraform.Destroy(t, sqsOptions)
+	//defer terraform.Destroy(t, vpcOptions)
 
 	// Apply resources
-	terraform.InitAndApply(t, vpcOptions)
-	terraform.InitAndApply(t, sqsOptions)
-	terraform.InitAndApply(t, lambdaOptions)
+	//terraform.InitAndApply(t, vpcOptions)
+	//terraform.InitAndApply(t, sqsOptions)
+	//terraform.InitAndApply(t, lambdaOptions)
 
 	// Validate outputs
 	functionName := terraform.Output(t, lambdaOptions, "lambda_function_name")

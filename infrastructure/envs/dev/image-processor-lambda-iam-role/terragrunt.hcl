@@ -47,7 +47,7 @@ inputs = {
   })
 
   tags = {
-    Name               = "image-processer-lambda-iam"
+    Name               = "image-processor-lambda-iam"
     Project            = "iac-pipeline"
     Environment        = "dev"
     Owner              = "shilash"

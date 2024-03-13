@@ -168,12 +168,10 @@ jobs:
           ls -R checkov-reports || echo "❌ No reports found"
 
   localstack-run:
-
     runs-on: self-hosted
     steps:
-      - name: Terragrunt apply
+      - name: terratest 
         run: |
-          echo "Starting Terragrunt apply"
-          cd infrastructure/envs/dev 
-          terragrunt init --parallelism=40
-          terragrunt apply --auto-approve --all terragrunt-localstack.hcl 
+          echo "Starting Terratest"
+          cd terratest 
+          go test -v 

@@ -31,6 +31,14 @@ dependency "s3" {
   }
 }
 
+dependency "secretsmanager" {
+  config_path = "../secretsmanager"
+
+  mock_outputs = {
+    secret_arn = "arn:aws:secretsmanager:us-east-1:000000000000:secret"
+  }
+}
+
 
 inputs = {
   name = "image-processor-iam-role"
@@ -47,7 +55,7 @@ inputs = {
   })
 
   tags = {
-    Name               = "image-processer-lambda-iam"
+    Name               = "image-processor-lambda-iam"
     Project            = "iac-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
@@ -112,6 +120,21 @@ inputs = {
           Resource = "${dependency.s3.outputs.bucket_arn}/*"
         }
       ]
+    },
+
+    {
+      name = "inline-secretsmanager-access"
+      statements = [
+        {
+          Effect = "Allow"
+          Action = [
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:DescribeSecret"
+          ]
+          Resource = "${dependency.secretsmanager.outputs.secret_arn}/*"
+        }
+      ]
     }
+    
   ]
 }

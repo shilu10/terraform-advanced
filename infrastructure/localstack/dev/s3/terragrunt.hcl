@@ -8,7 +8,7 @@ terraform {
 
 inputs = {
   bucket_name        = "demo-bucket"
-  versioning_enabled = true
+  versioning_enabled = false
 
   tags = {
     Name               = "demo-bucket"

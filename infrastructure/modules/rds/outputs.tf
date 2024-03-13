@@ -17,3 +17,9 @@ output "rds_identifier" {
   value       = aws_db_instance.this.identifier
   description = "DBInstanceIdentifier of RDS instance (use this for API calls)"
 }
+
+
+output "rds_port" {
+  value       = aws_db_instance.this.port
+  description = "Port on which the RDS instance is listening"
+}

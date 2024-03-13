@@ -1,5 +1,5 @@
 include {
-    path = find_in_parent_folders("root-localstack.hcl")
+    path = find_in_parent_folders("root.hcl")
 }
 
 terraform{
@@ -10,7 +10,7 @@ inputs = {
     private_repository = true
     ecr_private_repositories_values = {
         image_processer_lambda_repo = {
-                name                 = "image-processer-lambda-dev-repo"
+                name                 = "image-processor-lambda-dev-repo"
                 image_tag_mutability = "MUTABLE"
                 tags                 = {
                     Environment = "dev"

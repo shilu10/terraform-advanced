@@ -1,3 +1,5 @@
+# root.hcl file for terragrunt configuration
+
 # root.hcl - Terragrunt config for LocalStack with dynamic provider and backend
 
 locals {
@@ -41,10 +43,9 @@ provider "aws" {
     s3  = "http://localhost:4566"
     sts = "http://localhost:4566"
     iam = "http://localhost:4566"
-    lambda = "http://localhost:4566"
     ecr = "http://localhost:4566"
-    sqs = "http://localhost:4566"
     secretsmanager = "http://localhost:4566"
+    dynamodb = "http://localhost:4566"
   }
 }
 EOF

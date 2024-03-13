@@ -10,6 +10,14 @@ dependency "iam_role" {
   }
 }
 
+dependency "sqs" {
+  config_path = "../sqs"
+
+  mock_outputs = {
+    queue_name = "my-app-queue.fifo"
+  }
+}
+
 terraform {
   source = "../../../modules/lambda"
 }
@@ -17,12 +25,12 @@ terraform {
 inputs = {
   name      = "image-upload-function"
   use_image = true
-  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda:latest"
+  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-uploader-lambda-dev-repo:latest"
 
   environment_variables = {
     SQS_REGION = "us-east-1"
     BUCKET_NAME = "demo-bucket"
-    QUEUE_NAME = "my-app-queue"
+    QUEUE_NAME = dependency.sqs.outputs.queue_name
   }
 
   custom_vpc_enabled = false

@@ -36,7 +36,7 @@ terraform {
 inputs = {
   name      = "image-process-function"
   use_image = true
-  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-processor-lambda:latest"
+  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-processor-lambda-dev-repo:latest"
 
   environment_variables = {
     ENV = "dev"
@@ -59,7 +59,7 @@ inputs = {
   event_source_arn             = dependency.sqs.outputs.queue_arn
 
   tags = {
-    Name               = "image-processer-lambda"
+    Name               = "image-processor-lambda"
     Project            = "iac-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
