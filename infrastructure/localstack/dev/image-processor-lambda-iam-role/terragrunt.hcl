@@ -56,7 +56,7 @@ inputs = {
 
   tags = {
     Name               = "image-processor-lambda-iam"
-    Project            = "iac-pipeline"
+    Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
     Team               = "devops"

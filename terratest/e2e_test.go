@@ -38,6 +38,28 @@ func TestE2ETerragrunt_Localstack(t *testing.T) {
 	imageUploaderLambdaIAMRoleOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-uploader-lambda-iam-role")
 	imageProcesserLambdaIAMRoleOptions := getTerrafomrOptions("../infrastructure/localstack/dev/image-processor-lambda-iam-role")
 
+	// appply all resources in the correct order
+	//terraform.InitAndApply(t, vpcTerraformOptions)
+	//terraform.InitAndApply(t, s3TerraformOptions)
+	//terraform.InitAndApply(t, rdsTerraformOptions)
+	//terraform.InitAndApply(t, sqsTerraformOptions)
+	//terraform.InitAndApply(t, imageUploaderLambdaIAMRoleOptions)
+	//terraform.InitAndApply(t, imageProcesserLambdaIAMRoleOptions)
+	//terraform.InitAndApply(t, imageUploaderLambdaOptions)
+	//terraform.InitAndApply(t, imageProcesserLambdaOptions)
+
+	// Cleanup: destroy all resources in reverse order
+	//defer func() {
+	//	terraform.Destroy(t, imageProcesserLambdaOptions)
+	//	terraform.Destroy(t, imageUploaderLambdaOptions)
+	//	terraform.Destroy(t, imageProcesserLambdaIAMRoleOptions)
+	//	terraform.Destroy(t, imageUploaderLambdaIAMRoleOptions)
+	//	terraform.Destroy(t, sqsTerraformOptions)	
+	//	terraform.Destroy(t, rdsTerraformOptions)
+	//	terraform.Destroy(t, s3TerraformOptions)
+	//	terraform.Destroy(t, vpcTerraformOptions)
+	//}()
+
 	fmt.Println(imageProcesserLambdaOptions, imageUploaderLambdaOptions, imageProcesserLambdaIAMRoleOptions)
 	fmt.Println(imageUploaderLambdaIAMRoleOptions, sqsTerraformOptions, rdsTerraformOptions, s3TerraformOptions)
 	fmt.Println(vpcTerraformOptions)

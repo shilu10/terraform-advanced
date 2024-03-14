@@ -7,12 +7,12 @@ terraform {
 }
 
 inputs = {
-  bucket_name        = "demo-bucket"
-  versioning_enabled = true
+  bucket_name        = "uploads-terraform-secure-pipeline-dev"
+  versioning_enabled = false
 
   tags = {
     Name               = "demo-bucket"
-    Project            = "iac-pipeline"
+    Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
     Team               = "devops"

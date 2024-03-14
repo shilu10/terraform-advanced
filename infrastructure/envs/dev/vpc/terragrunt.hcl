@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  name     = "dev-vpc"
+  name     = "uploads-vpc-terraform-secure-pipeline-dev"
   vpc_cidr = "10.0.0.0/16"
 
   public_subnet_cidrs  = ["10.0.1.0/24", "10.0.2.0/24"]
@@ -21,7 +21,7 @@ inputs = {
 
   security_groups = {
     "rds" = {
-      name        = "rds-sg"
+      name        = "uploads-rds-sg-terraform-secure-pipeline-dev"
       description = "Allow MySQL"
       ingress = [{
         from_port   = 3306
@@ -36,8 +36,8 @@ inputs = {
         cidr_blocks = ["0.0.0.0/0"]
       }]
       tags = {
-        Name               = "rds-sg"
-        Project            = "iac-pipeline"
+        Name               = "uploads-rds-sg-terraform-secure-pipeline-dev"
+        Project            = "terraform-secure-pipeline"
         Environment        = "dev"
         Owner              = "shilash"
         Team               = "devops"
@@ -47,7 +47,7 @@ inputs = {
     }
 
     "lambda" = {
-      name        = "lambda-sg"
+      name        = "uploads-lambda-sg-terraform-secure-pipeline-dev"
       description = "Allow All"
       ingress = [{
         from_port   = 0
@@ -63,8 +63,8 @@ inputs = {
       }]
 
       tags = {
-        Name               = "lambda-function-sg"
-        Project            = "iac-pipeline"
+        Name               = "uploads-lambda-sg-terraform-secure-pipeline-dev"
+        Project            = "terraform-secure-pipeline"
         Environment        = "dev"
         Owner              = "shilash"
         Team               = "devops"
@@ -76,8 +76,8 @@ inputs = {
   }
 
   tags = {
-        Name               = "iac-pipeline-vpc"
-        Project            = "iac-pipeline"
+        Name               = "uploads-vpc-terraform-secure-pipeline-dev"
+        Project            = "terraform-secure-pipeline"
         Environment        = "dev"
         Owner              = "shilash"
         Team               = "devops"

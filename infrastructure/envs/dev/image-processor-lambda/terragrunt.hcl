@@ -29,6 +29,14 @@ dependency "vpc" {
   }
 }
 
+dependency "secretsmanager" {
+  config_path = "../secretsmanager"
+
+  mock_outputs = {
+    secret_arn = "arn:aws:secretsmanager:us-east-1:000000000000:secret:dev-secret-tf-advanced-OkQWVD"
+  }
+}
+
 terraform {
   source = "../../../modules/lambda"
 }
@@ -36,11 +44,11 @@ terraform {
 inputs = {
   name      = "image-process-function"
   use_image = true
-  image_uri = "000000000000.dkr.ecr.us-east-1.localhost.localstack.cloud:4566/image-processor-lambda-dev-repo:latest"
+  image_uri = get_env("IMAGE_PROCESS_IMAGE_URI", "default_image_uri")
 
   environment_variables = {
-    ENV = "dev"
-    BUCKET_NAME="demo-bucket"
+    RDS_SECRET_NAME = dependency.secretsmanager.outputs.secret_arn
+    BUCKET_NAME = get_env("BUCKET_NAME", "default_bucket_name")
   }
 
   # for storing data in rds (private)
@@ -60,7 +68,7 @@ inputs = {
 
   tags = {
     Name               = "image-processor-lambda"
-    Project            = "iac-pipeline"
+    Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
     Team               = "devops"

@@ -6,8 +6,6 @@ include {
 dependency "rds" {
   config_path = "../rds"
     mock_outputs = {
-        #host     = split(":", "rds-instance-endpoint.localstack.cloud:4566")[0]
-        #port    = 5432  
         rds_endpoint = "rds-instance-endpoint.localstack.cloud:4566"
         username = "mock_db_username"
         password = "mock_db_password"
@@ -21,18 +19,18 @@ terraform {
 }
 
 inputs = {
-    secret_name = "dev-secret-tf-advanced"
+    secret_name = "upload-db-secret-terraform-secure-pipeline-dev"
     secret_value = jsonencode({
         host = split(":", dependency.rds.outputs.rds_endpoint)[0]
         port = split(":", dependency.rds.outputs.rds_endpoint)[1]
-        username = "admin"
-        password = "S3cur3Pa$$w0rd"
-        dbname   = "myappdb"
+        username = get_env("UPLOADS_DB_USERNAME")
+        password = get_env("UPLOADS_DB_PASSWORD")
+        dbname   = get_env("UPLOADS_DB_NAME")
   })
 
     tags = {
-        Name              = "dev-secret-tf-advanced"
-        Project            = "iac-pipeline"
+        Name              = "upload-db-secret-terraform-secure-pipeline-dev"
+        Project            = "terraform-secure-pipeline"
         Environment        = "dev"
         Owner              = "shilash"
         Team               = "devops"

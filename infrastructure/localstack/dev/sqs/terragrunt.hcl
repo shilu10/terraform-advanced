@@ -7,7 +7,7 @@ terraform {
 }
 
 inputs = {
-  name                        = "my-app-queue"
+  name                        = "uploads-sqs-terraform-secure-pipeline-dev"
   fifo_queue                  = true
   content_based_deduplication = true
 
@@ -20,8 +20,8 @@ inputs = {
   kms_master_key_id = "alias/aws/sqs"
 
   tags = {
-    Name               = "my-app-queue"
-    Project            = "iac-pipeline"
+    Name               = "uploads-sqs-terraform-secure-pipeline-dev"
+    Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
     Team               = "devops"

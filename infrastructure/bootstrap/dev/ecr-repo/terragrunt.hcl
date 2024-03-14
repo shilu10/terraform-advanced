@@ -9,38 +9,38 @@ terraform{
 inputs = {
     private_repository = true
     ecr_private_repositories_values = {
-        image_processer_lambda_repo = {
-                name                 = "image-processer-lambda-dev-repo"
+        image_processor_lambda_repo = {
+                name                 = "image-processor-lambda-dev-repo"
                 image_tag_mutability = "MUTABLE"
                 tags                 = {
                     Environment = "dev"
-                    Project     = "terraform-advanced"
+                    Project     = "terraform-secure-pipeline"
                 }
                 repository_policy    = null
                 lifecycle_policy     = null
                 scan_on_push         = true
                 encryption_type      = "AES256"
                 kms_key              = ""
-                force_delete         = false
+                force_delete         = true
             },
         image_uploader_lambda_repo = {
                 name                 = "image-uploader-lambda-dev-repo"
                 image_tag_mutability = "MUTABLE"
                 tags                 = {
                     Environment = "dev"
-                    Project     = "terraform-advanced"
+                    Project     = "terraform-secure-pipeline"
                 }
                 repository_policy    = null
                 lifecycle_policy     = null
                 scan_on_push         = true
                 encryption_type      = "AES256"
                 kms_key              = ""
-                force_delete         = false
+                force_delete         = true
             }
     }
     tags = {
         Environment = "dev"
-        Project     = "terraform-advanced"
+        Project     = "terraform-secure-pipeline"
         Owner       = "devops-team"
         ManagedBy   = "Terragrunt"
         CreatedBy   = "Terragrunt"

@@ -38,7 +38,7 @@ inputs = {
 
   tags = {
     Name               = "image-uploader-lambda-iam"
-    Project            = "iac-pipeline"
+    Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
     Team               = "devops"
