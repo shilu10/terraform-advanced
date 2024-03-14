@@ -23,7 +23,7 @@ dependency "s3" {
 }
 
 inputs = {
-  name = "image-upload-iam-role"
+  name = "image-upload-iam-role-dev"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -37,7 +37,7 @@ inputs = {
   })
 
   tags = {
-    Name               = "image-uploader-lambda-iam"
+    Name               = "image-uploader-lambda-iam-dev"
     Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"

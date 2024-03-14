@@ -23,9 +23,9 @@ inputs = {
     secret_value = jsonencode({
         host = split(":", dependency.rds.outputs.rds_endpoint)[0]
         port = split(":", dependency.rds.outputs.rds_endpoint)[1]
-        username = get_env("UPLOADS_DB_USERNAME")
-        password = get_env("UPLOADS_DB_PASSWORD")
-        dbname   = get_env("UPLOADS_DB_NAME")
+        username = get_env("DEV_UPLOADS_DB_USERNAME")
+        password = get_env("DEV_UPLOADS_DB_PASSWORD")
+        dbname   = get_env("DEV_UPLOADS_DB_NAME")
   })
 
     tags = {

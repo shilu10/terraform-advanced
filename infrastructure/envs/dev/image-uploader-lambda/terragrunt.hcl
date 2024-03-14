@@ -23,13 +23,13 @@ terraform {
 }
 
 inputs = {
-  name      = "image-upload-function"
+  name      = "image-upload-function-dev"
   use_image = true
-  image_uri = get_env("IMAGE_UPLOAD_IMAGE_URI", "default_image_upload_uri")
+  image_uri = get_env("DEV_IMAGE_UPLOAD_IMAGE_URI", "default_image_upload_uri")
 
   environment_variables = {
-    SQS_REGION = get_env("SQS_REGION", "us-east-1")
-    BUCKET_NAME = get_env("BUCKET_NAME", "demo-bucket")
+    SQS_REGION = get_env("DEV_SQS_REGION", "us-east-1")
+    BUCKET_NAME = get_env("DEV_BUCKET_NAME", "demo-bucket")
     QUEUE_NAME = dependency.sqs.outputs.queue_name
   }
 
@@ -42,7 +42,7 @@ inputs = {
   role_arn    = dependency.iam_role.outputs.role_arn
 
   tags = {
-    Name               = "image-uploader-lambda"
+    Name               = "image-uploader-lambda-dev"
     Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"

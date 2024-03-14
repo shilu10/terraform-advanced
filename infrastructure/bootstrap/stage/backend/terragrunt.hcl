@@ -1,20 +1,21 @@
+
 include {
-    path = find_in_parent_folders("root-localstack.hcl")
+    path = find_in_parent_folders("root.hcl")
 }
 
 terraform {
-    source = "../../../modules/ecr-repo"
+    source = "../../../modules/backend"
 }
 
 inputs = {
-    bucket_name = "tf-state-stage-localstack"
-    dynamodb_table_name = "tf-state-lock-stage-localstack"
+    bucket_name = "tf-state-stage-terraform-secure-pipeline"
+    dynamodb_table_name = "tf-state-lock-stage"
     force_destroy = true
-    tags = {    
+    tags = {
         Environment = "stage"
-        Project = "terraform-advanced"
-        Owner = "devops-team"
-        ManagedBy = "Terragrunt"
-        CreatedBy = "Terragrunt"
+        Project     = "terraform-secure-pipeline"
+        Owner       = "devops-team"
+        ManagedBy   = "Terragrunt"
+        CreatedBy   = "Terragrunt"
     }
 }

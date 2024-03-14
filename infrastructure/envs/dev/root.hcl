@@ -3,11 +3,11 @@
 remote_state {
   backend = "s3"
   config = {
-    bucket         = "my-terraform-state-bucket"
+    bucket         = "tf-state-dev-terraform-secure-pipeline"
     key            = "${path_relative_to_include()}/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
-    dynamodb_table = "terraform-lock-table"
+    dynamodb_table = "tf-state-lock-dev"
   }
 }
 

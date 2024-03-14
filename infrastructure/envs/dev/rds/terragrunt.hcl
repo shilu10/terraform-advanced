@@ -25,10 +25,10 @@ inputs = {
   instance_class        = "db.t3.medium"
   allocated_storage     = 20
   max_allocated_storage = 100
-  db_name               = get_env("UPLOADS_DB_NAME", "my-upload-db")
-  username              = get_env("UPLOADS_DB_USERNAME", "dummy")
-  password              = get_env("UPLOADS_DB_PASSWORD", "dummy")
-  port                  = get_env("UPLOADS_DB_PORT", 3306)
+  db_name               = get_env("DEV_UPLOADS_DB_NAME", "my-upload-db")
+  username              = get_env("DEV_UPLOADS_DB_USERNAME", "dummy")
+  password              = get_env("DEV_UPLOADS_DB_PASSWORD", "dummy")
+  port                  = get_env("DEV_UPLOADS_DB_PORT", 3306)
 
   subnet_ids             = dependency.vpc.outputs.private_subnet_ids
   vpc_security_group_ids = [dependency.vpc.outputs.security_group_ids["rds"]]

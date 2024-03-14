@@ -11,7 +11,7 @@ inputs = {
   versioning_enabled = false
 
   tags = {
-    Name               = "demo-bucket"
+    Name               = "uploads-terraform-secure-pipeline-dev"
     Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"

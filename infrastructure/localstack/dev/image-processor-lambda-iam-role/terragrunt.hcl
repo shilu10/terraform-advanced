@@ -41,7 +41,7 @@ dependency "secretsmanager" {
 
 
 inputs = {
-  name = "image-processor-iam-role"
+  name = "image-processor-iam-role-dev"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -55,7 +55,7 @@ inputs = {
   })
 
   tags = {
-    Name               = "image-processor-lambda-iam"
+    Name               = "image-processor-lambda-iam-dev"
     Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"

@@ -42,13 +42,13 @@ terraform {
 }
 
 inputs = {
-  name      = "image-process-function"
+  name      = "image-process-function-dev"
   use_image = true
-  image_uri = get_env("IMAGE_PROCESS_IMAGE_URI", "default_image_uri")
+  image_uri = get_env("DEV_IMAGE_PROCESS_IMAGE_URI", "default_image_uri")
 
   environment_variables = {
     RDS_SECRET_NAME = dependency.secretsmanager.outputs.secret_arn
-    BUCKET_NAME = get_env("BUCKET_NAME", "default_bucket_name")
+    BUCKET_NAME = get_env("DEV_BUCKET_NAME", "default_bucket_name")
   }
 
   # for storing data in rds (private)
@@ -67,7 +67,7 @@ inputs = {
   event_source_arn             = dependency.sqs.outputs.queue_arn
 
   tags = {
-    Name               = "image-processor-lambda"
+    Name               = "image-processor-lambda-dev"
     Project            = "terraform-secure-pipeline"
     Environment        = "dev"
     Owner              = "shilash"
