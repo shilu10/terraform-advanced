@@ -1,4 +1,4 @@
-# main.tf for backend module (s3 + dynamodb)
+# main.tf# main.tf for backend module (s3 + dynamodb)
 
 resource "aws_s3_bucket" "this" {
   bucket = var.bucket_name
