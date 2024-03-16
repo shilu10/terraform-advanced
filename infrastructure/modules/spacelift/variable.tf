@@ -278,6 +278,7 @@ variable "contexts" {
       local_path    = string
     }))
   }))
+  default = {}
 }
 
 ## security email

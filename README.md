@@ -125,3 +125,70 @@ defer terragrunt.RunTerragrunt(t, options, "destroy")
 ---
 
 > 💡 **Pro Tip:** This setup can be extended with [Atlantis](https://www.runatlantis.io/), [DriftCTL](https://github.com/snyk/driftctl), or [OPA Gatekeeper](https://github.com/open-policy-agent/gatekeeper) for even stronger IaC governance.
+
+```text
+
+
+                             ┌───────────────────────────┐
+                             │        modules/           │  ← Reusable Terraform modules
+                             └────────────┬──────────────┘
+                                          │
+   ┌────────────┐     PR: feat/* → main   ▼
+   │ Developers │ ────────────────────▶ envs/dev/*/
+   └────┬───────┘                        localstack/dev/*
+        │                                   │
+        │                                   ▼
+        │     ┌──────────────────────────────┐
+        │     │   GitHub Actions (CI)        │
+        │     │   ├─ Checkov + OPA           │  ← Security/compliance
+        │     │   ├─ Infracost               │  ← FinOps analysis
+        │     │   └─ Terratest               │  ← Infra tests via LocalStack
+        │     └──────────────────────────────┘
+        │                                   │
+        ▼                                   ▼
+┌──────────────────────────────┐    ┌──────────────────────────────┐
+│   Merge to main              │    │   Spacelift CD: envs/dev     │
+│   (after CI passes)          │    │   → Real AWS (Apply)         │
+└────────────┬─────────────────┘    └────────────┬─────────────────┘
+             │                                     │
+             ▼                                     ▼
+      Promotion via PR: feat/* → main       envs/stage/* + localstack/stage/*
+             │                                     │
+             │     ┌──────────────────────────────┐
+             │     │ GitHub Actions (CI - Stage)  │
+             │     └──────────────────────────────┘
+             ▼                                     ▼
+      Merge to main                         Spacelift CD → AWS (stage)
+             │                                     │
+             ▼                                     ▼
+      Promotion via PR: feat/* → main       envs/prod/* + localstack/prod/*
+             │                                     │
+             │     ┌──────────────────────────────┐
+             │     │ GitHub Actions (CI - Prod)   │
+             │     └──────────────────────────────┘
+             ▼                                     ▼
+         Merge to main                     Spacelift CD → AWS (prod)
+
+```
+
+📌 Developer Workflow Summary
+
+Developers create feat/* branches to make changes in:
+
+envs/dev + localstack/dev
+
+Then envs/stage + localstack/stage
+
+Then envs/prod + localstack/prod
+
+Each PR runs CI via GitHub Actions:
+
+✅ Checkov + OPA for security/compliance
+
+💰 Infracost for cost visibility
+
+🧪 Terratest using LocalStack
+
+Once approved and merged:
+
+🛠 Spacelift automatically applies changes to the appropriate AWS environment

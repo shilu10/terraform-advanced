@@ -1,11 +1,11 @@
-terraform {
-  required_providers {
-    spacelift = {
-      source  = "spacelift-io/spacelift"
-      version = "1.26.0"
-    }
-  }
-}
+#terraform {
+ # required_providers {
+ #   spacelift = {
+  #    source  = "spacelift-io/spacelift"
+   #   version = "1.26.0"
+   # }
+  #}
+#}
 
 # ────────────────
 # Locals to safely filter optional data

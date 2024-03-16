@@ -1,46 +1,51 @@
+# root.hcl for bootstrap which creates the backend and ecr repos 
 
-generate "version" {
-  path = "version.tf"
-  if_exists = "overwrite_terragrunt"
-   contents  = <<EOF
-terraform {
+locals {
+    is_local = get_env("IS_BOOTSTRAP_LOCAL", true)
+    region = "us-east-1"
+}
 
-  required_providers {
-     aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
+generate "version"{
+    path = "version.tf"
+    if_exists = "overwrite"
+    contents = <<EOF
+terraform{
+    required_providers{
+        aws = {
+          source  = "hashicorp/aws"
+          version = "~> 5.0
+        }
     }
 }
 }
 EOF
 }
 
-
-generate "provider" {
-  path      = "provider.tf"
-  if_exists = "overwrite_terragrunt"
-  contents  = <<EOF
-provider "aws" {
-  region                      = "us-east-1"
-  access_key                  = "mock"
-  secret_key                  = "mock"
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
-  s3_use_path_style           = true
-
-  endpoints {
-    ec2             = "http://localhost:4566"
-    rds             = "http://localhost:4566"
-    s3              = "http://localhost:4566"
-    sts             = "http://localhost:4566"
-    iam             = "http://localhost:4566"
-    lambda          = "http://localhost:4566"
-    dynamodb        = "http://localhost:4566"
-    secretsmanager  = "http://localhost:4566"
-    ecr             = "http://localhost:4566"
-    sqs             = "http://localhost:4566"
-  }
+generate "provider"{
+    path = "provider.tf"
+    if_exists = "overwrite"
+    contents = <<EOF
+provider "aws"{
+  region = local.region
+}
 }
 EOF
+}
+
+locals {
+  is_localstack = getenv("USE_LOCALSTACK") == "true"
+}
+
+remote_state {
+  backend = local.is_localstack ? "local" : "s3"
+
+  config = local.is_localstack ? {
+    path = "${path_relative_to_include()}/terraform.tfstate"
+  } : {
+    bucket         = "tf-state-dev-terraform-secure-pipeline"
+    key            = "${path_relative_to_include()}/terraform.tfstate"
+    region         = "us-east-1"
+    dynamodb_table = "tf-state-lock-dev"
+    encrypt        = true
+  }
 }

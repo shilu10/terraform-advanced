@@ -19,8 +19,8 @@ inputs = {
   autodeploy        = true
 
   enable_terragrunt      = true
-  terraform_version      = "1.5.2"
-  terragrunt_version     = "0.52.15"
+  terraform_version      = "~> 1.5.2"
+  terragrunt_version     = "~> 0.52.0"
   use_run_all            = true
   use_smart_sanitization = true
   tool                   = "TERRAFORM_FOSS"

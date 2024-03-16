@@ -3,7 +3,7 @@ include "parent" {
 }
 
 terraform {
-    source = "../modules/spacelift"
+    source = "../../modules/spacelift"
 }
 
 inputs = {
@@ -12,15 +12,15 @@ inputs = {
   raw_git_namespace = "uploads"
   repository        = "terraform-advanced"
   git_url           = "https://github.com/shilu10/terraform-advanced.git"
-  branch            = "main"
+  branch            = "master"
   project_root      = "infrastructure/envs/dev/"
   labels            = ["terragrunt", "dev"]
   administrative    = false
   autodeploy        = true
 
   enable_terragrunt      = true
-  terraform_version      = "1.5.2"
-  terragrunt_version     = "0.52.15"
+  terraform_version      = "~> 1.5.2"
+  terragrunt_version     = "~> 0.52.0"
   use_run_all            = true
   use_smart_sanitization = true
   tool                   = "TERRAFORM_FOSS"
